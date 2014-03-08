@@ -12,10 +12,10 @@ var imagesBucket = qiniu.bucket('lovejog');
 
 module.exports = function (app) {
     app.use('/wechat',wechat('weixin', wechat.text(function (message, req, res, next) {
-        res.reply('已经收到你的文字信息');
         var post=new Post({source:'wx',type:'text',content:message.Content,wx_openid:message.FromUserName});
         post.save(function (err, post){
             if (err) {
+                console.dir(err);
                 return res.reply('发布失败！')
             }
             res.reply('发布图片成功！<a href="">点击查看</a><br/><a href="">点击编辑</a>');

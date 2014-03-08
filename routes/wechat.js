@@ -42,7 +42,7 @@ module.exports = function (app) {
                         if (err) {
                             return res.reply('发布失败！')
                         }
-                        res.reply('发布图片成功！');
+                       return res.reply('发布图片成功！');
                     })
                 });
 
@@ -111,7 +111,7 @@ module.exports = function (app) {
                     if (err) {
                         return res.reply('关注出现了点问题！')
                     }
-                    res.reply('欢迎关注love jog，直接发送文字和图片试试！<a href="">点击注册</a>可以获得更多功能！');
+                   return res.reply('欢迎关注love jog，直接发送文字和图片试试！<a href="">点击注册</a>可以获得更多功能！');
                 })
             }
         })));

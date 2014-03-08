@@ -38,8 +38,9 @@ module.exports = function (app) {
                 .on('error', function(err) {
                     res.reply('由于系统问题，没能收到您的图片'+err);
                 })
-                .on('end', function(reply) {
-                    var post=new Post({source:'wx',type:'image',content:key,wx_openid:message.FromUserName});
+                .on('end', function(data) {
+                    console.dir(data)
+                    var post=new Post({source:'wx',type:'image',wx_imge_url:message.PicUrl,qiniu_img_url:key,wx_openid:message.FromUserName});
                     post.save(function (err, post){
                         if (err) {
                             return response.reply('发布失败！')

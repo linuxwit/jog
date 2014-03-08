@@ -12,6 +12,8 @@ var commentSchema=mongoose.Schema({
 var postSchema = mongoose.Schema({
     title:      String,
     content:    {type:String,require: true},
+    wx_imge_url:String,
+    qiniu_img_url:String,
     author:     {type:Schema.Types.ObjectId, ref: 'User',require: true},
     wx_openid: String,
     posted:     {type: Date, default: Date.now},

@@ -29,6 +29,8 @@ module.exports = function (app) {
         // Content: 'http',
         // MsgId: '5837397576500011341' }
     }).image(function (message, req, res, next) {
+
+            var response=res;
             var key=message.MsgId;
             var puttingStream = imagesBucket.createPutStream(key);
             var request=require('request');
@@ -40,9 +42,9 @@ module.exports = function (app) {
                     var post=new Post({source:'wx',type:'image',content:key,wx_openid:message.FromUserName});
                     post.save(function (err, post){
                         if (err) {
-                            return res.reply('发布失败！')
+                            return response.reply('发布失败！')
                         }
-                       return res.reply('发布图片成功！');
+                       return response.reply('发布图片成功！');
                     })
                 });
 

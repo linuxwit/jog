@@ -25,7 +25,6 @@ var env = process.env.NODE_ENV || 'development',
     config = require('./config/config')[env];
 
 console.dir(env);
-return;
 mongoose.connect(config.db);
 
 var models_dir = __dirname + '/models';
@@ -41,7 +40,7 @@ ejs.close = '}}';
 var app = express();
 
 // all environments
-app.set('port', process.env.VMC_APP_PORT  || 1337);
+app.set('port', process.env.VMC_APP_PORT  || 80);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.favicon());

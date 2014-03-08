@@ -1,4 +1,4 @@
-
+//config
 module.exports = {
 	development: {
 		db: 'mongodb://localhost/jog',

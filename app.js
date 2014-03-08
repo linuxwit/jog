@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -73,7 +72,7 @@ require('./routes/index')(app, passport);
 require('./routes/api')(app, passport);
 
 
-
+//test
 
 var validateUser = function(req, res, next) {
     return next();

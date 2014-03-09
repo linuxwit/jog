@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fbc1c52d-b1ec-48f1-9a37-15c7b68541d4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/start.sh" afterPath="$PROJECT_DIR$/start.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/wechat.js" afterPath="$PROJECT_DIR$/routes/wechat.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="9e5d63b9-253b-4693-9ca3-9f85fb5b2140" name="New changelist" comment="" />
@@ -37,19 +37,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wechat.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="wechat.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/wechat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="104" selection-start="1589" selection-end="1589" vertical-scroll-proportion="0.0" vertical-offset="1380" max-vertical-offset="2370">
+            <state line="39" column="38" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.33742332" vertical-offset="420" max-vertical-offset="2370">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="start.sh" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="start.sh" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/start.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="260" selection-end="260" vertical-scroll-proportion="0.20916335" vertical-offset="0" max-vertical-offset="502">
+            <state line="8" column="17" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
               <folding />
             </state>
           </provider>
@@ -59,7 +59,9 @@
         <entry file="file://$PROJECT_DIR$/models/post.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="25" column="21" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="690">
-              <folding />
+              <folding>
+                <marker date="1394335386000" expanded="true" signature="370:962" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,8 +113,8 @@
         <option value="$PROJECT_DIR$/config/config.js" />
         <option value="$PROJECT_DIR$/models/post.js" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/routes/wechat.js" />
         <option value="$PROJECT_DIR$/start.sh" />
+        <option value="$PROJECT_DIR$/routes/wechat.js" />
       </list>
     </option>
   </component>
@@ -598,7 +600,11 @@
       <created>1394339977794</created>
       <updated>1394339977794</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="init&#10;">
+      <created>1394340167905</created>
+      <updated>1394340167905</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -744,7 +750,9 @@
     <entry file="file://$PROJECT_DIR$/models/post.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="21" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="690">
-          <folding />
+          <folding>
+            <marker date="1394335386000" expanded="true" signature="370:962" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -755,16 +763,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/wechat.js">
+    <entry file="file://$PROJECT_DIR$/start.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="104" selection-start="1589" selection-end="1589" vertical-scroll-proportion="0.0" vertical-offset="1380" max-vertical-offset="2370">
+        <state line="8" column="17" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/start.sh">
+    <entry file="file://$PROJECT_DIR$/routes/wechat.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="260" selection-end="260" vertical-scroll-proportion="0.20916335" vertical-offset="0" max-vertical-offset="502">
+        <state line="39" column="38" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.33742332" vertical-offset="420" max-vertical-offset="2370">
           <folding />
         </state>
       </provider>

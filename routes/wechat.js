@@ -18,7 +18,7 @@ module.exports = function (app) {
                 console.dir(err);
                 return res.reply('发布失败！')
             }
-            res.reply('发布成功！你可以<a href="">点击查看</a>也可以<a href="">点击编辑</a>，同样也可以<a href="">点击删除</a>');
+            res.reply('发布成功！你可以<a href="'+message.MsgId+'">点击编辑</a>');
         })
 
         // message为文本内容
@@ -36,7 +36,7 @@ module.exports = function (app) {
                     console.dir(err);
                     return res.reply('发布失败！')
                 }
-                res.reply('发布成功！你可以<a href="">点击查看</a>也可以<a href="">点击编辑</a>，同样也可以<a href="">点击删除</a>');
+                res.reply('发布成功！你可以<a href="'+message.MsgId+'">点击编辑</a>');
                 console.log('发布图片成功');
 
                 var puttingStream = imagesBucket.createPutStream(key);

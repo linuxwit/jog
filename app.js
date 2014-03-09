@@ -66,7 +66,7 @@ app.get('/info',function(req,res){
 
 require('./routes/wechat')(app);
 
-require('./routes/index')(app, passport);
+//require('./routes/index')(app, passport);
 
 require('./routes/api')(app, passport);
 

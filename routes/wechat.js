@@ -113,7 +113,6 @@ module.exports = function (app) {
                 }
                 res.reply('收到！');
                 console.log('收到位置信息');
-                console.dir(post);
             })
 
         }).link(function (message, req, res, next) {

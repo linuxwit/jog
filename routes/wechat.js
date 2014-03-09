@@ -108,10 +108,10 @@ module.exports = function (app) {
             post.save(function (err, post){
                 if (err) {
                     console.dir(err);
-                    return res.reply('发布失败！')
+                    return res.reply('失败了！')
                 }
-                res.reply('发布图片成功！');
-                console.log('发布图片成功');
+                res.reply('收到！');
+                console.log('收到位置信息');
             })
 
         }).link(function (message, req, res, next) {

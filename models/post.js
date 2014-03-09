@@ -12,7 +12,7 @@ var commentSchema=mongoose.Schema({
 var locationSchema=mongoose.Schema({
     x:String,
     y:String,
-    scale:number,
+    scale:Number,
     label:String
 })
 

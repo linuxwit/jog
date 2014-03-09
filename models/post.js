@@ -9,6 +9,13 @@ var commentSchema=mongoose.Schema({
         text: {type:String,require: true}
 });
 
+var locationSchema=mongoose.Schema({
+    x:String,
+    y:String,
+    scale:number,
+    label:String
+})
+
 var postSchema = mongoose.Schema({
     title:        String,
     content:      {type:String,require: true},
@@ -19,6 +26,7 @@ var postSchema = mongoose.Schema({
     wx_openid:    String,
     posted:       {type: Date, default: Date.now},
     type:         {type:String,require: true},
+    location:locationSchema,
     comments:[commentSchema],
     meta:{
         vote:     Number,

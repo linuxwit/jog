@@ -61,7 +61,6 @@ module.exports = function (app) {
                             }
                         });
                     });
-
             })
 
 
@@ -104,7 +103,18 @@ module.exports = function (app) {
             // Scale: '15',
             // Label: {},
             // MsgId: '5837398761910985062' }
+            var post=new Post({source:'wx',type:'location',location:{x:message.Location_X,y:message.Location_Y,scale:message.Scale,label:message.Label},wx_openid:message.FromUserName});
+            post.save(function (err, post){
+                if (err) {
+                    console.dir(err);
+                    return res.reply('发布失败！')
+                }
+                res.reply('发布图片成功！');
+                console.log('发布图片成功');
+            })
+
         }).link(function (message, req, res, next) {
+
             // message为链接内容
             // { ToUserName: 'gh_d3e07d51b513',
             // FromUserName: 'oPKu7jgOibOA-De4u8J2RuNKpZRw',

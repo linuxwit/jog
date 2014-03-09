@@ -47,7 +47,8 @@ module.exports = function (app) {
                             return;
                             //return res.reply('发布失败！')
                         }
-                        res.reply('发布图片成功！');
+                        //res.reply('发布图片成功！');
+                        console.log('发布图片成功');
                     })
                 });
 

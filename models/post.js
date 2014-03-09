@@ -10,14 +10,15 @@ var commentSchema=mongoose.Schema({
 });
 
 var postSchema = mongoose.Schema({
-    title:      String,
-    content:    {type:String,require: true},
-    wx_imge_url:String,
+    title:        String,
+    content:      {type:String,require: true},
+    wx_imge_url:  String,
+    sync:         Number,
     qiniu_img_url:String,
-    author:     {type:Schema.Types.ObjectId, ref: 'User',require: true},
-    wx_openid: String,
-    posted:     {type: Date, default: Date.now},
-    type:       {type:String,require: true},
+    author:       {type:Schema.Types.ObjectId, ref: 'User',require: true},
+    wx_openid:    String,
+    posted:       {type: Date, default: Date.now},
+    type:         {type:String,require: true},
     comments:[commentSchema],
     meta:{
         vote:     Number,

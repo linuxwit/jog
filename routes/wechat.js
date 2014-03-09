@@ -29,28 +29,43 @@ module.exports = function (app) {
         // Content: 'http',
         // MsgId: '5837397576500011341' }
     }).image(function (message, req, res, next) {
-
             var key=message.MsgId;
-            var puttingStream = imagesBucket.createPutStream(key);
-            var request=require('request');
-            request(message.PicUrl).pipe(puttingStream)
-                .on('error', function(err) {
+            var post=new Post({source:'wx',type:'image',wx_imge_url:message.PicUrl,qiniu_img_url:key,wx_openid:message.FromUserName,sync:0});
+            post.save(function (err, post){
+                if (err) {
                     console.dir(err);
-                  return  res.reply('由于系统问题，没能收到您的图片'+err);
-                })
-                .on('end', function(data) {
-                    console.dir(data)
-                    var post=new Post({source:'wx',type:'image',wx_imge_url:message.PicUrl,qiniu_img_url:key,wx_openid:message.FromUserName});
-                    post.save(function (err, post){
-                        if (err) {
-                            console.dir(err);
-                            return;
-                            //return res.reply('发布失败！')
-                        }
-                        //res.reply('发布图片成功！');
-                        console.log('发布图片成功');
+                    return res.reply('发布失败！')
+                }
+                res.reply('发布图片成功！');
+                console.log('发布图片成功');
+
+                var puttingStream = imagesBucket.createPutStream(key);
+                var request=require('request');
+                request(message.PicUrl).pipe(puttingStream)
+                    .on('error', function(err) {
+                        console.dir(err);
+                        post.sync=-1;
+                        post.save(function (err, post){
+                            if (err){
+                                console.log('save sync -1 fail')
+                                console.dir(err);
+                            }
+                        });
                     })
-                });
+                    .on('end', function(data) {
+                        post.sync=1;
+                        post.save(function (err, post){
+                            if (err){
+                                console.log('save sync 1 fail')
+                                console.dir(err);
+                            }
+                        });
+                    });
+
+            })
+
+
+
 
             // message为图片内容
             // { ToUserName: 'gh_d3e07d51b513',

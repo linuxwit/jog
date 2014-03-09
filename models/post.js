@@ -14,20 +14,20 @@ var locationSchema=mongoose.Schema({
     y:String,
     scale:Number,
     label:String
-})
+});
 
 var postSchema = mongoose.Schema({
     title:        String,
     content:      {type:String,require: true},
     wx_imge_url:  String,
-    sync:         Number,
+    sync:         Number,//同步-1失败，０没有同步，１成功
     qiniu_img_url:String,
-    author:       {type:Schema.Types.ObjectId, ref: 'User',require: true},
+    author:       {type:Schema.Types.ObjectId, ref: 'UserSchema',require: true},
     wx_openid:    String,
     posted:       {type: Date, default: Date.now},
     type:         {type:String,require: true},
-    location:locationSchema,
     comments:[commentSchema],
+    location:{type:Schema.Types.ObjectId, ref:'locationSchema'},
     meta:{
         vote:     Number,
         fav:      Number,

@@ -105,6 +105,7 @@ module.exports = function (app) {
             // MsgId: '5837398761910985062' }
             console.dir(message);
             var post=new Post({source:'wx',type:'location',location:{x:message.Location_X,y:message.Location_Y,scale:message.Scale,label:message.Label},wx_openid:message.FromUserName});
+            console.dir(post);
             post.save(function (err, post){
                 if (err) {
                     console.dir(err);
@@ -112,6 +113,7 @@ module.exports = function (app) {
                 }
                 res.reply('收到！');
                 console.log('收到位置信息');
+                console.dir(post);
             })
 
         }).link(function (message, req, res, next) {

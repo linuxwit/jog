@@ -103,6 +103,7 @@ module.exports = function (app) {
             // Scale: '15',
             // Label: {},
             // MsgId: '5837398761910985062' }
+            console.dir(message);
             var post=new Post({source:'wx',type:'location',location:{x:message.Location_X,y:message.Location_Y,scale:message.Scale,label:message.Label},wx_openid:message.FromUserName});
             post.save(function (err, post){
                 if (err) {

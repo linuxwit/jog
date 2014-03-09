@@ -30,22 +30,24 @@ module.exports = function (app) {
         // MsgId: '5837397576500011341' }
     }).image(function (message, req, res, next) {
 
-            var response=res;
             var key=message.MsgId;
             var puttingStream = imagesBucket.createPutStream(key);
             var request=require('request');
             request(message.PicUrl).pipe(puttingStream)
                 .on('error', function(err) {
-                    res.reply('由于系统问题，没能收到您的图片'+err);
+                    console.dir(err);
+                  return  res.reply('由于系统问题，没能收到您的图片'+err);
                 })
                 .on('end', function(data) {
                     console.dir(data)
                     var post=new Post({source:'wx',type:'image',wx_imge_url:message.PicUrl,qiniu_img_url:key,wx_openid:message.FromUserName});
                     post.save(function (err, post){
                         if (err) {
-                            return response.reply('发布失败！')
+                            console.dir(err);
+                            return;
+                            //return res.reply('发布失败！')
                         }
-                       return response.reply('发布图片成功！');
+                        res.reply('发布图片成功！');
                     })
                 });
 

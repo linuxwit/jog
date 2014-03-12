@@ -140,7 +140,7 @@
                          data-src="holder.js/46x46" style="width: 46px; height: 46px;">
 
                     <div class="card-heading-header">
-                        <h3><% if (post.title) post.title %></h3>
+                        <h3><% if (post.title) {%> <%=post.title %><%}%></h3>
                         <span><%= post.source %> <%= post.posted %></span>
                     </div>
                 </div>

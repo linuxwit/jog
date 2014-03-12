@@ -144,15 +144,27 @@
                         <span><%= post.source %> <%= post.posted %></span>
                     </div>
                 </div>
+                <% if (post.content) {%>
                 <div class="card-body">
-                    <p> <%= post.content %>
+                    <p>
+                        <%=post.content %>
                     </p>
                 </div>
+                <%}%>
+
+                <% if (post.sync==1 && post.qiniu_img_url ) {%>
                 <div class="card-media">
                     <a href="#" class="card-media-container">
-                        <img alt="500x300" src="<%=qiniu_host %>/<%= post.qiniu_img_url %>" style="width: 500px; height: 300px;">
+                        <img alt="500x300" src="<%= qiniu_host %>/<%= post.qiniu_img_url %>" style="max-width: 500px;">
                     </a>
                 </div>
+                <%} else {%>
+                    <div class="card-media">
+                        <a href="#" class="card-media-container">
+                            <img alt="500x300" src="<%= post.wx_imge_url %>" style="max-width: 500px;>
+                        </a>
+                    </div>
+                <%}%>
                 <div class="card-actions">
                     <form>
                         <div class="input-group">

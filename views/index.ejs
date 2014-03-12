@@ -141,7 +141,12 @@
 
                     <div class="card-heading-header">
                         <h3><% if (post.title) {%> <%=post.title %><%}%></h3>
-                        <span><%= post.source %> <%= post.posted %></span>
+                        <span>　
+                            <% if (post.source=='wx'){%>
+                               <a title="发布于微信公众号[lovejog]">微信</a>
+                            <%}%>
+                            <%= post.posted %>
+                        </span>
                     </div>
                 </div>
                 <% if (post.content) {%>

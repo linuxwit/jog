@@ -24,7 +24,7 @@ var mongoose = restful.mongoose;
 var env = process.env.NODE_ENV || 'development',
     config = require('./config/config')[env];
 
-console.dir(env);
+console.dir(config.db);
 mongoose.connect(config.db);
 
 var models_dir = __dirname + '/models';
@@ -66,7 +66,7 @@ app.get('/info',function(req,res){
 
 require('./routes/wechat')(app);
 
-//require('./routes/index')(app, passport);
+require('./routes/index')(app, passport);
 
 require('./routes/api')(app, passport);
 

@@ -38,3 +38,5 @@ var Post = restful.model("post", postSchema).methods(['get', 'put', 'delete', 'p
 module.exports = Post;
 
 
+
+

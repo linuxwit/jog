@@ -38,12 +38,12 @@
                 <img src="/logo/logo.png" alt="LoveJog" class="logo"/>
             </a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
-                <i class="glyphicon glyphicon-home"  style="color:#dd1111;"></i>
+                <i class="glyphicon glyphicon-home" style="color:#dd1111;"></i>
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="" ><i class="glyphicon glyphicon-home" style="color:#dd1111;"></i></a>
+                <li><a href=""><i class="glyphicon glyphicon-home" style="color:#dd1111;"></i></a>
                 </li>
                 <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-bell"></i></a>
@@ -66,7 +66,7 @@
 <div class="container" id="main">
     <div class="row" id="ms-container">
 
-
+        <% if(page == 0) { %>
         <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
             <div class="well card">
                 <form class="form-horizontal" role="form">
@@ -74,26 +74,33 @@
                         <textarea class="form-control" placeholder="说说你身边关于慢跑的新鲜事"></textarea>
                     </div>
                     <div>
-                        <div class="m7"><div class="mB k7"></div><div class="mB l7"></div></div>
+                        <div class="m7">
+                            <div class="mB k7"></div>
+                            <div class="mB l7"></div>
+                        </div>
                         <ul class="list-inline text-center">
                             <li>
                                 <a href="#">
-                                    <div class="text"></div>文字
+                                    <div class="text"></div>
+                                    文字
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <div class="photo lp"></div>图片
+                                    <div class="photo lp"></div>
+                                    图片
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <div class="link lp"></div>链接
+                                    <div class="link lp"></div>
+                                    链接
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <div class="event lp"></div>活动
+                                    <div class="event lp"></div>
+                                    活动
                                 </a>
                             </li>
                         </ul>
@@ -108,63 +115,99 @@
                 <div class="panel-body">
                     <div class="media">
                         <a href="#" class="pull-left">
-                            <img alt="48x48" data-src="http://holder.js/48x48" class="media-object" style="width: 48px; height:48px;"/>
+                            <img alt="48x48" data-src="http://holder.js/48x48" class="media-object"
+                                 style="width: 48px; height:48px;"/>
                         </a>
+
                         <div class="media-body">
-                            <p class="media-heading">上海浦东世纪公园<a href="#" class="btn btn-default btn-sm pull-right">参加</a></p>
+                            <p class="media-heading">上海浦东世纪公园<a href="#"
+                                                                class="btn btn-default btn-sm pull-right">参加</a></p>
                             <small class="text-info">12人</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div><!--/row-->
-    <div id="nextpage"><a href="/api/post?page=2">加载更多...</a></div><!--page-nav end-->
-</div>
+        <% } %>
+
+        <% posts.forEach(function(post){ %>
+
+        <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
+            <div class="card panel panel-default">
+                <div class="card-heading image">
+                    <img alt="46x46" style="width: 46px; height: 46px;">
+
+                    <div class="card-heading-header">
+                        <h3><%= post.title %></h3>
+                        <span><%= post.source %> <%= post.posted %></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p> <%= post.content %>
+                    </p>
+                </div>
+                <div class="card-media">
+                    <a href="#" class="card-media-container">
+                        <img alt="500x300" src="<%= post.wx_imge_url %>" style="width: 500px; height: 300px;">
+                    </a>
+                </div>
+                <div class="card-actions">
+                    <form>
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default">+1</button>
+                                <button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
 
-
-
-<!-- Footer
-================================================== -->
-<footer class="bs-footer" role="contentinfo" style="background-color:#EDEDED;margin-top: 80px;padding-top: 10px">
-    <div class="container">
-
-        <p class="text-center">Lovejog © 2014. All Rights Reserved. </p>
-        <p class="text-center">
-            <a href="http://www.miitbeian.gov.cn/" target="_blank" class="link_gray">沪ICP备14008847号-1</a>
-        </p>
-        <p class="text-center"><a href='#'>点击返回到顶部</a></p>
+        </div>
+        <% }); %>
+        <!--/row-->
+        <div id="nextpage"><a href="/?page=2">加载更多...</a></div>
+        <!--page-nav end-->
     </div>
-</footer>
-
-<script type="text/template" id="posts_template">
-<% _.each(posts, function(item) { %>
-    <% =item._id %>
-<% }); %>
-</script>
-
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/underscore-min.js"></script>
-<script src="/plugin/masonry.pkgd.min.js"></script>
-<script src="/plugin/imagesloaded.min.js"></script>
-<script src="/plugin/jquery.infinitescroll.min.js"></script>
 
 
+    <!-- Footer
+    ================================================== -->
+    <footer class="bs-footer" role="contentinfo" style="background-color:#EDEDED;margin-top: 80px;padding-top: 10px">
+        <div class="container">
 
-<script src="/js/application.js"></script>
-<script type='text/javascript'>
+            <p class="text-center">Lovejog © 2014. All Rights Reserved. </p>
 
-    (function() {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    })();
+            <p class="text-center">
+                <a href="http://www.miitbeian.gov.cn/" target="_blank" class="link_gray">沪ICP备14008847号-1</a>
+            </p>
 
-</script>
+            <p class="text-center"><a href='#'>点击返回到顶部</a></p>
+        </div>
+    </footer>
+
+
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/underscore-min.js"></script>
+    <script src="/plugin/masonry.pkgd.min.js"></script>
+    <script src="/plugin/imagesloaded.min.js"></script>
+    <script src="/plugin/jquery.infinitescroll.min.js"></script>
+
+
+    <script src="/js/application.js"></script>
+    <script type='text/javascript'>
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
 </body>
 </html>

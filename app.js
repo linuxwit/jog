@@ -34,8 +34,8 @@ fs.readdirSync(models_dir).forEach(function(file) {
     require(models_dir + '/' + file);
 });
 
-ejs.open = '{{';
-ejs.close = '}}';
+//ejs.open = '{{';
+//ejs.close = '}}';
 
 var app = express();
 

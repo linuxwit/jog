@@ -1,14 +1,12 @@
+var post=require('../models/post');
 
-module.exports = function(app, passport) {
-    app.get('/',function(req,res){
+module.exports = function (app, passport) {
+    app.get('/', function (req, res) {
+        var page=req.param("page")?parseInt(req.param("page")):0;
+        var query= post.find({}, {}, { skip: page*10, limit: 10 }).sort('posted -1');
+         query.exec(function (err, docs) {
+            res.render('index',{posts:docs,page:page});
+        });
 
-      //  res.sendfile('./views/index.html');
-       res.render('index')
-    })
-
-    app.get('/post/:page',function(req,res){
-
-        console.log (req.params.id);
-        res.render('post')
     })
 }

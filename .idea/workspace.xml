@@ -76,7 +76,7 @@
       <file leaf-file-name="index.ejs" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="153" column="0" selection-start="7277" selection-end="7277" vertical-scroll-proportion="0.46460176" vertical-offset="2085" max-vertical-offset="3495">
+            <state line="167" column="42" selection-start="7998" selection-end="7998" vertical-scroll-proportion="0.5973451" vertical-offset="2235" max-vertical-offset="3495">
               <folding>
                 <element signature="n#style#0;n#i#0;n#button#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#i#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -607,12 +607,16 @@
       <created>1394634897410</created>
       <updated>1394634897410</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="init&#10;">
+      <created>1394635031790</created>
+      <updated>1394635031790</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="125" y="49" width="1244" height="804" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996207" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996207" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -878,7 +882,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="153" column="0" selection-start="7277" selection-end="7277" vertical-scroll-proportion="0.46460176" vertical-offset="2085" max-vertical-offset="3495">
+        <state line="167" column="42" selection-start="7998" selection-end="7998" vertical-scroll-proportion="0.5973451" vertical-offset="2235" max-vertical-offset="3495">
           <folding>
             <element signature="n#style#0;n#i#0;n#button#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />

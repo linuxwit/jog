@@ -138,7 +138,7 @@
                     <img alt="46x46" style="width: 46px; height: 46px;">
 
                     <div class="card-heading-header">
-                        <h3><%= post.title %></h3>
+                        <h3><%= if (post.title) post.title %></h3>
                         <span><%= post.source %> <%= post.posted %></span>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
                 </div>
                 <div class="card-media">
                     <a href="#" class="card-media-container">
-                        <img alt="500x300" src="<%= post.wx_imge_url %>" style="width: 500px; height: 300px;">
+                        <img alt="500x300" src="<%= post.qiniu_img_url %>" style="width: 500px; height: 300px;">
                     </a>
                 </div>
                 <div class="card-actions">

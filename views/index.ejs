@@ -158,7 +158,7 @@
                         <img alt="500x300" src="<%= qiniu_host %>/<%= post.qiniu_img_url %>" style="max-width: 500px;">
                     </a>
                 </div>
-                <%} else {%>
+                <%} else if (post.wx_imge_url) {%>
                     <div class="card-media">
                         <a href="#" class="card-media-container">
                             <img alt="500x300" src="<%= post.wx_imge_url %>" style="max-width: 500px;>

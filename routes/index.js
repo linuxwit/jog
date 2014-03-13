@@ -4,7 +4,7 @@ module.exports = function (app, passport) {
     app.get('/', function (req, res) {
         moment.lang('zh-cn');
         var page=req.param("page")?parseInt(req.param("page")):0;
-        var query= post.find({}, {}, { skip: page*10, limit: 10 }).sort({ posted: 'desc' });
+        var query= post.find({}, {}, { skip: page*12, limit: 12 }).sort({ posted: 'desc' });
          query.exec(function (err, docs) {
             res.render('index',{
                 posts:docs,

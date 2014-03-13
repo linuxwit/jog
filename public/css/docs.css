@@ -71,7 +71,9 @@ h3,h4,h5 {
     border-bottom-width:1px;
     padding-bottom:10px;
 }
-
+h3{
+    border-bottom-width:0px;
+}
 .modal-dialog {
     width: 450px;
 }

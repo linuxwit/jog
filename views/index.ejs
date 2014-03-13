@@ -154,15 +154,15 @@
                 <%}%>
 
                 <% if (post.sync==1 && post.qiniu_img_url ) {%>
-                <div class="card-media">
-                    <a href="" class="card-media-container text-center">
-                        <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>" class="img-responsive thumbnail" >
+                <div class="card-media text-center">
+                    <a href="" class="card-media-container ">
+                        <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>" class="img-responsive " >
                     </a>
                 </div>
                 <%} else if (post.wx_imge_url) {%>
-                    <div class="card-media">
-                        <a href="" class="card-media-container text-center">
-                            <img  src="<%= post.wx_imge_url %>" class="img-responsive thumbnail" >
+                    <div class="card-media text-center">
+                        <a href="" class="card-media-container ">
+                            <img  src="<%= post.wx_imge_url %>" class="img-responsive " >
                         </a>
                     </div>
                 <%}%>

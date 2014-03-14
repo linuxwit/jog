@@ -1,0 +1,23 @@
+<%- include header.html %>
+<div class="container">
+    <form  id="formRegister" class="form-signin" role="form" method="post" action="/signup">
+        <h2 class="form-signin-heading">欢迎注册</h2>
+        <% if (msg){ %>
+        <div class="info alert-info">
+            <span><%= msg %></span>
+        </div>
+        <% } %>
+
+        <input type="email" name="email" class="form-control" placeholder="请输入邮箱" required autofocus>
+        <input type="password" name="password" class="form-control" placeholder="请输入密码" required>
+        <input type="password" name="password2" class="form-control" placeholder="请再输入密码" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+        <a class="btn btn-lg btn-default btn-block" href="/login" type="submit">返回</a>
+    </form>
+</div> <!-- /container -->
+<%- include footer.html %>
+
+
+
+
+

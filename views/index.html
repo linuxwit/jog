@@ -1,9 +1,165 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-aaaa
-</body>
-</html>
+<%- include header.html %>
+
+<div class="navbar navbar-fixed-top header">
+    <div class="col-md-12">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">
+                <img src="/logo/logo.png" alt="LoveJog" class="logo"/>
+            </a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
+                <i class="glyphicon glyphicon-home" style="color:#dd1111;"></i>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href=""><i class="glyphicon glyphicon-home" style="color:#dd1111;"></i></a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-bell"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><span class="badge pull-right">40</span>Link</a></li>
+                        <li><a href="#"><span class="badge pull-right">2</span>Link</a></li>
+                        <li><a href="#"><span class="badge pull-right">0</span>Link</a></li>
+                        <li><a href="#"><span class="label label-info pull-right">1</span>Link</a></li>
+                        <li><a href="#"><span class="badge pull-right">13</span>Link</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" id="btnToggle"><i class="glyphicon glyphicon-th-large"></i></a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-user"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--main-->
+<div class="container" id="main">
+    <div class="row" id="ms-container">
+        <% if(page == 0) { %>
+        <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
+            <div class="well card">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group" style="padding:14px;margin-bottom:0">
+                        <textarea class="form-control" placeholder="说说你身边关于慢跑的新鲜事"></textarea>
+                    </div>
+                    <div>
+                        <div class="m7">
+                            <div class="mB k7"></div>
+                            <div class="mB l7"></div>
+                        </div>
+                        <ul class="list-inline text-center">
+                            <li>
+                                <a href="#">
+                                    <div class="text"></div>
+                                    文字
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="photo lp"></div>
+                                    图片
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="link lp"></div>
+                                    链接
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="event lp"></div>
+                                    活动
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a class="pull-right" href="#">更多</a> <h4>和大家一起跑</h4></div>
+                <div class="panel-body">
+                    <div class="media">
+                        <a href="#" class="pull-left">
+                            <img alt="48x48" data-src="http://holder.js/48x48" class="media-object"
+                                 style="width: 48px; height:48px;"/>
+                        </a>
+
+                        <div class="media-body">
+                            <p class="media-heading">上海浦东世纪公园<a href="#"
+                                                                class="btn btn-default btn-sm pull-right">参加</a></p>
+                            <small class="text-info">12人</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+        <% posts.forEach(function(post){ %>
+        <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
+            <div class="card">
+                <div class="card-heading image">
+                    <img alt="46x46"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAB3UlEQVRoge3U3VLaUBiFYe//UlZiovwJFluhrQa0gkX5GwuBiWNCsvctvD3QttaDOqAzxXYfrINkstf3TOZLdqy1vMXs/G2Ag7+VOLiDO/iWxsEd3MG3NA7u4P893KRT2qGQRPUiofhxP5vRO64RSkg+++/OWRTPD3ytvmfgGTef9pCeDCpu+XroI4U0O32uBj2ikwviZ+Gv1/dH+OrbKSW/RufLId6jQcXyjLJEcDwlMwbz80xB0m/gyaPRTyjSMa1AqBwxW5kN+jaB53Oiik+lG3M3PfptUDZuIgm/VGJXQgppRFNSY7FFQr/hIb9OuxkglenMc8ymfevBC5LeAV54zHWcEA8OkUQ5uiHJCtLR/bWC9/TGQ7p1HymgfZNjraVI+jQ8PZyZk7+wby34/OTXLj5Oubsgm39mT8JrTlhZw+3lAZKoD+4w1pLHZ1Qeng9bE1Lzsr414IZsMWU0HDIcDrmKqkhir9Vnslxh8jmn+0JBk/PrK6K6d78SiwKbx3SrQsERnXYJKaQ1Tkk37dv0d2itZfVkJ6215ItL2rXg/s2FdT4OluQmJ+5UkHb5MLqjWM04LQmFLcapWb9vo49zy+PgDu7gWxoHd3AH39I4uIM7+JbGwR38X4d/B5Ww4AOuqNhLAAAAAElFTkSuQmCC"
+                         data-src="holder.js/46x46" style="width: 46px; height: 46px;">
+
+                    <div class="card-heading-header">
+                        <h3>
+                            <% if (post.title) { %>
+                            <%= post.title %>
+                            <% } %>
+                        </h3>
+                        <span>
+                            <% if (post.source == 'wx'){ %>
+                            <a title="发布于微信公众号[lovejog]">来源于微信</a>
+                            <% } %>
+                            <%= moment(post.posted).fromNow() %>
+                        </span>
+                    </div>
+                </div>
+                <% if (post.content) { %>
+                <div class="card-body">
+                    <p>
+                        <%= post.content %>
+                    </p>
+                </div>
+                <% } %>
+
+                <% if (post.sync == 1 && post.qiniu_img_url ) { %>
+                <div class="card-media text-center">
+                    <a href="" class="card-media-container ">
+                        <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>" class="img-responsive ">
+                    </a>
+                </div>
+                <% } else if (post.wx_imge_url) { %>
+                <div class="card-media text-center">
+                    <a href="" class="card-media-container ">
+                        <img src="<%= post.wx_imge_url %>" class="img-responsive ">
+                    </a>
+                </div>
+                <% } %>
+                <div class="card-actions" >
+                    <form style="display: none">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default">+1</button>
+                                <button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+        <!--/row-->
+        <div id="nextpage" class="hide"><a href="/?page=2">加载更多...</a></div>
+        <!--page-nav end-->
+    </div>
+
+
+</div>
+
+<%- include footer.html %>

@@ -5,9 +5,6 @@ var Post = require('./post');
 
 var hash = require('../util/hash');
 
-
-
-
 UserSchema = mongoose.Schema({
 	firstName:  String,
 	lastName:   String,
@@ -30,7 +27,11 @@ UserSchema = mongoose.Schema({
 
 
 UserSchema.statics.signup = function(email, password, done){
-	var User = this;
+
+    console.log('signup......');
+
+	var user = this;
+    console.dir(User);
 	hash(password, function(err, salt, hash){
 		if (err) return done(err);
 		User.create({
@@ -38,7 +39,7 @@ UserSchema.statics.signup = function(email, password, done){
 			salt : salt,
 			hash : hash
 		}, function(err, user){
-                        if (err) return done(err);
+            if (err) return done(err);
 			done(null, user);
 		});
 	});
@@ -119,5 +120,6 @@ UserSchema.statics.findOrCreateOAuthUser = function(profile, done){
 	});
 }
 
-var User = restful.model("User", UserSchema).methods(['get', 'put','post']);;
+var User = restful.model("User", UserSchema).methods(['get', 'put','post']);
+
 module.exports = User;

@@ -2,7 +2,9 @@ var mongoose = require('mongoose')
   , LocalStrategy = require('passport-local').Strategy
   , FacebookStrategy = require('passport-facebook').Strategy
   , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-  , User = mongoose.model('User');
+  , SinaStrategy = require('passport-sina').OAuth2Strategy
+  , qqStrategy = require('passport-qq').Strategy
+  , User = require('../models/user');
 
 
 module.exports = function (passport, config) {
@@ -17,6 +19,7 @@ module.exports = function (passport, config) {
 		});
 	});
 
+
   	passport.use(new LocalStrategy({
 		usernameField: 'email',
 		passwordField: 'password'
@@ -25,7 +28,8 @@ module.exports = function (passport, config) {
     	User.isValidUserPassword(email, password, done);
     }));
 
-	passport.use(new FacebookStrategy({
+
+    /*passport.use(new FacebookStrategy({
 		clientID: config.facebook.clientID,
 		clientSecret: config.facebook.clientSecret,
 		callbackURL: config.facebook.callbackURL
@@ -48,5 +52,30 @@ module.exports = function (passport, config) {
 	      return done(err, user);
 	    });
 	  }
-	));
+	));*/
+
+    passport.use(new SinaStrategy({
+            clientID: client_id,
+            clientSecret: client_secret,
+            callbackURL: "http://127.0.0.1:8080/auth/sina/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+            User.findOrCreate({ singId: profile.id }, function (err, user) {
+                return done(err, user);
+            });
+        }
+    ));
+
+
+    passport.use(new qqStrategy({
+            clientID: client_id,
+            clientSecret: client_secret,
+            callbackURL: "http://127.0.0.1:8080/auth/qq/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+            User.findOrCreate({ qqId: profile.id }, function (err, user) {
+                return done(err, user);
+            });
+        }
+    ));
 }

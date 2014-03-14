@@ -17,6 +17,7 @@
         "passport-facebook": "*",
         "passport-google-oauth": "*",
         "connect-flash": "*",
-        "moment":"*"
+        "moment":"*",
+        "passport-sina":"*"
     }
 }

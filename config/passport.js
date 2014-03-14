@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
   , LocalStrategy = require('passport-local').Strategy
   , FacebookStrategy = require('passport-facebook').Strategy
   , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-  , SinaStrategy = require('passport-sina').OAuth2Strategy
+  , SinaStrategy = require('passport-sina').Strategy
   , qqStrategy = require('passport-qq').Strategy
   , User = require('../models/user');
 
@@ -55,9 +55,9 @@ module.exports = function (passport, config) {
 	));*/
 
     passport.use(new SinaStrategy({
-            clientID: client_id,
-            clientSecret: client_secret,
-            callbackURL: "http://127.0.0.1:8080/auth/sina/callback"
+            clientID: config.sina.clientID,
+            clientSecret: config.sina.clientSecret,
+            callbackURL: config.sina.callbackURL
         },
         function(accessToken, refreshToken, profile, done) {
             User.findOrCreate({ singId: profile.id }, function (err, user) {
@@ -68,9 +68,9 @@ module.exports = function (passport, config) {
 
 
     passport.use(new qqStrategy({
-            clientID: client_id,
-            clientSecret: client_secret,
-            callbackURL: "http://127.0.0.1:8080/auth/qq/callback"
+            clientID: config.qq.clientID,
+            clientSecret: config.qq.clientSecret,
+            callbackURL: config.qq.callbackURL
         },
         function(accessToken, refreshToken, profile, done) {
             User.findOrCreate({ qqId: profile.id }, function (err, user) {

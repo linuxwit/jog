@@ -1,7 +1,5 @@
 var mongoose = require('mongoose')
   , LocalStrategy = require('passport-local').Strategy
-  , FacebookStrategy = require('passport-facebook').Strategy
-  , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
   , SinaStrategy = require('passport-sina').Strategy
   , qqStrategy = require('passport-qq').Strategy
   , User = require('../models/user');
@@ -28,41 +26,20 @@ module.exports = function (passport, config) {
     	User.isValidUserPassword(email, password, done);
     }));
 
-
-    /*passport.use(new FacebookStrategy({
-		clientID: config.facebook.clientID,
-		clientSecret: config.facebook.clientSecret,
-		callbackURL: config.facebook.callbackURL
-    },
-    function(accessToken, refreshToken, profile, done) {
-    	profile.authOrigin = 'facebook';
-    	User.findOrCreateOAuthUser(profile, function (err, user) {
-	      return done(err, user);
-	    });
-    }));
-
-	passport.use(new GoogleStrategy({
-	    clientID: config.google.clientID,
-	    clientSecret: config.google.clientSecret,
-	    callbackURL: config.google.callbackURL
-	  },
-	  function(accessToken, refreshToken, profile, done) {
-	  	profile.authOrigin = 'google';
-	    User.findOrCreateOAuthUser(profile, function (err, user) {
-	      return done(err, user);
-	    });
-	  }
-	));*/
-
     passport.use(new SinaStrategy({
             clientID: config.sina.clientID,
             clientSecret: config.sina.clientSecret,
             callbackURL: config.sina.callbackURL
         },
         function(accessToken, refreshToken, profile, done) {
+
+            console.dir(profile);
+
+            /*
             User.findOrCreate({ singId: profile.id }, function (err, user) {
                 return done(err, user);
             });
+            */
         }
     ));
 

@@ -13,9 +13,9 @@ module.exports = {
             callbackURL: 'http://www.lovejog.com/auth/qq/callback'
         },
         sina: {
-            clientID: 'q',
-            clientSecret: 'q',
-            callbackURL: 'q'
+            clientID: '1120024586',
+            clientSecret: '5b9cee2d00af49317c22d2505530c298',
+            callbackURL: 'http://www.lovejog.com/auth/weibo/callback'
         }
     },
     production: {

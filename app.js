@@ -71,6 +71,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+require('./routes/wechat')(app);
+
+require('./routes/index')(app, passport);
+
+require('./routes/api')(app, passport);
 
 app.use(function(err, req, res, next){
     res.status(err.status || 500);
@@ -95,11 +100,7 @@ app.get('/info',function(req,res){
     res.send(process.env);
 })
 
-require('./routes/wechat')(app);
 
-require('./routes/index')(app, passport);
-
-require('./routes/api')(app, passport);
 
 
 

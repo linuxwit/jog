@@ -33,13 +33,18 @@ module.exports = function (passport, config) {
         },
         function(accessToken, refreshToken, profile, done) {
 
-            console.dir(profile);
-
-            /*
-            User.findOrCreate({ singId: profile.id }, function (err, user) {
+            var data={
+                'thrid_id':'wb'+profile.id,
+                'nickname':profile.screen_name,
+                'name':profile.name,
+                'gender':profile.gender=='m'?'男':'女',
+                'location':profile.location,
+                'avtar':profile.profile_image_url
+            };
+            console.dir(data);
+            User.findOrCreate(data, function (err, user) {
                 return done(err, user);
             });
-            */
         }
     ));
 
@@ -50,11 +55,21 @@ module.exports = function (passport, config) {
             callbackURL: config.qq.callbackURL
         },
         function(accessToken, refreshToken, profile, done) {
-            console.log(profile);
-            /*
-            User.findOrCreate({ qqId: profile.id }, function (err, user) {
-                return done(err, user);
-            });*/
+
+            if (profile.ret>=0){
+                var data={
+                    'thrid_id':'qq'+profile.id,
+                    'nickname':profile.nickname,
+                    'gender':profile.gender,
+                    'avtar':profile.figureurl_qq_1
+                }
+                console.dir(data);
+                User.findOrCreate(data, function (err, user) {
+                    return done(err, user);
+                });
+            }
+
+
         }
     ));
 }

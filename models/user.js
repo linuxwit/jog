@@ -60,6 +60,27 @@ UserSchema.statics.isValidUserPassword = function(email, password, done) {
 	});
 };
 
+UserSchema.statics.findorCreate=function(profile,done){
+    var User = this;
+    // Build dynamic key query
+    var query = {};
+    query['thrid_id'] = profile.id;
+    User.findOne(query, function(err, user){
+        if(err) return done(err);
+        if(user){
+            done(null, user);
+        } else {
+            User.create(
+                profile,
+                function(err, user){
+                    if(err) throw err;
+                    done(null, user);
+                }
+            );
+        }
+    })
+}
+
 // Create a new user given a profile
 UserSchema.statics.findOrCreateOAuthUser = function(profile, done){
 	var User = this;

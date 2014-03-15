@@ -8,9 +8,9 @@ module.exports = {
         },
         qiniu: 'http://lovejog.qiniudn.com',
         qq: {
-            clientID: 'zzzzz',
-            clientSecret: 'aaaa',
-            callbackURL: 'q'
+            clientID: '101038143',
+            clientSecret: 'fd8a92e3619747ff712a231bf1d0aa0d',
+            callbackURL: 'http://www.lovejog.com/auth/qq/callback'
         },
         sina: {
             clientID: 'q',

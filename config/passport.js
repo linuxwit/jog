@@ -73,9 +73,11 @@ module.exports = function (passport, config) {
             callbackURL: config.qq.callbackURL
         },
         function(accessToken, refreshToken, profile, done) {
+            console.log(profile);
+            /*
             User.findOrCreate({ qqId: profile.id }, function (err, user) {
                 return done(err, user);
-            });
+            });*/
         }
     ));
 }

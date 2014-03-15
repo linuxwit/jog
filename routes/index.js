@@ -2,6 +2,7 @@ var Post = require('../models/post');
 var User = require('../models/user');
 var Auth = require('../middlewares/auth');
 var moment = require('moment');
+var crypto = require('crypto');
 module.exports = function (app, passport) {
 
 
@@ -74,13 +75,44 @@ module.exports = function (app, passport) {
         function(req, res){
             // The request will be redirected to qq for authentication, so this
             // function will not be called.
-        });
+        }
+    );
 
     app.get('/auth/qq/callback',
         passport.authenticate('qq', { failureRedirect: '/login' }),
         function(req, res) {
             // Successful authentication, redirect home.
             res.redirect('/');
-        });
+        }
+    );
+
+
+    app.get('/auth/weibo',
+        function(req, res, next) {
+            req.session = req.session || {};
+            req.session.auth_state = crypto.createHash('sha1').update(-(new Date()) + '').digest('hex');
+            passport.authenticate('sina', { 'state': req.session.auth_state })(req, res, next)
+        },
+        function(req, res){
+            // The request will be redirected to qq for authentication, so this
+            // function will not be called.
+        }
+    );
+
+    app.get('/auth/weibo/callback',
+        function(req, res, next){
+            if(req.session && req.session.auth_state && req.session.auth_state === req.query.state) {
+                passport.authenticate('sina', { failureRedirect: '/login' })(req, res, next);
+            } else {
+                next(new Error('Auth State Mismatch'));
+            }
+        },
+        function(req, res) {
+            // Successful authentication, redirect home.
+            res.redirect('/');
+
+
+        }
+    );
 
 }

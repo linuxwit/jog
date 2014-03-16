@@ -57,7 +57,8 @@ module.exports = function (passport, config) {
         },
         function(accessToken, refreshToken, profile, done) {
 
-            if (profile.ret>=0){
+                console.log('QQQQQQQQQ');
+
 
                 var data={
                     'id':profile.id,
@@ -66,9 +67,10 @@ module.exports = function (passport, config) {
                     'avatar':profile.figureurl_qq_1
                 }
                 User.findOrCreate({'authOrigin':'qq',qq:data}, function (err, user) {
+                    console.dir(user);
                     return done(err, user);
                 });
-            }
+
 
 
         }

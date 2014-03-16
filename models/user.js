@@ -11,17 +11,22 @@ UserSchema = mongoose.Schema({
 	email:      String,
 	salt:       String,
 	hash:       String,
-    third_id:   String,
+    authOrigin:   String,
     wx_status:String,
 	qq:{
-		id:       String,
-		email:    String,
-		name:     String
+        id:       String,
+        nickname:String,
+        name:String,
+        gender:String,
+        avatar:String
 	},
-	weibo:{
+	sina:{
 		id:       String,
-		email:    String,
-		name:     String
+        nickname:String,
+        name:String,
+        gender:String,
+        location:String,
+        avatar:String
 	}
 });
 
@@ -91,6 +96,7 @@ UserSchema.statics.findOrCreate=function(profile,done){
             console.log(user);
             User.create(user,function(err, user){
                     console.log('save user ................');
+                    console.dir(user);
                     if(err) throw err;
                     done(null, user);
                 }

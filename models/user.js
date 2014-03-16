@@ -6,19 +6,19 @@ var Post = require('./post');
 var hash = require('../util/hash');
 
 UserSchema = mongoose.Schema({
-	firstName:  String,
-	lastName:   String,
+	nickname:  String,
+	gender:   String,
 	email:      String,
 	salt:       String,
 	hash:       String,
-    wx_openid:   String,
+    third_id:   String,
     wx_status:String,
-	facebook:{
+	qq:{
 		id:       String,
 		email:    String,
 		name:     String
 	},
-	google:{
+	weibo:{
 		id:       String,
 		email:    String,
 		name:     String
@@ -27,11 +27,7 @@ UserSchema = mongoose.Schema({
 
 
 UserSchema.statics.signup = function(email, password, done){
-
-    console.log('signup......');
-
 	var user = this;
-    console.dir(User);
 	hash(password, function(err, salt, hash){
 		if (err) return done(err);
 		User.create({
@@ -49,12 +45,12 @@ UserSchema.statics.signup = function(email, password, done){
 UserSchema.statics.isValidUserPassword = function(email, password, done) {
 	this.findOne({email : email}, function(err, user){
 		if(err) return done(err);
-		if(!user) return done(null, false, { message : 'Incorrect email.' });
+		if(!user) return done(null, false, { message : '帐号不存在.' });
 		hash(password, user.salt, function(err, hash){
 			if(err) return done(err);
 			if(hash == user.hash) return done(null, user);
 			done(null, false, {
-				message : 'Incorrect password'
+				message : '密码有误，请重新输入.'
 			});
 		});
 	});
@@ -64,14 +60,13 @@ UserSchema.statics.findorCreate=function(profile,done){
     var User = this;
     // Build dynamic key query
     var query = {};
-    query['thrid_id'] = profile.id;
+    query[profile.authOrigin + '.id'] = profile.id;
     User.findOne(query, function(err, user){
         if(err) return done(err);
         if(user){
             done(null, user);
         } else {
-            User.create(
-                profile,
+            User.create(profile,
                 function(err, user){
                     if(err) throw err;
                     done(null, user);

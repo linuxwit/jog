@@ -81,7 +81,6 @@ module.exports = function (app, passport) {
     app.get('/auth/qq/callback',
         passport.authenticate('qq', { failureRedirect: '/login' }),
         function(req, res) {
-            // Successful authentication, redirect home.
             res.redirect('/');
         }
     );

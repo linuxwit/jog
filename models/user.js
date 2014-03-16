@@ -61,6 +61,9 @@ UserSchema.statics.findOrCreate=function(profile,done){
     // Build dynamic key query
     var query = {};
     query[profile.authOrigin + '.id'] = profile.id;
+
+    console.log(profile);
+
     User.findOne(query, function(err, user){
         if(err) return done(err);
         if(user){

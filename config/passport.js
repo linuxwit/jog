@@ -33,17 +33,17 @@ module.exports = function (passport, config) {
         },
         function(accessToken, refreshToken, profile, done) {
 
-            /*
+
             var data={
-                'third_id':'wb'+profile.id,
+                'id':profile.id,
                 'nickname':profile.screen_name,
                 'name':profile.name,
                 'gender':profile.gender=='m'?'男':'女',
                 'location':profile.location,
                 'avtar':profile.profile_image_url
-            };*/
+            };
 
-            User.findOrCreate({'authOrigin':'qq','sina':profile}, function (err, user) {
+            User.findOrCreate({'authOrigin':'sina','sina':data}, function (err, user) {
                 return done(err, user);
             });
         }
@@ -58,14 +58,14 @@ module.exports = function (passport, config) {
         function(accessToken, refreshToken, profile, done) {
 
             if (profile.ret>=0){
-                /*
+
                 var data={
                     'id':profile.id,
                     'nickname':profile.nickname,
                     'gender':profile.gender,
                     'avtar':profile.figureurl_qq_1
-                }*/
-                User.findOrCreate({'authOrigin':'qq',qq:profile}, function (err, user) {
+                }
+                User.findOrCreate({'authOrigin':'qq',qq:data}, function (err, user) {
                     return done(err, user);
                 });
             }

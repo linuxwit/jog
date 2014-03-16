@@ -68,8 +68,14 @@ UserSchema.statics.findOrCreate=function(profile,done){
         if(err) return done(err);
 
         console.log('end query the user ');
+
+        console.log(user);
+
         if(user){
+
+            console.log('update the user');
             user[''+profile.authOrigin] = profile[''+profile.authOrigin];
+
             user.save(function(err, user){
                 if(err) throw err;
                 done(null, user);
@@ -83,7 +89,7 @@ UserSchema.statics.findOrCreate=function(profile,done){
             }
             user[''+profile.authOrigin] = profile[''+profile.authOrigin];
 
-            console.log('create user');
+            console.log('create new user');
             User.create(user,function(err, user){
                     console.log('save user ................');
                     if(err) throw err;

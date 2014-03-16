@@ -58,26 +58,35 @@ UserSchema.statics.isValidUserPassword = function(email, password, done) {
 
 UserSchema.statics.findOrCreate=function(profile,done){
     var User = this;
-    // Build dynamic key query
     var query = {};
     query[profile.authOrigin + '.id'] = profile.id;
 
-
-
+    console.log('findOrCreate');
+    console.log(profile);
+    console.log('query the user ');
     User.findOne(query, function(err, user){
         if(err) return done(err);
+
+        console.log('end query the user ');
         if(user){
-            done(null, user);
+            user[''+profile.authOrigin] = profile[''+profile.authOrigin];
+            user.save(function(err, user){
+                if(err) throw err;
+                done(null, user);
+            });
         } else {
+
+            user={
+                nickname:profile[''+profile.authOrigin].nickname,
+                avatar:profile[''+profile.authOrigin].avatar,
+                authOrigin:profile.authOrigin
+            }
+            user[''+profile.authOrigin] = profile[''+profile.authOrigin];
+
             console.log('create user');
-
-            console.log(profile);
-
-
-            User.create(profile,function(err, user){
-                    console.log(user);
+            User.create(user,function(err, user){
+                    console.log('save user ................');
                     if(err) throw err;
-
                     done(null, user);
                 }
             );

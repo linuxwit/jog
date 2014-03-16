@@ -142,11 +142,12 @@
                 </div>
                 <% } %>
                 <div class="card-actions" >
-                    <form style="display: none">
+                    <form>
                         <div class="input-group">
                             <div class="input-group-btn">
                                 <button class="btn btn-default">+1</button>
                                 <button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
+                                <a class="btn btn-default" href="/post/<%= post._id %>" target="_blank">评论</a>
                             </div>
                         </div>
                     </form>

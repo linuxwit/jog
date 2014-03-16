@@ -68,8 +68,6 @@ UserSchema.statics.findOrCreate=function(profile,done){
     query[profile.authOrigin + '.id'] = profile[''+profile.authOrigin].id;
     User.findOne(query, function(err, user){
         if(err) return done(err);
-
-
         if(user){
 
             console.log('update the user');

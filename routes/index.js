@@ -29,6 +29,26 @@ module.exports = function (app, passport) {
         })
     })
 
+    app.get('/post/:id',function(req,res){
+        if (!req.isAuthenticated()) {
+            res.redirect('/login');
+        }
+        moment.lang('zh-cn');
+
+        var page = req.param("page") ? parseInt(req.param("page")) : 0;
+        var query = Post.findOne({'_id':req.params.id});
+        query.exec(function (err, doc) {
+            user = req.isAuthenticated() ? req.user : null;
+            res.render('post', {
+                post: doc,
+                moment: moment,
+                page: page,
+                qiniu_host: 'http://lovejog.qiniudn.com',
+                user: user
+            });
+        })
+    })
+
     app.get('/login', function (req, res) {
         res.render('login');
     })

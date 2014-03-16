@@ -88,8 +88,7 @@ UserSchema.statics.findOrCreate=function(profile,done){
                 authOrigin:profile.authOrigin
             }
             user[''+profile.authOrigin] = profile[''+profile.authOrigin];
-
-            console.log('create new user');
+            console.log(user);
             User.create(user,function(err, user){
                     console.log('save user ................');
                     if(err) throw err;

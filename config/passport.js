@@ -40,7 +40,7 @@ module.exports = function (passport, config) {
                 'name':profile.name,
                 'gender':profile.gender=='m'?'男':'女',
                 'location':profile.location,
-                'avtar':profile.profile_image_url
+                'avatar':profile.profile_image_url
             };
 
             User.findOrCreate({'authOrigin':'sina','sina':data}, function (err, user) {
@@ -63,7 +63,7 @@ module.exports = function (passport, config) {
                     'id':profile.id,
                     'nickname':profile.nickname,
                     'gender':profile.gender,
-                    'avtar':profile.figureurl_qq_1
+                    'avatar':profile.figureurl_qq_1
                 }
                 User.findOrCreate({'authOrigin':'qq',qq:data}, function (err, user) {
                     return done(err, user);

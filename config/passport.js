@@ -60,9 +60,9 @@ module.exports = function (passport, config) {
                 console.log(profile);
                 var data={
                     'id':profile.id,
-                    'nickname':profile.nickname,
-                    'gender':profile.gender,
-                    'avatar':profile.figureurl_qq_1
+                    'nickname':profile._json.nickname,
+                    'gender':profile._json.gender,
+                    'avatar':profile._json.figureurl_qq_1
                 }
                 User.findOrCreate({'authOrigin':'qq',qq:data}, function (err, user) {
                     console.dir(user);

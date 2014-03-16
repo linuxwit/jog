@@ -59,7 +59,7 @@ UserSchema.statics.isValidUserPassword = function(email, password, done) {
 UserSchema.statics.findOrCreate=function(profile,done){
     var User = this;
     var query = {};
-    query[profile.authOrigin + '.id'] = profile.id;
+    query[profile.authOrigin + '.id'] = profile[''+profile.authOrigin].id;
 
     console.log('findOrCreate');
     console.log(query);

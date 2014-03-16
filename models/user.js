@@ -12,6 +12,7 @@ UserSchema = mongoose.Schema({
 	salt:       String,
 	hash:       String,
     authOrigin:   String,
+    avatar:String,
     wx_status:String,
 	qq:{
         id:       String,
@@ -65,16 +66,9 @@ UserSchema.statics.findOrCreate=function(profile,done){
     var User = this;
     var query = {};
     query[profile.authOrigin + '.id'] = profile[''+profile.authOrigin].id;
-
-    console.log('findOrCreate');
-    console.log(query);
-    console.log('query the user ');
     User.findOne(query, function(err, user){
         if(err) return done(err);
 
-        console.log('end query the user ');
-
-        console.log(user);
 
         if(user){
 

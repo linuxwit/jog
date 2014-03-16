@@ -56,10 +56,8 @@ module.exports = function (passport, config) {
             callbackURL: config.qq.callbackURL
         },
         function(accessToken, refreshToken, profile, done) {
-
-                console.log('QQQQQQQQQ');
-
-
+                console.log('---------------------------')
+                console.log(profile);
                 var data={
                     'id':profile.id,
                     'nickname':profile.nickname,

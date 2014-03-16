@@ -56,7 +56,7 @@ UserSchema.statics.isValidUserPassword = function(email, password, done) {
 	});
 };
 
-UserSchema.statics.findorCreate=function(profile,done){
+UserSchema.statics.findOrCreate=function(profile,done){
     var User = this;
     // Build dynamic key query
     var query = {};

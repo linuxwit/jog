@@ -9,7 +9,7 @@ module.exports = function (app, passport) {
     app.get('/', function (req, res) {
 
         if (!req.isAuthenticated()) {
-            res.redirect('/signin');
+            res.redirect('/login');
         }
         moment.lang('zh-cn');
 

@@ -1,13 +1,13 @@
 <%- include header.html %>
-<link href="/css/login.css" rel="stylesheet">
 
 <div class="container">
     <div class="row-fluid">
         <div class="col-md-12">
             <div class="center-block">
 
-                <h5> 登录 Lovejog.com</h5>
+
                 <form class="form-signin" role="form" method="post" action="/login">
+                    <h4> 登录 Lovejog.com</h4>
                     <input type="email" name="email" class="form-control" placeholder="邮箱" required autofocus>
                     <input type="password" name="password" class="form-control" placeholder="密码" required>
                     <label class="checkbox">
@@ -19,9 +19,9 @@
                         <a href="/getpassword">忘记密码</a> <a class="pull-right" href="/signup">还没有帐号，请注册</a>
                     </div>
 
-                    <a href="/auth/qq" class="btn btn-lg btn-primary btn-block" type="submit">使用QQ登录</a>
+                    <a href="/auth/qq" class="btn btn-lg btn-default btn-block" type="submit">使用QQ登录</a>
 
-                    <a href="/auth/weibo" class="btn btn-lg btn-primary btn-block" type="submit">使用weibo登录</a>
+                    <a href="/auth/weibo" class="btn btn-lg btn-default btn-block" type="submit">使用weibo登录</a>
                 </form>
             </div>
         </div>

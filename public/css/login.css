@@ -1,0 +1,99 @@
+body{
+    background: none repeat scroll 0 0 #3DB6E4;
+    color: #FFFFFF;
+    padding: 0;
+}
+.container{
+    padding:0;
+    margin: 0;
+}
+ .wrap {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #333333;
+    left: 50%;
+    margin-left: -220px;
+    margin-top: -190px;
+    padding: 0;
+    position: absolute;
+    text-align: left;
+    top: 50%;
+    width: 440px;
+}
+
+.wrap .auth-label {
+    color: #FFFFFF;
+    font-size: 2rem;
+    font-weight: normal;
+    line-height: 3rem;
+    margin-bottom: 10px;
+}
+ .wrap .auth-box {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+}
+.wrap .auth-box .social-login {
+    border-bottom: 1px solid #CCCCCC;
+    margin: 0 auto 30px;
+    padding: 0 0 30px;
+    position: relative;
+}
+
+.btn-google {
+    background: #396FC5;
+    border-radius: 5px;
+    color: #FFFFFF;
+    display: block;
+    padding: 0;
+}
+.wrap .auth-box .social-login span {
+    font-size: 1.6rem;
+}
+
+.wrap .auth-box .social-login .or {
+    background: none repeat scroll 0 0 #FFFFFF;
+    bottom: -14px;
+    color: #AAAAAA;
+    font-size: 13px;
+    left: 50%;
+    margin-left: -30px;
+    position: absolute;
+    text-align: center;
+    width: 60px;
+}
+.wrap .controls input {
+    -moz-box-sizing: border-box;
+    font-size: 1.6rem;
+    height: auto;
+    line-height: 2.4rem;
+    padding: 8px 10px;
+    transition: none 0s ease 0s;
+    width: 100%;
+}
+
+.wrap .remember-me input#remember_me {
+    margin-top: 0;
+    padding: 0;
+    width: auto;
+}
+
+.wrap .auth-box #sign-in-btn {
+    margin-top: 5px;
+    width: 140px;
+}
+
+.wrap .note {
+    color: #FFFFFF;
+    font-size: 13px;
+    margin: 5px;
+    text-align: right;
+}
+p {
+    margin: 0 0 9px;
+}
+.wrap .auth-box .forgot-password-helper a {
+    color: #999999;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+}

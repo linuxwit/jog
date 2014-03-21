@@ -143,7 +143,9 @@ module.exports = function (app) {
             // Longitude: '113.352425',
             // Precision: '119.385040',
             // MsgId: '5837397520665436492' }
-
+            console.log('event');
+            console.log(message);
+            res.reply(message);
             if (message.Event=='subscribe'){
                 res.reply('欢迎关注爱慢跑！直接发送文字和图片试试，<a href="'+host+'/signup/'+ message.FromUserName +'/'+post._id+'">点击注册</a>可以更好玩哟');
 

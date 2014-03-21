@@ -71,6 +71,8 @@ module.exports = function (app, passport) {
 
 
     app.get("/signup/:id",function(req,res){
+        console.log(req.params.id);
+
         res.render("weixin/signup",{id:req.params.id,msg:''});
     })
 
@@ -94,6 +96,7 @@ module.exports = function (app, passport) {
     );
 
     app.post("/signup/:id", Auth.userExist, function (req, res, next) {
+
         User.signup(req.params.id,req.body.email, req.body.password, function (err, user) {
             if (err) throw err;
             req.login(user, function (err) {

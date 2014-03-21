@@ -69,14 +69,15 @@ module.exports = function (app, passport) {
         })
     );
 
-    app.get("/signup", function (req, res) {
-        res.render("signup", {msg: ''});
-    });
 
     app.get("/signup/:id",function(req,res){
         res.render("signup",{msg:''});
     })
 
+    app.get("/signup", function (req, res) {
+        res.render("signup", {msg: ''});
+    });
+
 
     app.post("/signin"
         , passport.authenticate('local', {
@@ -91,6 +92,16 @@ module.exports = function (app, passport) {
             failureRedirect: "/signin"
         })
     );
+
+    app.post("/signup/:id", Auth.userExist, function (req, res, next) {
+        User.signup(req.params.id,req.body.email, req.body.password, function (err, user) {
+            if (err) throw err;
+            req.login(user, function (err) {
+                if (err) return next(err);
+                return res.redirect("/login");
+            });
+        });
+    });
 
     app.post("/signup", Auth.userExist, function (req, res, next) {
         User.signup(null,req.body.email, req.body.password, function (err, user) {
@@ -102,15 +113,7 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.post("/signup/:id", Auth.userExist, function (req, res, next) {
-        User.signup(req.params.id,req.body.email, req.body.password, function (err, user) {
-            if (err) throw err;
-            req.login(user, function (err) {
-                if (err) return next(err);
-                return res.redirect("/login");
-            });
-        });
-    });
+
 
 
     app.get('/getpassword', function (req, res) {

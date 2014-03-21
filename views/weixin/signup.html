@@ -1,8 +1,13 @@
 <%- include ../header.html %>
-
+<style type="text/css">
+    body{
+        margin: 0;padding: 0;
+    }
+    h5{padding-bottom: 0px;border-bottom: none}
+</style>
 <div id="header" class="text-center">
     <div id="header_content">
-        <a id="back" href="#"><span class="glyphicon glyphicon-chevron-left" style="color:#428BCA"></span></a>
+        <a id="back" href="/"><span class="glyphicon glyphicon-chevron-left hide" style="color:#428BCA"></span></a>
         <h5>用户注册</h5>
     </div>
 </div>
@@ -18,12 +23,14 @@
                 <div class="col-xs-12 col-md-12">
                     <form role="form"  id="fmRegister" method="post" action="/signup/<%= this.id %>">
                         <div class="form-group">
-                            <input type="email" class="form-control input-lg" placeholder="请输入邮箱">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control input-lg" placeholder="请设定新密码">
+                            <input type="email" name="email" class="form-control input-lg" required placeholder="请输入邮箱">
                         </div>
-                        <button type="button" id="btnRegister" class="btn btn-default btn-primary btn-lg btn-block">注册</button>
+                        <div class="form-group">
+                            <input type="password"  name="password" class="form-control input-lg" required placeholder="请设定新密码">
+                        </div>
+                        <button type="submit"  class="btn btn-default btn-primary btn-lg btn-block">注册</button>
                     </form>
                 </div>
             </div>
@@ -31,12 +38,14 @@
         <div class="tab-pane" id="old_user">
             <form role="form"  id="fmBind" method="post" action="/bind/<%= this.id %>">
                 <div class="form-group">
-                    <input type="text" class="form-control input-lg" id="userId" placeholder="请输入邮箱">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control input-lg" id="password" placeholder="请输入密码">
+                    <input type="text" class="form-control input-lg" name="email" required="" placeholder="请输入邮箱">
                 </div>
-                <button type="button" id="btnBind" class="btn btn-default btn-primary btn-lg btn-block">绑定微信</button>
+                <div class="form-group">
+                    <input type="password" class="form-control input-lg" name="password" placeholder="请输入密码">
+                </div>
+                <button type="submit"  class="btn btn-default btn-primary btn-lg btn-block">绑定微信</button>
             </form>
         </div>
     </div>

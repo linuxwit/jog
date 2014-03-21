@@ -474,3 +474,77 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+
+#header{
+    background: #f7f7f7;
+    border-bottom: 1px solid #DDD;
+
+}
+#header_content{
+    border: 1px solid #f7f7f7;
+
+}
+#back{
+    float: left;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 5px;
+}
+.list-group-item:first-child {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-top: none;
+}
+.list-group-item:last-child {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+.list-group-item{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.list-cards .list-group-item{
+    border-left: none;
+    border-right: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.list-cards .list-group-item:last-child{
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.list-cards a.list-group-item:hover{
+    background-color: #fff;
+}
+#nav_tab > li{
+    min-width: 100px;
+    width: 50%;
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #f7f7f7;
+    border: none;
+}
+
+#nav_tab  > li > a,#nav_tab  > li > a:hover{
+    border-radius: 0;
+    border-top:none;
+    border-right:none;
+    border-bottom: 1px solid #EEE;
+    border-left: 1px solid #EEE;
+    margin-right: 0px;
+    text-align: center;
+
+}
+
+#nav_tab  > li.active > a,#nav_tab  > li.active > a:focus,#nav_tab  > li.active > a:hover{
+    border-radius: 0;
+    border-bottom: 1px solid #FFF;
+    border-left: 1px solid #FFF;
+
+}

@@ -19,6 +19,7 @@
         "connect-flash": "*",
         "moment":"*",
         "passport-sina":"*",
-        "passport-qq":"*"
+        "passport-qq":"*",
+        "mongoose-auto-increment":"*"
     }
 }

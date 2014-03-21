@@ -10,16 +10,23 @@ qiniu.config({
 
 var imagesBucket = qiniu.bucket('lovejog');
 
+var host="http://www.lovejog.com"
+
 module.exports = function (app) {
     app.use('/wechat',wechat('weixin', wechat.text(function (message, req, res, next) {
-        var post=new Post({source:'wx',type:'text',content:message.Content,wx_openid:message.FromUserName});
-        post.save(function (err, post){
-            if (err) {
-                console.dir(err);
-                return res.reply('发布失败！')
-            }
-            res.reply('发布成功！你可以<a href="'+message.MsgId+'">点击编辑</a>');
-        })
+
+        if (message.Content.length>5){
+            var post=new Post({source:'wx',type:'text',content:message.Content,wx_openid:message.FromUserName});
+            post.save(function (err, post){
+                if (err) {
+                    console.dir(err);
+                    return res.reply('发布失败！')
+                }
+                res.reply('发布成功！你可以<a href="'+host+'/edit/'+ message.FromUserName +'/'+post._id+'">点击编辑</a>');
+            })
+        }else{
+            return res.reply('多说点嘛！');
+        }
 
         // message为文本内容
         // { ToUserName: 'gh_d3e07d51b513',
@@ -36,8 +43,7 @@ module.exports = function (app) {
                     console.dir(err);
                     return res.reply('发布失败！')
                 }
-                res.reply('发布成功！你可以<a href="'+message.MsgId+'">点击编辑</a>');
-                console.log('发布图片成功');
+                res.reply('发布成功！你可以<a href="'+host+'/edit/'+ message.FromUserName +'/'+post._id+'">点击编辑</a>');
 
                 var puttingStream = imagesBucket.createPutStream(key);
                 var request=require('request');
@@ -137,15 +143,20 @@ module.exports = function (app) {
             // Longitude: '113.352425',
             // Precision: '119.385040',
             // MsgId: '5837397520665436492' }
-            var user=new User({wx_openid:message.FromUserName,wx_status:subscribe});
-            if (message.Event=='subscribe'){
 
-                user.save(function (err, post){
+            if (message.Event=='subscribe'){
+                res.reply('欢迎关注爱慢跑！直接发送文字和图片试试，<a href="'+host+'/signup/'+ message.FromUserName +'/'+post._id+'">点击注册</a>可以更好玩哟');
+
+                /*
+                 var user=new User({wx_openid:message.FromUserName,wx_status:subscribe});
+                user.save(function (err, user){
                     if (err) {
                         return res.reply('关注出现了点问题！')
                     }
+
+
                    return res.reply('欢迎关注love jog，直接发送文字和图片试试！<a href="">点击注册</a>可以获得更多功能！');
-                })
+                })*/
             }
         })));
 

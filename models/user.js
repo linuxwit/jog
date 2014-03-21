@@ -13,7 +13,7 @@ UserSchema = mongoose.Schema({
 	hash:       String,
     authOrigin:   String,
     avatar:String,
-    wx_status:String,
+    wx_openid:String,
 	qq:{
         id:       String,
         nickname:String,
@@ -32,11 +32,12 @@ UserSchema = mongoose.Schema({
 });
 
 
-UserSchema.statics.signup = function(email, password, done){
+UserSchema.statics.signup = function(wx_openid,email, password, done){
 	var user = this;
 	hash(password, function(err, salt, hash){
 		if (err) return done(err);
 		User.create({
+            wx_openid:wx_openid,
 			email : email,
 			salt : salt,
 			hash : hash

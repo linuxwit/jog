@@ -147,7 +147,7 @@ module.exports = function (app) {
             console.log(message);
             res.reply(message);
             if (message.Event=='subscribe'){
-                res.reply('欢迎关注爱慢跑！直接发送文字和图片试试，<a href="'+host+'/signup/'+ message.FromUserName +'/'+post._id+'">点击注册</a>可以更好玩哟');
+                res.reply('欢迎关注爱慢跑！直接发送文字和图片试试，<a href="'+host+'/signup/'+ message.FromUserName+'">点击注册</a>可以更好玩哟');
 
                 /*
                  var user=new User({wx_openid:message.FromUserName,wx_status:subscribe});

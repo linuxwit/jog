@@ -143,9 +143,6 @@ module.exports = function (app) {
             // Longitude: '113.352425',
             // Precision: '119.385040',
             // MsgId: '5837397520665436492' }
-            console.log('event');
-            console.log(message);
-            res.reply(message);
             if (message.Event=='subscribe'){
                 res.reply('欢迎关注爱慢跑！直接发送文字和图片试试，<a href="'+host+'/signup/'+ message.FromUserName+'">点击注册</a>可以更好玩哟');
 
@@ -159,7 +156,11 @@ module.exports = function (app) {
 
                    return res.reply('欢迎关注love jog，直接发送文字和图片试试！<a href="">点击注册</a>可以获得更多功能！');
                 })*/
+            }else
+            {
+                res.reply("");
             }
+
         })));
 
 }

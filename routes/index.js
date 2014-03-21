@@ -71,7 +71,7 @@ module.exports = function (app, passport) {
 
 
     app.get("/signup/:id",function(req,res){
-        res.render("signup",{msg:''});
+        res.render("weixin/signup",{id:req.params.id,msg:''});
     })
 
     app.get("/signup", function (req, res) {

@@ -116,6 +116,21 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get('/edit/:openid/:id',function(req,res,next){
+
+        User.findOne({'wx_openid': req.params.openid}, function (err, user) {
+            var query = Post.findOne({'_id': req.params.id});
+            query.exec(function (err, doc) {
+                res.render('edit', {
+                    post: doc,
+                    openid: req.params.openid,
+                    id: req.params.id,
+                    user: user
+                });
+            })
+        });
+    });
+
 
 
 

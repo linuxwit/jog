@@ -3,7 +3,7 @@ var wechat = require('wechat');
 //var S = require('string');
 var Post = require('../models/post');
 var User = require('../models/user');
-var qiniu_host= 'http://lovejog.qiniudn.com',
+var qiniu_host= 'http://lovejog.qiniudn.com';
 
 qiniu.config({
     access_key: 'YG9uh4iBBLoeX20AeoAZKQIctJjn0fdH5UXoPNkC',

@@ -121,12 +121,16 @@ module.exports = function (app, passport) {
         User.findOne({'wx_openid': req.params.openid}, function (err, user) {
             var query = Post.findOne({'_id': req.params.id});
             query.exec(function (err, doc) {
-                res.render('weixin/edit', {
-                    post: doc,
-                    openid: req.params.openid,
-                    id: req.params.id,
-                    user: user
-                });
+                if (doc) {
+                    res.render('weixin/edit', {
+                        post: doc,
+                        openid: req.params.openid,
+                        id: req.params.id,
+                        user: user
+                    });
+                }else{
+                    res.redirect('/');
+                }
             })
         });
     });
@@ -137,12 +141,12 @@ module.exports = function (app, passport) {
                 if (err) throw err;
                 if (post){
                     if (req.body.action=='save'){
-                    post.number=req.body.number;
-                    post.content=req.body.content;
+                        post.number=req.body.number;
+                        post.content=req.body.content;
 
-                    post.save(function(err,post){
-                        res.redirect('/post/'+post._id);
-                    })
+                        post.save(function(err,post){
+                            res.redirect('/post/'+post._id);
+                        })
                     }else if (req.body.action=='del'){
                         post.remove();
                     }

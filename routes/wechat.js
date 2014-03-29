@@ -3,7 +3,7 @@ var wechat = require('wechat');
 //var S = require('string');
 var Post = require('../models/post');
 var User = require('../models/user');
-var qiniu_host= 'http://lovejog.qiniudn.com';
+var qiniu_host = 'http://lovejog.qiniudn.com';
 
 qiniu.config({
     access_key: 'YG9uh4iBBLoeX20AeoAZKQIctJjn0fdH5UXoPNkC',
@@ -12,21 +12,21 @@ qiniu.config({
 
 var imagesBucket = qiniu.bucket('lovejog');
 
-var host="http://www.lovejog.com"
+var host = "http://www.lovejog.com"
 
 module.exports = function (app) {
-    app.use('/wechat',wechat('weixin', wechat.text(function (message, req, res, next) {
+    app.use('/wechat', wechat('weixin', wechat.text(function (message, req, res, next) {
 
-        if (message.Content.length>5){
-            var post=new Post({source:'wx',type:'text',content:message.Content,wx_openid:message.FromUserName});
-            post.save(function (err, post){
+        if (message.Content.length > 5) {
+            var post = new Post({source: 'wx', type: 'text', content: message.Content, wx_openid: message.FromUserName});
+            post.save(function (err, post) {
                 if (err) {
                     console.dir(err);
                     return res.reply('发布失败！')
                 }
-                res.reply('发布成功！你可以<a href="'+host+'/edit/'+ message.FromUserName +'/'+post._id+'">点击编辑</a>');
+                res.reply('发布成功！你可以<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑</a>');
 
-                User.findUserByOpenId(post.wx_openid,function(err,user){
+                User.findUserByOpenId(post.wx_openid, function (err, user) {
                     console.log(user);
                     if (user) {
                         post.author = user._id;
@@ -34,20 +34,20 @@ module.exports = function (app) {
                     }
                 })
             })
-        }else{
-            var input=message.Content;
-            if ((/\w+/).test(input)){
-                Post.find({'number':input},function(err,docs){
+        } else {
+            var input = message.Content;
+            if ((/\w+/).test(input)) {
+                Post.find({'number': input}, function (err, docs) {
                     if (err)
                         return res.reply('非常抱谦，没有找到任何关于' + input + '的信息');
 
-                    var match=new Array();
-                    for(var i=0;i<count(docs);i++){
+                    var match = new Array();
+                    for (var i = 0; i < count(docs); i++) {
                         match.push({
                             title: docs[i].conent,
                             description: '',
-                            picurl:qiniu_host+docs[i].qiniu_img_url,
-                            url: 'http://www.lovejog.com/post/'+docs[i]._id
+                            picurl: qiniu_host + docs[i].qiniu_img_url,
+                            url: 'http://www.lovejog.com/post/' + docs[i]._id
                         });
 
                     }
@@ -66,40 +66,47 @@ module.exports = function (app) {
         // Content: 'http',
         // MsgId: '5837397576500011341' }
     }).image(function (message, req, res, next) {
-            var key=message.MsgId;
-            var post=new Post({source:'wx',type:'image',wx_imge_url:message.PicUrl,qiniu_img_url:key,wx_openid:message.FromUserName,sync:0});
-            post.save(function (err, post){
+            var key = message.MsgId;
+            var post = new Post({source: 'wx', type: 'image', wx_imge_url: message.PicUrl, qiniu_img_url: key, wx_openid: message.FromUserName, sync: 0});
+            post.save(function (err, post) {
                 if (err) {
                     console.dir(err);
                     return res.reply('发布失败！')
                 }
-                res.reply('发布成功！你可以<a href="'+host+'/edit/'+ message.FromUserName +'/'+post._id+'">点击编辑</a>');
+                res.reply('发布成功！你可以<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑</a>');
 
                 var puttingStream = imagesBucket.createPutStream(key);
-                var request=require('request');
+                var request = require('request');
                 request(message.PicUrl).pipe(puttingStream)
-                    .on('error', function(err) {
+                    .on('error', function (err) {
                         console.dir(err);
-                        post.sync=-1;
-                        post.save(function (err, post){
-                            if (err){
+                        post.sync = -1;
+                        post.save(function (err, post) {
+                            if (err) {
                                 console.log('save sync -1 fail')
                                 console.dir(err);
                             }
                         });
                     })
-                    .on('end', function(data) {
-                        post.sync=1;
-                        post.save(function (err, post){
-                            if (err){
+                    .on('end', function (data) {
+                        post.sync = 1;
+                        post.save(function (err, post) {
+                            if (err) {
                                 console.log('save sync 1 fail')
                                 console.dir(err);
                             }
                         });
                     });
+
+                //查找是否有没有绑定，如果绑定就更新author
+                User.findUserByOpenId(post.wx_openid, function (err, user) {
+                    console.log(user);
+                    if (user) {
+                        post.author = user._id;
+                        post.save();
+                    }
+                })
             })
-
-
 
 
             // message为图片内容
@@ -140,9 +147,9 @@ module.exports = function (app) {
             // Label: {},
             // MsgId: '5837398761910985062' }
             console.dir(message);
-            var post=new Post({source:'wx',type:'location',location:{x:message.Location_X,y:message.Location_Y,scale:message.Scale,label:message.Label},wx_openid:message.FromUserName});
+            var post = new Post({source: 'wx', type: 'location', location: {x: message.Location_X, y: message.Location_Y, scale: message.Scale, label: message.Label}, wx_openid: message.FromUserName});
             console.dir(post);
-            post.save(function (err, post){
+            post.save(function (err, post) {
                 if (err) {
                     console.dir(err);
                     return res.reply('失败了！')
@@ -173,21 +180,20 @@ module.exports = function (app) {
             // Longitude: '113.352425',
             // Precision: '119.385040',
             // MsgId: '5837397520665436492' }
-            if (message.Event=='subscribe'){
-                res.reply('欢迎关注爱慢跑！直接发送文字和图片试试，<a href="'+host+'/signup/'+ message.FromUserName+'">点击注册</a>可以更好玩哟');
+            if (message.Event == 'subscribe') {
+                res.reply('欢迎关注爱慢跑！直接发送文字和图片试试，<a href="' + host + '/signup/' + message.FromUserName + '">点击注册</a>可以更好玩哟');
 
                 /*
                  var user=new User({wx_openid:message.FromUserName,wx_status:subscribe});
-                user.save(function (err, user){
-                    if (err) {
-                        return res.reply('关注出现了点问题！')
-                    }
+                 user.save(function (err, user){
+                 if (err) {
+                 return res.reply('关注出现了点问题！')
+                 }
 
 
-                   return res.reply('欢迎关注love jog，直接发送文字和图片试试！<a href="">点击注册</a>可以获得更多功能！');
-                })*/
-            }else
-            {
+                 return res.reply('欢迎关注love jog，直接发送文字和图片试试！<a href="">点击注册</a>可以获得更多功能！');
+                 })*/
+            } else {
                 res.reply("");
             }
 

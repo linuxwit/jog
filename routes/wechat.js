@@ -26,9 +26,12 @@ module.exports = function (app) {
                 }
                 res.reply('发布成功！你可以<a href="'+host+'/edit/'+ message.FromUserName +'/'+post._id+'">点击编辑</a>');
 
-                User.findUserByOpenId(post.wx_openid,function(err,userId){
-                    post.author=userId;
-                    post.save();
+                User.findUserByOpenId(post.wx_openid,function(err,user){
+                    console.log(user);
+                    if (user) {
+                        post.author = user._id;
+                        post.save();
+                    }
                 })
             })
         }else{

@@ -131,6 +131,27 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.post('/edit/:openid/:id',function(req,res){
+        User.findOne({'wx_openid': req.params.openid}, function (err, user) {
+            Post.findOne({'_id': req.params.id},function(err,post){
+                if (err) throw err;
+                if (post){
+                    if (req.body.action=='save'){
+                    post.number=req.body.number;
+                    post.content=req.body.content;
+
+                    post.save(function(err,post){
+                        res.redirect('/');
+                    })
+                    }else if (req.body.action=='del'){
+                        post.remove();
+                    }
+                }
+            });
+
+        });
+    });
+
 
 
 

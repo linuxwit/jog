@@ -28,7 +28,7 @@ module.exports = function (app) {
             })
         }else{
             var input=message.Content;
-            /*if (S(input).isAlphaNumeric()){
+            if ((/\w+/).test(input)){
                 Post.find({'number':input},function(err,docs){
                     if (err)
                         return res.reply('非常抱谦，没有找到任何关于' + input + '的信息');
@@ -46,7 +46,7 @@ module.exports = function (app) {
                     res.reply(match);
 
                 })
-            } else*/
+            } else
                 return res.reply('多说点嘛！');
         }
 

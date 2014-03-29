@@ -20,7 +20,6 @@
         "moment":"*",
         "passport-sina":"*",
         "passport-qq":"*",
-        "mongoose-auto-increment":"*",
-        "string":"*"
+        "mongoose-auto-increment":"*"
     }
 }

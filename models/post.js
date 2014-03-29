@@ -16,6 +16,7 @@ var postSchema = mongoose.Schema({
     wx_imge_url: String,
     sync: Number,//同步-1失败，０没有同步，１成功
     qiniu_img_url: String,
+    number:String,
     author: {type: Schema.Types.ObjectId, ref: 'UserSchema', require: true},
     wx_openid: String,
     posted: {type: Date, default: Date.now},

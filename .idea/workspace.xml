@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fbc1c52d-b1ec-48f1-9a37-15c7b68541d4" name="Default" comment="init&#10;">
+    <list default="true" id="fbc1c52d-b1ec-48f1-9a37-15c7b68541d4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/weixin/edit.html" afterPath="$PROJECT_DIR$/views/weixin/edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="9e5d63b9-253b-4693-9ca3-9f85fb5b2140" name="New changelist" comment="" />
@@ -74,10 +73,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="edit.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/weixin/edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="65" selection-start="1316" selection-end="1316" vertical-scroll-proportion="-13.125" vertical-offset="180" max-vertical-offset="705">
+            <state line="21" column="90" selection-start="749" selection-end="749" vertical-scroll-proportion="0.31236443" vertical-offset="171" max-vertical-offset="675">
               <folding />
             </state>
           </provider>
@@ -107,10 +106,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="148" column="17" selection-start="4397" selection-end="4397" vertical-scroll-proportion="0.8493976" vertical-offset="1797" max-vertical-offset="3240">
+            <state line="124" column="29" selection-start="3558" selection-end="3561" vertical-scroll-proportion="0.0" vertical-offset="1737" max-vertical-offset="3240">
               <folding />
             </state>
           </provider>
@@ -179,8 +178,8 @@
         <option value="$PROJECT_DIR$/views/footer.html" />
         <option value="$PROJECT_DIR$/views/post.html" />
         <option value="$PROJECT_DIR$/views/index.html" />
-        <option value="$PROJECT_DIR$/views/weixin/edit.html" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/views/weixin/edit.html" />
       </list>
     </option>
   </component>
@@ -945,7 +944,11 @@
       <created>1396103981593</created>
       <updated>1396103981593</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="init&#10;">
+      <created>1396104771613</created>
+      <updated>1396104771613</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1300,16 +1303,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/weixin/edit.html">
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="65" selection-start="1316" selection-end="1316" vertical-scroll-proportion="-13.125" vertical-offset="180" max-vertical-offset="705">
+        <state line="124" column="29" selection-start="3558" selection-end="3561" vertical-scroll-proportion="0.0" vertical-offset="1737" max-vertical-offset="3240">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
+    <entry file="file://$PROJECT_DIR$/views/weixin/edit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="17" selection-start="4397" selection-end="4397" vertical-scroll-proportion="0.8493976" vertical-offset="1797" max-vertical-offset="3240">
+        <state line="21" column="90" selection-start="749" selection-end="749" vertical-scroll-proportion="0.31236443" vertical-offset="171" max-vertical-offset="675">
           <folding />
         </state>
       </provider>

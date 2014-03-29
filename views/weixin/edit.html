@@ -19,11 +19,9 @@
                 <div class="form-group">
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" name="content" placeholder="内容" ><% if(post.content) %>
-                        <%= post.content %><% } %>
-                    </textarea>
+                    <textarea class="form-control" rows="3" name="content" placeholder="说说" ><% if(post && post.content) {%><%= post.content %> <% } %></textarea>
                 </div>
-                <% if (post.wx_imge_url) {%>
+                <% if (post && post.wx_imge_url) {%>
                 <div class="form-group">
                     <input type="text" name="number" class="form-control" placeholder="参赛号码">
                 </div>

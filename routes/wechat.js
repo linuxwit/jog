@@ -3,6 +3,7 @@ var wechat = require('wechat');
 var S = require('string');
 var Post = require('../models/post');
 var User = require('../models/user');
+var qiniu_host= 'http://lovejog.qiniudn.com',
 
 qiniu.config({
     access_key: 'YG9uh4iBBLoeX20AeoAZKQIctJjn0fdH5UXoPNkC',
@@ -28,9 +29,25 @@ module.exports = function (app) {
         }else{
             var input=message.Content;
             if (S(input).isAlphaNumeric()){
-                return res.reply('非常人抱谦，没有找到任何关于'+input+'的信息')
-            }else
-              return res.reply('多说点嘛！');
+                Post.find({'number':input},function(err,docs){
+                    if (err)
+                        return res.reply('非常抱谦，没有找到任何关于' + input + '的信息');
+
+                    var match=new Array();
+                    for(var i=0;i<count(docs);i++){
+                        match.push({
+                            title: docs[i].conent,
+                            description: '',
+                            picurl:qiniu_host+docs[i].qiniu_img_url,
+                            url: 'http://www.lovejog.com/post/'+docs[i]._id
+                        });
+
+                    }
+                    res.reply(match);
+
+                })
+            } else
+                return res.reply('多说点嘛！');
         }
 
         // message为文本内容

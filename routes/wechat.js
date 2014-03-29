@@ -1,5 +1,6 @@
 var qiniu = require('node-qiniu');
 var wechat = require('wechat');
+var S = require('string');
 var Post = require('../models/post');
 var User = require('../models/user');
 
@@ -25,7 +26,11 @@ module.exports = function (app) {
                 res.reply('发布成功！你可以<a href="'+host+'/edit/'+ message.FromUserName +'/'+post._id+'">点击编辑</a>');
             })
         }else{
-            return res.reply('多说点嘛！');
+            var input=message.Content;
+            if (S(input).isAlphaNumeric()){
+                return res.reply('非常人抱谦，没有找到任何关于'+input+'的信息')
+            }else
+              return res.reply('多说点嘛！');
         }
 
         // message为文本内容

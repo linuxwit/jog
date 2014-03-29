@@ -141,7 +141,7 @@ module.exports = function (app, passport) {
                     post.content=req.body.content;
 
                     post.save(function(err,post){
-                        res.redirect('/');
+                        res.redirect('/post/'+post._id);
                     })
                     }else if (req.body.action=='del'){
                         post.remove();

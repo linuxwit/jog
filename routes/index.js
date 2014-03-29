@@ -121,7 +121,7 @@ module.exports = function (app, passport) {
         User.findOne({'wx_openid': req.params.openid}, function (err, user) {
             var query = Post.findOne({'_id': req.params.id});
             query.exec(function (err, doc) {
-                res.render('edit', {
+                res.render('weixin/edit', {
                     post: doc,
                     openid: req.params.openid,
                     id: req.params.id,

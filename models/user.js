@@ -48,6 +48,12 @@ UserSchema.statics.signup = function(wx_openid,email, password, done){
 	});
 }
 
+UserSchema.statics.findUserByOpenId=function(wx_open_id,done){
+    this.findOne({wx_openid : wx_open_id}, function(err, user){
+           if (err) done(err);
+           if (user) done(null,user._id);
+    })
+}
 
 UserSchema.statics.isValidUserPassword = function(email, password, done) {
 	this.findOne({email : email}, function(err, user){

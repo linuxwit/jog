@@ -25,6 +25,11 @@ module.exports = function (app) {
                     return res.reply('发布失败！')
                 }
                 res.reply('发布成功！你可以<a href="'+host+'/edit/'+ message.FromUserName +'/'+post._id+'">点击编辑</a>');
+
+                User.findUserByOpenId(post.wx_openid,function(err,userId){
+                    post.author=userId;
+                    post.save();
+                })
             })
         }else{
             var input=message.Content;

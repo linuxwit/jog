@@ -128,33 +128,31 @@ module.exports = function (app, passport) {
                         id: req.params.id,
                         user: user
                     });
-                }else{
-                    res.redirect('/');
                 }
             })
         });
     });
 
     app.post('/edit/:openid/:id',function(req,res){
-        User.findOne({'wx_openid': req.params.openid}, function (err, user) {
-            Post.findOne({'_id': req.params.id},function(err,post){
-                if (err) throw err;
-                if (post){
-                    console.log(req.body.number)
-                    if (req.body.action=='save'){
-                        post.number=req.body.number;
-                        post.content=req.body.content;
+        console.log('Post');
+        console.log(req.body.action)
+        Post.findOne({'_id': req.params.id},function(err,post){
+            if (err) throw err;
+            if (post){
+                console.log(req.body.number)
+                if (req.body.action=='save'){
+                    post.number=req.body.number;
+                    post.content=req.body.content;
 
-                        post.save(function(err,post){
-                            res.redirect('/post/'+post._id);
-                        })
-                    }else if (req.body.action=='del'){
-                        post.remove();
-                    }
+                    post.save(function(err,post){
+                        res.redirect('/post/'+post._id);
+                    })
+                }else if (req.body.action=='del'){
+                    post.remove();
                 }
-            });
-
+            }
         });
+
     });
 
 

@@ -146,7 +146,7 @@ module.exports = function (app, passport) {
                         console.log(post);
                         res.redirect('/post/'+post._id);
                     })
-                }else if (req.body.action=='del'){
+                }else if (req.body.action=='delete'){
                     post.remove();
                 }
             }

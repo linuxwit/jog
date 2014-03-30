@@ -3,7 +3,7 @@ var wechat = require('wechat');
 //var S = require('string');
 var Post = require('../models/post');
 var User = require('../models/user');
-var qiniu_host = 'http://lovejog.qiniudn.com';
+var qiniu_host = 'http://lovejog.qiniudn.com/';
 
 qiniu.config({
     access_key: 'YG9uh4iBBLoeX20AeoAZKQIctJjn0fdH5UXoPNkC',
@@ -37,7 +37,7 @@ module.exports = function (app) {
         } else {
             var input = message.Content;
             if ((/\w+/).test(input)) {
-                Post.find({'number': input}, function (err, docs) {
+                Post.find({'number': '/'+input+'/'}, function (err, docs) {
                     if (err || docs==null || docs.length==0)
                         return res.reply('非常抱谦，没有找到任何关于' + input + '的信息');
 
@@ -51,7 +51,7 @@ module.exports = function (app) {
                         });
 
                     }
-
+                    console.log(match);
                     res.reply(match);
 
                 })

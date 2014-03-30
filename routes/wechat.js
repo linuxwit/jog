@@ -37,7 +37,7 @@ module.exports = function (app) {
         } else {
             var input = message.Content;
             if ((/\w+/).test(input)) {
-                Post.find({'number': '/'+input+'/'}, function (err, docs) {
+                Post.find({'number': new RegExp(input, 'i')}, function (err, docs) {
                     if (err || docs==null || docs.length==0)
                         return res.reply('非常抱谦，没有找到任何关于' + input + '的信息');
 

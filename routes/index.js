@@ -140,6 +140,7 @@ module.exports = function (app, passport) {
             Post.findOne({'_id': req.params.id},function(err,post){
                 if (err) throw err;
                 if (post){
+                    console.log(req.body.number)
                     if (req.body.action=='save'){
                         post.number=req.body.number;
                         post.content=req.body.content;

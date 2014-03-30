@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fbc1c52d-b1ec-48f1-9a37-15c7b68541d4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/user.js" afterPath="$PROJECT_DIR$/models/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/wechat.js" afterPath="$PROJECT_DIR$/routes/wechat.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="9e5d63b9-253b-4693-9ca3-9f85fb5b2140" name="New changelist" comment="" />
@@ -29,10 +28,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="35" selection-start="3809" selection-end="3809" vertical-scroll-proportion="0.0" vertical-offset="1755" max-vertical-offset="3300">
+            <state line="142" column="47" selection-start="4175" selection-end="4175" vertical-scroll-proportion="0.5182342" vertical-offset="1860" max-vertical-offset="3315">
               <folding />
             </state>
           </provider>
@@ -47,10 +46,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wechat.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="wechat.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/wechat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="41" selection-start="3979" selection-end="3979" vertical-scroll-proportion="0.7637795" vertical-offset="1112" max-vertical-offset="3120">
+            <state line="100" column="41" selection-start="3979" selection-end="3979" vertical-scroll-proportion="0.0" vertical-offset="1112" max-vertical-offset="3120">
               <folding />
             </state>
           </provider>
@@ -100,9 +99,9 @@
         <option value="$PROJECT_DIR$/views/weixin/edit.html" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/models/post.js" />
-        <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/models/user.js" />
         <option value="$PROJECT_DIR$/routes/wechat.js" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
       </list>
     </option>
   </component>
@@ -915,7 +914,11 @@
       <created>1396137102344</created>
       <updated>1396137102344</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="init&#10;">
+      <created>1396137533301</created>
+      <updated>1396137533301</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1213,13 +1216,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/weixin/edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="90" selection-start="749" selection-end="749" vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="675">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/post.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="44" selection-start="2019" selection-end="2029" vertical-scroll-proportion="0.48806942" vertical-offset="300" max-vertical-offset="1125">
@@ -1269,16 +1265,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
+    <entry file="file://$PROJECT_DIR$/views/weixin/edit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="35" selection-start="3809" selection-end="3809" vertical-scroll-proportion="0.0" vertical-offset="1755" max-vertical-offset="3300">
+        <state line="25" column="35" selection-start="974" selection-end="974" vertical-scroll-proportion="0.38016528" vertical-offset="191" max-vertical-offset="675">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/wechat.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="41" selection-start="3979" selection-end="3979" vertical-scroll-proportion="0.7637795" vertical-offset="1112" max-vertical-offset="3120">
+        <state line="100" column="41" selection-start="3979" selection-end="3979" vertical-scroll-proportion="0.0" vertical-offset="1112" max-vertical-offset="3120">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="142" column="47" selection-start="4175" selection-end="4175" vertical-scroll-proportion="0.5182342" vertical-offset="1860" max-vertical-offset="3315">
           <folding />
         </state>
       </provider>

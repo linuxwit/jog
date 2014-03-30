@@ -23,7 +23,7 @@
                 </div>
                 <% if (post && post.wx_imge_url) {%>
                 <div class="form-group">
-                    <input type="text" name="number" class="form-control" placeholder="参赛号码">
+                    <input type="text" name="number" value="<%= post.number %>" class="form-control" placeholder="参赛号码">
                 </div>
                 <div class="form-group">
                     <img src="<%= post.wx_imge_url %>" class="img-responsive ">

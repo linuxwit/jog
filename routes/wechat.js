@@ -38,11 +38,11 @@ module.exports = function (app) {
             var input = message.Content;
             if ((/\w+/).test(input)) {
                 Post.find({'number': input}, function (err, docs) {
-                    if (err)
+                    if (err || docs==null || docs.length==0)
                         return res.reply('非常抱谦，没有找到任何关于' + input + '的信息');
 
                     var match = new Array();
-                    for (var i = 0; i < count(docs); i++) {
+                    for (var i = 0; i < docs.length; i++) {
                         match.push({
                             title: docs[i].conent,
                             description: '',
@@ -51,6 +51,7 @@ module.exports = function (app) {
                         });
 
                     }
+
                     res.reply(match);
 
                 })

@@ -134,8 +134,6 @@ module.exports = function (app, passport) {
     });
 
     app.post('/edit/:openid/:id',function(req,res){
-        console.log('Post');
-        console.log(req.body.action)
         Post.findOne({'_id': req.params.id},function(err,post){
             if (err) throw err;
             if (post){
@@ -145,6 +143,7 @@ module.exports = function (app, passport) {
                     post.content=req.body.content;
 
                     post.save(function(err,post){
+                        console.log(post);
                         res.redirect('/post/'+post._id);
                     })
                 }else if (req.body.action=='del'){

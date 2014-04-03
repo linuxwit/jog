@@ -8,6 +8,7 @@ module.exports = function (app, passport) {
 
     app.get('/', function (req, res) {
 
+
         if (!req.isAuthenticated()) {
             res.redirect('/login');
         }
@@ -101,7 +102,7 @@ module.exports = function (app, passport) {
             if (err) throw err;
             req.login(user, function (err) {
                 if (err) return next(err);
-                return res.redirect("/login");
+                return res.redirect("/");
             });
         });
     });
@@ -111,7 +112,7 @@ module.exports = function (app, passport) {
             if (err) throw err;
             req.login(user, function (err) {
                 if (err) return next(err);
-                return res.redirect("/login");
+                return res.redirect("/");
             });
         });
     });

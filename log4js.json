@@ -5,7 +5,7 @@
         },
         {
             "type": "file",
-            "filename": "/logs/log.log",
+            "filename": "/logs/log.txt",
             "maxLogSize": 20480,
             "backups": 3,
             "category": "relative-logger"

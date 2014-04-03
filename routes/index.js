@@ -5,7 +5,7 @@ var moment = require('moment');
 var crypto = require('crypto');
 
 var log4js = require('log4js');
-log4js.configure('log4js.json',{});
+log4js.configure('../log4js.json',{});
 var logger = log4js.getLogger();
 
 module.exports = function (app, passport) {

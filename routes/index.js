@@ -3,12 +3,17 @@ var User = require('../models/user');
 var Auth = require('../middlewares/auth');
 var moment = require('moment');
 var crypto = require('crypto');
+
+var log4js = require('log4js');
+log4js.configure('log4js.json',{});
+var logger = log4js.getLogger();
+
 module.exports = function (app, passport) {
 
 
     app.get('/', function (req, res) {
 
-
+        logger.debug('hello');
         if (!req.isAuthenticated()) {
             res.redirect('/login');
         }
@@ -148,7 +153,14 @@ module.exports = function (app, passport) {
                         res.redirect('/post/'+post._id);
                     })
                 }else if (req.body.action=='delete'){
-                    post.remove();
+                    try{
+                        post.remove(function(err,post){
+                            res.redirect('/');
+                        });
+                    }
+                    catch(ex){
+                        logger.eror(ex);
+                    }
                 }
             }
         });

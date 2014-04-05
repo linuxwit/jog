@@ -37,7 +37,7 @@ exports.notify=function(post){
     var deleteUrl='http://www.lovejog.com/edit/'+post.wx_openid+'/'+post._id;
     this.send(
         '有新发布！',
-        '<img src="'+post.wx_imge_url+'" /><br/>post.conent<br/> <a href="'+deleteUrl+'">查看</a>',
+        '<img src="'+post.wx_imge_url+'" /><br/>'+post.content+'<br/> <a href="'+deleteUrl+'">查看</a>',
         'support@lovejog.com',
         '376300248@qq.com'
     );

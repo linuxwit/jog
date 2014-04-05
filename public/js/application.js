@@ -52,7 +52,9 @@ $(function() {
         pixelsFromNavToBottom: 300,
         loading: {
             finishedMsg: '没有更多的页面加载。',
-            img: 'images/loading.gif'
+            img: 'images/loading.gif',
+            msgText: "加载中...",
+            selector: '.loading'
         }
     },
     function(newElements) {

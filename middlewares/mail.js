@@ -36,8 +36,12 @@ exports.send=function(subject,content,from,to){
 exports.notify=function(post){
     var deleteUrl='http://www.lovejog.com/edit/'+post.wx_openid+'/'+post._id;
 
-    var content=post.content+'<br/>';
-    content+='<img src="'+post.wx_imge_url+'" /><br/>';
+    var content;
+    if (post.content){
+        content=post.content+'<br/>'
+    }else{
+        content+='<img src="'+post.wx_imge_url+'" /><br/>';
+    }
     content+='<a href="'+deleteUrl+'">查看</a>';
 
     console.log(content);

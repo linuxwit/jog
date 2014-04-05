@@ -163,6 +163,8 @@ module.exports = function (app, passport) {
                      //   logger.eror(ex);
                     }
                 }
+            }else{
+                res.redirect('/');
             }
         });
 

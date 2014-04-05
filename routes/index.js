@@ -14,9 +14,9 @@ module.exports = function (app, passport) {
     app.get('/', function (req, res) {
 
        // logger.debug('hello');
-        if (!req.isAuthenticated()) {
+       /* if (!req.isAuthenticated()) {
             res.redirect('/login');
-        }
+        }*/
         moment.lang('zh-cn');
 
         var page = req.param("page") ? parseInt(req.param("page")) : 0;

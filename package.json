@@ -1,5 +1,5 @@
 {
-    "name": "application-name",
+    "name": "lovejog6ty54",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -20,6 +20,7 @@
         "moment":"*",
         "passport-sina":"*",
         "passport-qq":"*",
-        "mongoose-auto-increment":"*"
+        "mongoose-auto-increment":"*",
+        "nodemailer":"*"
     }
 }

@@ -35,9 +35,17 @@ exports.send=function(subject,content,from,to){
 
 exports.notify=function(post){
     var deleteUrl='http://www.lovejog.com/edit/'+post.wx_openid+'/'+post._id;
+
+    var content=post.content+'<br/>';
+    content+='<img src="'+post.wx_imge_url+'" /><br/>';
+    content+='<img src="'+post.wx_imge_url+'" />';
+    content+='<a href="'+deleteUrl+'">查看</a>';
+
+    console.log(content);
+
     this.send(
         '有新发布！',
-        '<img src="'+post.wx_imge_url+'" /><br/>'+post.content+'<br/> <a href="'+deleteUrl+'">查看</a>',
+        content,
         'support@lovejog.com',
         '376300248@qq.com'
     );

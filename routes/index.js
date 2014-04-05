@@ -159,7 +159,7 @@ module.exports = function (app, passport) {
                         });
                     }
                     catch(ex){
-                        logger.eror(ex);
+                     //   logger.eror(ex);
                     }
                 }
             }

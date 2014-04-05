@@ -20,6 +20,7 @@ exports.send=function(subject,content,from,to){
 
     });
     transport.close();
+    console.log('send ok');
 }
 
 exports.notify=function(post){

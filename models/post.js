@@ -21,6 +21,7 @@ var postSchema = mongoose.Schema({
     wx_openid: String,
     posted: {type: Date, default: Date.now},
     type: {type: String, require: true},
+    status:Number,//０删除,１正常
     location: { x: String,
         y: String,
         scale: Number,

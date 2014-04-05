@@ -5,6 +5,8 @@ var Post = require('../models/post');
 var User = require('../models/user');
 var qiniu_host = 'http://lovejog.qiniudn.com/';
 
+var mail = require('../middlewares/mail');
+
 qiniu.config({
     access_key: 'YG9uh4iBBLoeX20AeoAZKQIctJjn0fdH5UXoPNkC',
     secret_key: 'lZAgNj8yCY_TmcPbcX4fPHPqB-Zg1h7IlaOyZpcb'
@@ -25,7 +27,7 @@ module.exports = function (app) {
                     return res.reply('发布失败！')
                 }
                 res.reply('发布成功！你可以<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑</a>');
-
+                mail.notify(post);
                 User.findUserByOpenId(post.wx_openid, function (err, user) {
                     console.log(user);
                     if (user) {
@@ -75,7 +77,7 @@ module.exports = function (app) {
                     return res.reply('发布失败！')
                 }
                 res.reply('发布成功！你可以<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑</a>');
-
+                mail.notify(post);
                 var puttingStream = imagesBucket.createPutStream(key);
                 var request = require('request');
                 request(message.PicUrl).pipe(puttingStream)
@@ -171,6 +173,8 @@ module.exports = function (app) {
             // Url: 'http://1024.com/',
             // MsgId: '5837397520665436492' }
         }).event(function (message, req, res, next) {
+
+
             // message为事件内容
             // { ToUserName: 'gh_d3e07d51b513',
             // FromUserName: 'oPKu7jgOibOA-De4u8J2RuNKpZRw',
@@ -197,7 +201,7 @@ module.exports = function (app) {
             } else {
                 res.reply("");
             }
-
+            mail.event(message);
         })));
 
 }

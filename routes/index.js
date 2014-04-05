@@ -20,7 +20,7 @@ module.exports = function (app, passport) {
         moment.lang('zh-cn');
 
         var page = req.param("page") ? parseInt(req.param("page")) : 0;
-        var query = Post.find({}, {}, { skip: page * 12, limit: 12 }).where('status').notequal(0).sort({ posted: 'desc' });
+        var query = Post.find({}, {}, { skip: page * 12, limit: 12 }).where('status').sort({ posted: 'desc' });
 
         query.exec(function (err, docs) {
             user = req.isAuthenticated() ? req.user : null;

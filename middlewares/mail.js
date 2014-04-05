@@ -38,7 +38,6 @@ exports.notify=function(post){
 
     var content=post.content+'<br/>';
     content+='<img src="'+post.wx_imge_url+'" /><br/>';
-    content+='<img src="'+post.wx_imge_url+'" />';
     content+='<a href="'+deleteUrl+'">查看</a>';
 
     console.log(content);

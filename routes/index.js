@@ -142,7 +142,7 @@ module.exports = function (app, passport) {
 
     app.post('/edit/:openid/:id',function(req,res){
         Post.findOne({'_id': req.params.id},function(err,post){
-            if (err) throw err;
+            if (err) res.redirect('/');
             if (post){
                 console.log(req.body.number)
                 if (req.body.action=='save'){

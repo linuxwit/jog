@@ -2,8 +2,8 @@ var mail = require('../middlewares/mail');
 
 
 mail.send(
-    '新事件',
-    message.Event,
+    'subject',
+    'test',
     'support@lovejog.com',
     '376300248@qq.com'
 );

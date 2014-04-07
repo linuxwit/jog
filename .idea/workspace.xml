@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fbc1c52d-b1ec-48f1-9a37-15c7b68541d4" name="Default" comment="header&#10;">
+    <list default="true" id="fbc1c52d-b1ec-48f1-9a37-15c7b68541d4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/footer.html" afterPath="$PROJECT_DIR$/views/footer.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -67,7 +67,7 @@
       <file leaf-file-name="footer.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/footer.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="70" selection-start="454" selection-end="454" vertical-scroll-proportion="0.28481013" vertical-offset="0" max-vertical-offset="615">
+            <state line="9" column="50" selection-start="434" selection-end="434" vertical-scroll-proportion="0.28481013" vertical-offset="0" max-vertical-offset="615">
               <folding />
             </state>
           </provider>
@@ -1201,7 +1201,11 @@
       <created>1396884849088</created>
       <updated>1396884849088</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="header&#10;">
+      <created>1396885179111</created>
+      <updated>1396885179111</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1578,7 +1582,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/footer.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="70" selection-start="454" selection-end="454" vertical-scroll-proportion="0.28481013" vertical-offset="0" max-vertical-offset="615">
+        <state line="9" column="50" selection-start="434" selection-end="434" vertical-scroll-proportion="0.28481013" vertical-offset="0" max-vertical-offset="615">
           <folding />
         </state>
       </provider>

@@ -60,7 +60,7 @@ module.exports = function (app, passport) {
     })
 
     app.get('/signin', function (req, res) {
-        res.render('signin');
+        res.render('login');
     })
 
     app.get('/logout', function (req, res) {

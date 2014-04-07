@@ -125,3 +125,7 @@ $(function() {
 
 
 });
+
+$(img).bind('error',function(){
+    $(this).hide();
+})

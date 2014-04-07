@@ -12,8 +12,17 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/"><i class="glyphicon glyphicon-home" style="color:#dd1111;"></i></a>
-                </li>
+                <% if (user){%
+                    <li><a href="/logout"><i class="glyphicon glyphicon-user"></i>注销</a></li>
+                <%} else {%>
+                    <li>
+                        <a href="/signin"><i class="glyphicon glyphicon-home" style="color:#dd1111;"></i>登录</a>
+                    </li>
+                    <li>
+                        <a href="/signup"><i class="glyphicon glyphicon-home" style="color:#dd1111;"></i>注册</a>
+                    </li>
+                <%>
+
                <!-- <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-bell"></i></a>
                     <ul class="dropdown-menu">

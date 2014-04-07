@@ -127,5 +127,5 @@ $(function() {
 });
 
 $(img).bind('error',function(){
-    $(this).hide();
+    $(this).closest('div.card').hide();
 })

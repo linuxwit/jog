@@ -226,4 +226,8 @@ module.exports = function (app, passport) {
         }
     );
 
+    app.get('robots.txt',function(res,req){
+        res.send('User-agent: *\r\nAllow:　/');
+    })
+
 }

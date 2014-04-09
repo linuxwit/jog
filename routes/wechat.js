@@ -186,7 +186,7 @@ module.exports = function (app) {
             // Precision: '119.385040',
             // MsgId: '5837397520665436492' }
             if (message.Event == 'subscribe') {
-                res.reply('欢迎关注爱慢跑！直接发送文字和图片试试，可以分享你的打卡记录，也可以是小伙伴的比赛图，如果有小伙们上传了你的比赛图，你也可以输入比赛号来查找你的相片<a href="' + host + '/signup/' + message.FromUserName + '">点击注册</a>可以更好玩哟');
+                res.reply('欢迎关注爱慢跑！直接发送文字和图片试试，可以分享你的打卡记录，也可以是小伙伴的比赛图，如果有小伙们上传了你的比赛图，你也可以输入比赛号来查找你的相片<a href="' + host +'?form=' + message.FromUserName + '">点击浏览</a>可以更好玩哟');
 
                 /*
                  var user=new User({wx_openid:message.FromUserName,wx_status:subscribe});

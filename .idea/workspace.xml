@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fbc1c52d-b1ec-48f1-9a37-15c7b68541d4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/wechat.js" afterPath="$PROJECT_DIR$/routes/wechat.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="9e5d63b9-253b-4693-9ca3-9f85fb5b2140" name="New changelist" comment="" />
@@ -28,10 +28,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="228" column="14" selection-start="6615" selection-end="6615" vertical-scroll-proportion="0.0" vertical-offset="2997" max-vertical-offset="3570">
+            <state line="228" column="44" selection-start="6645" selection-end="6645" vertical-scroll-proportion="0.6987952" vertical-offset="3072" max-vertical-offset="3570">
               <folding />
             </state>
           </provider>
@@ -73,10 +73,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wechat.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="wechat.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/wechat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="161" selection-start="7832" selection-end="7832" vertical-scroll-proportion="0.22680412" vertical-offset="2710" max-vertical-offset="3195">
+            <state line="188" column="161" selection-start="7832" selection-end="7832" vertical-scroll-proportion="0.0" vertical-offset="2710" max-vertical-offset="3195">
               <folding />
             </state>
           </provider>
@@ -167,8 +167,8 @@
         <option value="$PROJECT_DIR$/public/css/docs.css" />
         <option value="$PROJECT_DIR$/public/js/application.js" />
         <option value="$PROJECT_DIR$/views/footer.html" />
-        <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/routes/wechat.js" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
       </list>
     </option>
   </component>
@@ -1205,7 +1205,11 @@
       <created>1397055992261</created>
       <updated>1397055992261</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="header&#10;">
+      <created>1397056091685</created>
+      <updated>1397056091685</updated>
+    </task>
+    <option name="localTasksCounter" value="170" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1549,16 +1553,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
+    <entry file="file://$PROJECT_DIR$/routes/wechat.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="228" column="14" selection-start="6615" selection-end="6615" vertical-scroll-proportion="0.0" vertical-offset="2997" max-vertical-offset="3570">
+        <state line="188" column="161" selection-start="7832" selection-end="7832" vertical-scroll-proportion="0.0" vertical-offset="2710" max-vertical-offset="3195">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/wechat.js">
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="161" selection-start="7832" selection-end="7832" vertical-scroll-proportion="0.22680412" vertical-offset="2710" max-vertical-offset="3195">
+        <state line="228" column="44" selection-start="6645" selection-end="6645" vertical-scroll-proportion="0.6987952" vertical-offset="3072" max-vertical-offset="3570">
           <folding />
         </state>
       </provider>

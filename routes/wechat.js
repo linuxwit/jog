@@ -58,7 +58,7 @@ module.exports = function (app) {
 
                 })
             } else
-                return res.reply('多说点嘛！');
+                return res.reply('多说点嘛！'+'<a href="' + host +'?form=' + message.FromUserName + '">点击浏览</a>');
         }
 
         // message为文本内容

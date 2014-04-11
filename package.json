@@ -1,5 +1,5 @@
 {
-    "name": "lovejog6ty54",
+    "name": "lovejog",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -21,6 +21,7 @@
         "passport-sina":"*",
         "passport-qq":"*",
         "mongoose-auto-increment":"*",
-        "nodemailer":"*"
+        "nodemailer":"*",
+        "sitemap":"*"
     }
 }

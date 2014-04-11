@@ -1,2 +1,4 @@
 User-agent: *
 Allow:　/
+Disallow: /getpassword
+Disallow: /edit/

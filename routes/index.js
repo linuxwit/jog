@@ -231,9 +231,8 @@ module.exports = function(app, passport) {
 
     //用户设置
     app.get('/user/profile', Auth.isAuthenticated, function(req, res) {
+        console.log(req.user);
         res.render('profile', {user: req.user});
     })
-
-
 
 }

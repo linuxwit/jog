@@ -56,11 +56,11 @@ module.exports = function(app, passport) {
     })
 
     app.get('/login', function(req, res) {
-        res.render('login');
+        res.render('login', {user: req.user});
     })
 
     app.get('/signin', function(req, res) {
-        res.render('login');
+        res.render('login', {user: req.user});
     })
 
     app.get('/logout', function(req, res) {
@@ -79,7 +79,7 @@ module.exports = function(app, passport) {
     app.get("/signup/:id", function(req, res) {
         console.log(req.params.id);
 
-        res.render("weixin/signup", {id: req.params.id, msg: ''});
+        res.render("weixin/signup", {id: req.params.id, msg: '', user: req.user});
     })
 
     app.get("/signup", function(req, res) {

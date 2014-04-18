@@ -15,7 +15,6 @@ qiniu.config({
 var imagesBucket = qiniu.bucket('lovejog');
 
 var host = "http://www.lovejog.com"
-
 module.exports = function(app) {
     app.use('/wechat', wechat('weixin', wechat.text(function(message, req, res, next) {
 
@@ -26,7 +25,7 @@ module.exports = function(app) {
                     console.dir(err);
                     return res.reply('发布失败！')
                 }
-                res.reply('发布成功！你可以<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑</a>');
+                res.reply('发布成功！<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑一下</a>');
                 mail.notify(post);
                 User.findUserByOpenId(post.wx_openid, function(err, user) {
                     console.log(user);
@@ -41,7 +40,7 @@ module.exports = function(app) {
             if ((/\w+/).test(input)) {
                 Post.find({'number': new RegExp(input, 'i')}, function(err, docs) {
                     if (err || docs == null || docs.length == 0)
-                        return res.reply('非常抱谦，没有找到任何关于' + input + '的信息');
+                        return res.reply('非常抱谦，没有找到任何关于' + input + '的信息\n告诉身边的人，让更多的加入我们，这样就有机会查找到相片了');
 
                     var match = new Array();
                     for (var i = 0; i < docs.length; i++) {
@@ -58,7 +57,7 @@ module.exports = function(app) {
 
                 })
             } else
-                return res.reply('多说点嘛！' + '<a href="' + host + '?form=' + message.FromUserName + '">点击浏览</a>');
+                return res.reply('多说点嘛！' + '<a href="' + host + '?form=' + message.FromUserName + '">点击看看</a>');
         }
 
         // message为文本内容
@@ -76,7 +75,7 @@ module.exports = function(app) {
                 console.dir(err);
                 return res.reply('发布失败！')
             }
-            res.reply('发布成功！你可以<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑</a>');
+            res.reply('发布成功！<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击加个标题</a>');
             mail.notify(post);
             var puttingStream = imagesBucket.createPutStream(key);
             var request = require('request');
@@ -187,11 +186,14 @@ module.exports = function(app) {
         // MsgId: '5837397520665436492' }
         if (message.Event == 'subscribe') {
             var msg = [];
-            msg.push('非常感谢关注爱慢跑（lovejog.com)，您可以\n\n');
-            msg.push('1: 发送文字来分享\n');
-            msg.push('2: 发送图片来分享\n');
-            msg.push('3: 发送位置来分享\n');
-            msg.push('4：<a href="' + host + '?form=' + message.FromUserName + '">点击浏览</a>');
+            msg.push('非常感谢您来到爱慢跑社区，您可以在这里分享慢跑的趣事儿\n\n');
+
+            msg.push('1: 发送文字和伙伴分享\n');
+            msg.push('2: 发送图片和伙伴分享\n');
+            msg.push('3: 发送位置寻找小伙伴\n');
+            msg.push('4: 发送比赛号码找相片\n\n');
+
+            msg.push('看看请点击<a href="' + host + '?form=' + message.FromUserName + '">www.lovejog.com</a>');
             res.reply(msg.join(""));
             //res.reply('直接发送文字和图片试试，可以分享你的打卡记录，也可以是小伙伴的比赛图，如果有小伙们上传了你的比赛图，你也可以输入比赛号来查找你的相片<a href="' + host + '?form=' + message.FromUserName + '">点击浏览</a>可以更好玩哟');
 

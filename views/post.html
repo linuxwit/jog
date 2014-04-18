@@ -1,66 +1,69 @@
 <%- include header.html %>
 <body>
-<div class="container">
-    <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
-        <div class="card">
-            <div class="card-heading image">
+    <!--main-->
+    <div class="container" id="main">
+        <div class="row" id="ms-container">
+            <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
+                <div class="card">
+                    <div class="card-heading image">
 
-                <a href=""> <img src="/images/photo.jpg" class="media-object" />
-                </a>
+                        <a href=""> <img src="/images/photo.jpg" class="media-object" />
+                        </a>
 
-                <div class="card-heading-header">
-                    <h3>
-                        <% if (post.title) { %>
-                        <%= post.title %>
-                        <% } %>
-                    </h3>
-                        <span>
-                            <% if (post.source == 'wx'){ %>
-                            <a title="发布于微信公众号[lovejog]">来源于微信</a>
-                            <% } %>
-                            <%= moment(post.posted).fromNow() %>
-                        </span>
-                </div>
-            </div>
-            <% if (post.content) { %>
-            <div class="card-body">
-                <p>
-                    <%= post.content %>
-                </p>
-            </div>
-            <% } %>
-
-            <% if (post.sync == 1 && post.qiniu_img_url ) { %>
-            <div class="card-media text-center">
-                <a href="" class="card-media-container ">
-                    <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>" class="img-responsive ">
-                </a>
-            </div>
-            <% } else if (post.wx_imge_url) { %>
-            <div class="card-media text-center">
-                <a href="" class="card-media-container ">
-                    <img src="<%= post.wx_imge_url %>" class="img-responsive ">
-                </a>
-            </div>
-            <% } %>
-            <div class="card-actions hide"  >
-                <form>
-                    <div class="input-group">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default">+1</button>
-                            <button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
+                        <div class="card-heading-header">
+                            <h3>
+                                <% if (post.title) { %>
+                                <%= post.title %>
+                                <% } %>
+                            </h3>
+                            <span>
+                                <% if (post.source == 'wx'){ %>
+                                <a title="发布于微信公众号[lovejog]">来源于微信</a>
+                                <% } %>
+                                <%= moment(post.posted).fromNow() %>
+                            </span>
                         </div>
                     </div>
-                </form>
+                    <% if (post.content) { %>
+                    <div class="card-body">
+                        <p>
+                            <%= post.content %>
+                        </p>
+                    </div>
+                    <% } %>
+
+                    <% if (post.sync == 1 && post.qiniu_img_url ) { %>
+                    <div class="card-media text-center">
+                        <a href="" class="card-media-container ">
+                            <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>" class="img-responsive ">
+                        </a>
+                    </div>
+                    <% } else if (post.wx_imge_url) { %>
+                    <div class="card-media text-center">
+                        <a href="" class="card-media-container ">
+                            <img src="<%= post.wx_imge_url %>" class="img-responsive ">
+                        </a>
+                    </div>
+                    <% } %>
+                    <div class="card-actions hide"  >
+                        <form>
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default">+1</button>
+                                    <button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <wb:comments url="auto" border="y" width="auto" skin="silver" appkey="1120024586" ></wb:comments>
+
             </div>
-        </div>
-        <wb:comments url="auto" border="y" width="auto" skin="silver" appkey="1120024586" ></wb:comments>
 
+
+        </div> <!-- /container -->
     </div>
-
-
-</div> <!-- /container -->
-<body>
+</body>
 <%- include footer.html %>
 
 

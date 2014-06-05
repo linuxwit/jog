@@ -126,6 +126,8 @@ $(function() {
 
 });
 
-$(img).error(function(){
-    $(this).closest('div.card').hide();
+$(function(){
+    $(img).error(function(){
+        $(this).closest('div.card').hide();
+    })
 })

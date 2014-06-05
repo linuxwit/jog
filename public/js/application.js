@@ -127,7 +127,7 @@ $(function() {
 });
 
 $(function(){
-    $(img).error(function(){
+    $("img").error(function(){
         $(this).closest('div.card').hide();
     })
 })

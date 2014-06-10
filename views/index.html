@@ -97,13 +97,13 @@
 
                 <% if (post.sync == 1 && post.qiniu_img_url ) { %>
                 <div class="card-media text-center">
-                    <a href="" class="card-media-container　text-center ">
+                    <a href="/post/<%= post._id %>" class="card-media-container　text-center ">
                         <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>?imageView2/2/w/450" class="img-responsive ">
                     </a>
                 </div>
                 <% } else if (post.wx_imge_url) { %>
                 <div class="card-media text-center">
-                    <a href="" class="card-media-container ">
+                    <a href="/post/<%= post._id %>"  class="card-media-container ">
                         <img src="<%= post.wx_imge_url %>" class="img-responsive ">
                     </a>
                 </div>

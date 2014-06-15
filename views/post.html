@@ -65,7 +65,7 @@
 
 <script>
     window.shareData = {
-        "imgUrl": "<%= post.qiniu_img_url %>",
+        "imgUrl": "<%= qiniu_host %>/<%= post.qiniu_img_url %>",
         "fTitle": "<%= post.content?post.content:'' %>",
         "fContent":  "<%= post.content?post.content:'' %>",
         "tTitle":  "<%= post.content?post.content:'' %>",

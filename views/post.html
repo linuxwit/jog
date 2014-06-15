@@ -62,6 +62,48 @@
 
     </div> <!-- /container -->
 </div>
+
+<script>
+    window.shareData = {
+        "imgUrl": img ? img : "",
+        "fTitle": window.document.title,
+        "fContent": window.document.body.innerText,
+        "tTitle": window.document.body.innerText,
+        "tContent": window.document.body.innerText,
+        "sendFriendLink": window.location.href,
+        "timeLineLink": window.location.href
+    };
+
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+            WeixinJSBridge.invoke('sendAppMessage', {
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "desc": window.shareData.fContent,
+                "title": window.shareData.fTitle,
+                "link": window.shareData.sendFriendLink
+            }, function(res) {
+                _report('send_msg', res.err_msg);
+            });
+        });
+
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function(argv) {
+            WeixinJSBridge.invoke('shareTimeline', {
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle,
+                "link": window.shareData.timeLineLink
+            }, function(res) {
+                _report('timeline', res.err_msg);
+            });
+        });
+    });
+</script>
 <%- include footer.html %>
 
 

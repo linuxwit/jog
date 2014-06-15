@@ -65,11 +65,11 @@
 
 <script>
     window.shareData = {
-        "imgUrl": img ? img : "",
-        "fTitle": window.document.title,
-        "fContent": window.document.body.innerText,
-        "tTitle": window.document.body.innerText,
-        "tContent": window.document.body.innerText,
+        "imgUrl": "<%= post.qiniu_img_url %>",
+        "fTitle": "<%= post.content?post.content:'' %>",
+        "fContent":  "<%= post.content?post.content:'' %>",
+        "tTitle":  "<%= post.content?post.content:'' %>",
+        "tContent":  "<%= post.content?post.content:'' %>",
         "sendFriendLink": window.location.href,
         "timeLineLink": window.location.href
     };

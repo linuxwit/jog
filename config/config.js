@@ -1,7 +1,7 @@
 //config
 module.exports = {
     development: {
-        db: 'mongodb://localhost/jog',
+        db: 'mongodb://localhost/jog_test',
         //mongodb://user:pass@server.mongohq.com:port_name/db_name
         app: {
             name: 'love jog'

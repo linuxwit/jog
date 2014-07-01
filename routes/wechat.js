@@ -25,7 +25,7 @@ module.exports = function(app) {
                     console.dir(err);
                     return res.reply('发布失败！')
                 }
-                res.reply('发布成功！<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑一下</a>');
+                res.reply('发布成功！<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑一下，可分享给朋友</a>');
                 mail.notify(post);
                 User.findUserByOpenId(post.wx_openid, function(err, user) {
                     console.log(user);
@@ -75,7 +75,7 @@ module.exports = function(app) {
                 console.dir(err);
                 return res.reply('发布失败！')
             }
-            res.reply('发布成功！<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击加个标题</a>');
+            res.reply('发布成功！<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击加入文字，可分享给朋友</a>');
             mail.notify(post);
             var puttingStream = imagesBucket.createPutStream(key);
             var request = require('request');
@@ -156,7 +156,7 @@ module.exports = function(app) {
                 console.dir(err);
                 return res.reply('失败了！')
             }
-            res.reply('收到！');
+            res.reply('收到位置信息！');
             console.log('收到位置信息');
         })
 

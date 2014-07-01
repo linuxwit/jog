@@ -19,7 +19,7 @@ module.exports = {
         }
     },
     production: {
-        db: 'mongodb://localhost/jog',
+        db: 'mongodb://localhost/jog_test',
         app: {
             name: 'love jog'
         },

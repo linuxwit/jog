@@ -1,0 +1,4 @@
+.DS_Store
+.npmignore
+node_modules/
+example/config.js

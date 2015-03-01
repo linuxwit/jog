@@ -1,27 +1,31 @@
 {
-    "name": "lovejog",
-    "version": "0.0.1",
-    "private": true,
-    "scripts": {
-        "start": "node app.js"
-    },
-    "dependencies": {
-        "express": "3.4.8",
-        "ejs": "*",
-        "underscore":"*",
-        "node-restful": "*",
-        "mongodb": "*",
-        "nodemon": "*",
-        "passport": "*",
-        "passport-local": "*",
-        "passport-facebook": "*",
-        "passport-google-oauth": "*",
-        "connect-flash": "*",
-        "moment":"*",
-        "passport-sina":"*",
-        "passport-qq":"*",
-        "mongoose-auto-increment":"*",
-        "nodemailer":"*",
-        "sitemap":"*"
-    }
+  "name": "lovejog",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "connect-flash": "*",
+    "ejs": "*",
+    "express": "3.4.8",
+    "log4js": "^0.6.22",
+    "moment": "*",
+    "mongodb": "*",
+    "mongoose-auto-increment": "*",
+    "node-qiniu": "^6.1.9",
+    "node-restful": "*",
+    "nodemailer": "*",
+    "nodemon": "*",
+    "passport": "*",
+    "passport-facebook": "*",
+    "passport-google-oauth": "*",
+    "passport-local": "*",
+    "passport-qq": "*",
+    "passport-sina": "*",
+    "request": "^2.53.0",
+    "sitemap": "*",
+    "underscore": "*",
+    "wechat": "^1.2.1"
+  }
 }

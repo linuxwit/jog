@@ -20,7 +20,12 @@ module.exports = function(app, passport) {
         moment.lang('zh-cn');
 
         var page = req.param("page") ? parseInt(req.param("page")) : 0;
-        var query = Post.find({}, {}, {skip: page * 12, limit: 12}).where('status').sort({posted: 'desc'});
+        var query = Post.find({}, {}, {
+            skip: page * 12,
+            limit: 12
+        }).where('status').sort({
+            posted: 'desc'
+        });
 
         query.exec(function(err, docs) {
             user = req.isAuthenticated() ? req.user : null;
@@ -42,7 +47,9 @@ module.exports = function(app, passport) {
         moment.lang('zh-cn');
 
         var page = req.param("page") ? parseInt(req.param("page")) : 0;
-        var query = Post.findOne({'_id': req.params.id});
+        var query = Post.findOne({
+            '_id': req.params.id
+        });
         query.exec(function(err, doc) {
             user = req.isAuthenticated() ? req.user : null;
             res.render('post', {
@@ -56,11 +63,15 @@ module.exports = function(app, passport) {
     })
 
     app.get('/login', function(req, res) {
-        res.render('login', {user: req.user});
+        res.render('login', {
+            user: req.user
+        });
     })
 
     app.get('/signin', function(req, res) {
-        res.render('login', {user: req.user});
+        res.render('signin', {
+            user: req.user
+        });
     })
 
     app.get('/logout', function(req, res) {
@@ -68,38 +79,38 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 
-    app.post("/login"
-            , passport.authenticate('local', {
-                successRedirect: "/",
-                failureRedirect: "/login"
-            })
-            );
+    app.post("/login", passport.authenticate('local', {
+        successRedirect: "/",
+        failureRedirect: "/login"
+    }));
 
 
     app.get("/signup/:id", function(req, res) {
         console.log(req.params.id);
 
-        res.render("weixin/signup", {id: req.params.id, msg: '', user: req.user});
+        res.render("weixin/signup", {
+            id: req.params.id,
+            msg: '',
+            user: req.user
+        });
     })
 
     app.get("/signup", function(req, res) {
-        res.render("signup", {msg: ''});
+        res.render("signup", {
+            msg: ''
+        });
     });
 
 
-    app.post("/signin"
-            , passport.authenticate('local', {
-                successRedirect: "/",
-                failureRedirect: "/signin"
-            })
-            );
+    app.post("/signin", passport.authenticate('local', {
+        successRedirect: "/",
+        failureRedirect: "/signin"
+    }));
 
-    app.post("/signin"
-            , passport.authenticate('local', {
-                successRedirect: "/",
-                failureRedirect: "/signin"
-            })
-            );
+    app.post("/signin", passport.authenticate('local', {
+        successRedirect: "/",
+        failureRedirect: "/signin"
+    }));
 
     app.post("/signup/:id", Auth.userExist, function(req, res, next) {
 
@@ -128,8 +139,12 @@ module.exports = function(app, passport) {
 
     app.get('/edit/:openid/:id', function(req, res, next) {
 
-        User.findOne({'wx_openid': req.params.openid}, function(err, user) {
-            var query = Post.findOne({'_id': req.params.id});
+        User.findOne({
+            'wx_openid': req.params.openid
+        }, function(err, user) {
+            var query = Post.findOne({
+                '_id': req.params.id
+            });
             query.exec(function(err, doc) {
                 if (doc) {
                     res.render('weixin/edit', {
@@ -144,7 +159,9 @@ module.exports = function(app, passport) {
     });
 
     app.post('/edit/:openid/:id', function(req, res) {
-        Post.findOne({'_id': req.params.id}, function(err, post) {
+        Post.findOne({
+            '_id': req.params.id
+        }, function(err, post) {
             if (err)
                 res.redirect('/');
             if (post) {
@@ -163,8 +180,7 @@ module.exports = function(app, passport) {
                         post.save(function(err, post) {
                             res.redirect('/');
                         });
-                    }
-                    catch (ex) {
+                    } catch (ex) {
                         //   logger.eror(ex);
                     }
                 }
@@ -177,62 +193,72 @@ module.exports = function(app, passport) {
 
 
 
-
     app.get('/getpassword', function(req, res) {
         res.render('getpassword');
     })
 
     app.post('/getpassword', function(req, res) {
         //TODO send mail
-        res.render('getpassword', {status: 1, msg: '已经发送邮件成功'});
+        res.render('getpassword', {
+            status: 1,
+            msg: '已经发送邮件成功'
+        });
     })
 
 
     app.get('/auth/qq',
-            passport.authenticate('qq'),
-            function(req, res) {
-                // The request will be redirected to qq for authentication, so this
-                // function will not be called.
-            }
+        passport.authenticate('qq'),
+        function(req, res) {
+            // The request will be redirected to qq for authentication, so this
+            // function will not be called.
+        }
     );
 
-    app.get('/auth/qq/callback', passport.authenticate('qq', {failureRedirect: '/login'}),
-            function(req, res) {
-                res.redirect('/');
-            }
+    app.get('/auth/qq/callback', passport.authenticate('qq', {
+            failureRedirect: '/login'
+        }),
+        function(req, res) {
+            res.redirect('/');
+        }
     );
 
 
     app.get('/auth/weibo',
-            function(req, res, next) {
-                req.session = req.session || {};
-                req.session.auth_state = crypto.createHash('sha1').update(-(new Date()) + '').digest('hex');
-                passport.authenticate('sina', {'state': req.session.auth_state})(req, res, next)
-            },
-            function(req, res) {
-                // The request will be redirected to qq for authentication, so this
-                // function will not be called.
-            }
+        function(req, res, next) {
+            req.session = req.session || {};
+            req.session.auth_state = crypto.createHash('sha1').update(-(new Date()) + '').digest('hex');
+            passport.authenticate('sina', {
+                'state': req.session.auth_state
+            })(req, res, next)
+        },
+        function(req, res) {
+            // The request will be redirected to qq for authentication, so this
+            // function will not be called.
+        }
     );
 
     app.get('/auth/weibo/callback',
-            function(req, res, next) {
-                if (req.session && req.session.auth_state && req.session.auth_state === req.query.state) {
-                    passport.authenticate('sina', {failureRedirect: '/login'})(req, res, next);
-                } else {
-                    next(new Error('Auth State Mismatch'));
-                }
-            },
-            function(req, res) {
-                // Successful authentication, redirect home.
-                res.redirect('/');
+        function(req, res, next) {
+            if (req.session && req.session.auth_state && req.session.auth_state === req.query.state) {
+                passport.authenticate('sina', {
+                    failureRedirect: '/login'
+                })(req, res, next);
+            } else {
+                next(new Error('Auth State Mismatch'));
             }
+        },
+        function(req, res) {
+            // Successful authentication, redirect home.
+            res.redirect('/');
+        }
     );
 
     //用户设置
     app.get('/user/profile', Auth.isAuthenticated, function(req, res) {
         console.log(req.user);
-        res.render('profile', {user: req.user});
+        res.render('profile', {
+            user: req.user
+        });
     })
 
 }

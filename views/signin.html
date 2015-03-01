@@ -1,56 +1,49 @@
 <%- include header.html %>
-<link href="/css/login.css" rel="stylesheet">
-<div class="container" id="main">
+<div class="container" id="main" style="margin-top: 30px">
     <div class="row" id="ms-container">
-        <section class="wrap login col-lg-6 col-md-6 col-sm-12 ">
-            <header>
-                <h3 class="auth-label">
-                    登录 LoveJog.com
-                </h3>
-            </header>
-            <div class="auth-box">
-                <div class="social-login">
-                    <a class="btn btn-primary btn-block" href="/auth/weibo">
-                        <span>使用新浪微博登录</span>
-                    </a>
-                    <span class="">或</span>
-                </div>
-
-                <form method="post" class="simple_form form form-stacked email-login-form" action="/signin" accept-charset="UTF-8">
+        <div class="col-lg-offset-3 col-lg-6">
+            <div class="well bs-component">
+                <form class="form-horizontal" action="/signin" accept-charset="UTF-8" method="post">
                     <fieldset>
+                        <legend>登录 LoveJog.com</legend>
                         <% if (this.message) {%>
-                        <div class="alert alert-danger"><%= message %></div>
+                        <div class="control-group">
+                            <div class="alert alert-danger"><%= message %></div>
+                        </div>
                         <% } %>
-                        <div class="control-group">
-                            <label for="email" class="string required control-label">邮箱</label>
-                            <div class="controls">
-                                <input type="email" id="email" placeholder="邮箱" name="email" required autofocus>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputEmail">邮箱</label>
+                            <div class="col-lg-10">
+                                <input type="text" type="email"  placeholder="邮箱" name="email" id="inputEmail" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputPassword">密码</label>
+                            <div class="col-lg-10">
+                                <input type="password" id="inputPassword" placeholder="密码" name="password" required class="form-control">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="1" name="remember_me" id="remember_me" checked="checked"> 记住我
+                                    </label>
+                                    <a tabindex="-1" class="pull-right" href="/getpassword">忘记密码?</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button class="btn btn-primary" type="submit">登录</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                还没有帐号？<a href="/signup">免费注册</a>
                             </div>
                         </div>
 
-                        <div class="control-group">
-                            <label for="password" class="string required control-label">密码</label>
-                            <div class="controls">
-                                <input type="password" id="password"  placeholder="密码" name="password" required autocomplete="off">
-                            </div>
-                        </div>
-
-                        <div class="controls clearfix">
-                            <p class="forgot-password-helper pull-right">
-                                <a tabindex="-1" href="/getpassword">忘记密码?</a>
-                            </p>
-                            <label for="remember_me" class="remember-me"><input type="checkbox" value="1" name="remember_me" id="remember_me" checked="checked"> 记住我</label>
-                        </div>
-                        <div class="controls">
-                            <input type="submit" value="登录" id="sign-in-btn" class="btn btn-success pull-right">
-                        </div>
                     </fieldset>
-                </form>  </div>
-
-            <p class="note">
-                还没有帐号? <a href="/signup">免费注册</a>
-            </p>
-        </section>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <%- include footer.html %>

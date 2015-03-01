@@ -1,5 +1,6 @@
 require('should');
 var reply = require('../').reply;
+var reply2CustomerService = require('../').reply2CustomerService;
 
 describe('wechat.js', function () {
   describe('reply text', function () {
@@ -128,10 +129,28 @@ describe('wechat.js', function () {
 
     it('reply({type: "video", content: video}) should ok', function () {
       var result = reply({type: 'video', content: video}, 'from', 'to');
-      result.should.be.include('<Video><MediaId><![CDATA[mediaId]]></MediaId><ThumbMediaId><![CDATA[thumbMediaId]]></ThumbMediaId></Video>');
+      result.should.be.include('<Video><MediaId><![CDATA[mediaId]]></MediaId><Title><![CDATA[]]></Title><Description><![CDATA[]]></Description></Video>');
       result.should.be.include('<MsgType><![CDATA[video]]></MsgType>');
       result.should.be.include('<ToUserName><![CDATA[to]]></ToUserName>');
       result.should.be.include('<FromUserName><![CDATA[from]]></FromUserName>');
+    });
+  });
+
+  describe('reply2CustomerService', function () {
+    it('reply2CustomerService', function () {
+      var result = reply2CustomerService('from', 'to');
+      result.should.be.include('<MsgType><![CDATA[transfer_customer_service]]></MsgType>');
+      result.should.be.include('<ToUserName><![CDATA[to]]></ToUserName>');
+      result.should.be.include('<FromUserName><![CDATA[from]]></FromUserName>');
+      result.should.be.not.include('<KfAccount>');
+    });
+
+    it('reply2CustomerService with kfAccount', function () {
+      var result = reply2CustomerService('from', 'to', 'kf');
+      result.should.be.include('<MsgType><![CDATA[transfer_customer_service]]></MsgType>');
+      result.should.be.include('<ToUserName><![CDATA[to]]></ToUserName>');
+      result.should.be.include('<FromUserName><![CDATA[from]]></FromUserName>');
+      result.should.be.include('<KfAccount><![CDATA[kf]]></KfAccount>');
     });
   });
 });

@@ -1,20 +1,51 @@
 <%- include header.html %>
-<div class="container" id="main">
-    <div class="row-fluid">
-        <form  id="formRegister" class="form-signin" role="form" method="post" action="/signup">
-            <h2 class="form-signin-heading">欢迎注册</h2>
-            <% if (msg){ %>
-            <div class="info alert-info">
-                <span><%= msg %></span>
-            </div>
-            <% } %>
 
-            <input type="email" name="email" class="form-control" placeholder="请输入邮箱" required autofocus>
-            <input type="password" name="password" class="form-control" placeholder="请输入密码" required>
-            <input type="password" name="password2" class="form-control" placeholder="请再输入密码" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
-            <a class="btn btn-lg btn-default btn-block" href="/">返回</a>
-        </form>
+<div class="container" id="main" style="margin-top: 30px">
+    <div class="row" id="ms-container">
+        <div class="col-lg-offset-3 col-lg-6">
+            <div class="well bs-component">
+                <form class="form-horizontal" action="/signup" accept-charset="UTF-8" method="post">
+                    <fieldset>
+                        <legend>欢迎注册 LoveJog.com</legend>
+                        <% if (msg) {%>
+                        <div class="control-group">
+                            <div class="alert alert-danger"><%= msg %></div>
+                        </div>
+                        <% } %>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputEmail">邮箱</label>
+                            <div class="col-lg-10">
+                                <input type="text" type="email"  placeholder="邮箱" name="email" id="inputEmail" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputPassword">密码</label>
+                            <div class="col-lg-10">
+                                <input type="password" id="inputPassword" placeholder="密码" name="password" required class="form-control">
+                            </div>
+                        </div>
+                           <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputPassword">重复密码</label>
+                            <div class="col-lg-10">
+                                <input type="password" id="inputPassword" placeholder="密码" name="password2" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button class="btn btn-primary" type="submit">注册</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                已有帐号？<a href="/signin">登录</a>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </div>
-</div> <!-- /container -->
+</div>
+
 <%- include footer.html %>

@@ -1,13 +1,15 @@
 <%- include ../header.html %>
-
 <div class="container" >
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <form role="form"  method="post" action="/edit/<%= openid %>/<%= id %>">
                 <div class="form-group">
                 </div>
+                
+                
+
                 <div class="form-group">
-                    <textarea class="form-control" rows="10" name="content" placeholder="说说" ><% if(post && post.content) {%><%= post.content %> <% } %></textarea>
+                    <textarea class="form-control" rows="5" name="content" placeholder="说说" ><% if(post && post.content) {%><%= post.content %> <% } %></textarea>
                 </div>
                 <% if (post && post.wx_imge_url) {%>
                 <div class="form-group">
@@ -19,18 +21,10 @@
                 <% }%>
                 <button type="submit"  name="action"  value="save" class="btn btn-default btn-primary btn-lg">保存</button>
                 <button type="submit"  name="action"  value="delete" class="btn btn-default btn-lg">删除</button>
-
-
                 <a href="/post/<%= id %>"  class="btn btn-default btn-lg">点击查看</a>
                 <div class="alert-info"><span>点击查看可分享到微信朋友圈</span> </div>
-
-
-
             </form>
         </div>
     </div>
 </div>
-
-
 <%- include ../footer.html %>
-

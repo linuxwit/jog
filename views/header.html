@@ -1,90 +1,72 @@
 <!DOCTYPE html >
-<html lang="zh_cn"  xmlns:wb="http://open.weibo.com/wb">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="喜爱慢跑是一个慢跑爱好者分享慢跑经验图片的网站，你可以在这儿签到打卡，分享慢跑，比赛经验等">
-    <meta name="keywords" content="慢跑，马拉松比赛，健身跑">
-    <meta property="qc:admins" content="3323275377647652776375" />
-    <meta name="google-site-verification" content="BozdVz7YDNq_5MvB0bV6f68eub_X8Qact1ch2_fY4k0" />
-    <meta name="baidu-site-verification" content="ecaQHP9u4W" />
-    <meta property="wb:webmaster" content="c5641d67e0876a7d" />
-    <script type="text/javascript" name="baidu-tc-cerfication" src="http://apps.bdimg.com/cloudaapi/lightapp.js#b55cf4a82a98163495b03c3649ca5c71"></script><script type="text/javascript">window.bd && bd._qdc && bd._qdc.init({app_id: '7ca10a5143c620cd361032c6'});</script>
-    <meta name="author" content="lovejog">
-    <title>
+<html lang="zh_cn">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="喜爱慢跑是一个慢跑爱好者分享慢跑经验图片的网站，你可以在这儿签到打卡，分享慢跑，比赛经验等">
+        <meta name="keywords" content="慢跑，马拉松比赛，健身跑">
+        <meta property="qc:admins" content="3323275377647652776375" />
+        <meta name="google-site-verification" content="BozdVz7YDNq_5MvB0bV6f68eub_X8Qact1ch2_fY4k0" />
+        <meta name="baidu-site-verification" content="ecaQHP9u4W" />
+        <meta property="wb:webmaster" content="c5641d67e0876a7d" />
+        <meta name="author" content="lovejog">
+        <title>
         
         <% if (global.post) { %>
-            global post
+        global post
         <% } else { %>
-            喜爱慢跑-随时随地分享身边的慢跑事儿 
+        喜爱慢跑-随时随地分享身边的慢跑事儿
         <% } %>
-    </title>
-
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/docs.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1120024586" type="text/javascript" charset="utf-8"></script>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="shortcut icon" href="/ico/favicon.png">
-
-    <script>
+        </title>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+        <!-- Favicons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="shortcut icon" href="/ico/favicon.png">
+        <script>
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-48214929-1']);
         _gaq.push(['_trackPageview']);
-    </script>
-</head>
-<body>
-
-<div class="navbar navbar-fixed-top header">
-    <div class="col-md-12">
-        <div class="navbar-header">
-            <a href="/" class="navbar-brand">
-                <img src="/logo/logo.png" alt="LoveJog" class="logo"/>
-            </a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
-                <i class="glyphicon glyphicon-home" style="color:#dd1111;"></i>
-            </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbar-collapse1">
-            <ul class="nav navbar-nav navbar-right">
-                <% if (user){%>
-                    <li><a href="#">设置</a></li>
-                    <li><a href="/logout">注销</a></li>
-                <%} else {%>
-                    <li>
-                        <a href="/signin">登录</a>
-                    </li>
-                    <li>
-                        <a href="/signup">注册</a>
-                    </li>
-                <%}%>
-
-                <!-- <li>
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-bell"></i></a>
-                     <ul class="dropdown-menu">
-                         <li><a href="#"><span class="badge pull-right">40</span>Link</a></li>
-                         <li><a href="#"><span class="badge pull-right">2</span>Link</a></li>
-                         <li><a href="#"><span class="badge pull-right">0</span>Link</a></li>
-                         <li><a href="#"><span class="label label-info pull-right">1</span>Link</a></li>
-                         <li><a href="#"><span class="badge pull-right">13</span>Link</a></li>
-                     </ul>
-                 </li>
-                 <li><a href="#" id="btnToggle"><i class="glyphicon glyphicon-th-large"></i></a></li>
-                 -->
-
-            </ul>
-        </div>
-
-    </div>
-</div>
-
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button data-target="#bs-example-navbar-collapse-2" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand"> 爱慢跑</a>
+                </div>
+                <div id="bs-example-navbar-collapse-2" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">首页 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="/daka">打卡</a></li>
+                        <li><a href="/wenda">问答</a></li>
+                        <li><a href="/qita">大杂烩</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <% if (user){%>
+                        <li><a href="#">设置</a></li>
+                        <li><a href="/logout">注销</a></li>
+                        <%} else {%>
+                        <li>
+                            <a href="/signin">登录</a>
+                        </li>
+                        <li>
+                            <a href="/signup">注册</a>
+                        </li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </nav>

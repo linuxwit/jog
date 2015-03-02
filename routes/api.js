@@ -1,3 +1,5 @@
+var restful = require('node-restful');
+var mongoose = restful.mongoose;
 var Post = require('../models/post');
 var JogGroup = require('../models/joggroup');
 var restful = require('node-restful');
@@ -17,7 +19,7 @@ module.exports = function(app, passport) {
 			owner:'YefanXun',
 			local_qr_url: '',
 			qiniu_qr_url: '',
-			author: 1000
+			author:mongoose.Types.ObjectId('53246bd3954d580f11000002')
 		});
 		model.save(function(err, post) {
 			if (err) {

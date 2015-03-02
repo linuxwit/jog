@@ -1,54 +1,53 @@
 <%- include header.html %>
 <div class="container" id="main">
-    <div class="row"
-        <% posts.forEach(function(post){ %>
-        <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
-            <div class="card">
-                <div class="card-heading image">
-                    <a href=""> <img src="/images/photo.jpg" class="media-object" />
-                    </a>
-                    <div class="card-heading-header">
-                        <h3>
-                        <% if (post.title) { %>
-                        <%= post.title %>
+    <div class="row">
+        
+        <div class="col-md-8 col-sm-8 col-xs-12 col-lg-9">
+            <% posts.forEach(function(post){ %>
+            <div class="well">
+                <div class="media">
+                    <div class="media-left">
+                        <% if (post.sync == 1 && post.qiniu_img_url ) { %>
+                        <a href="/post/<%= post._id %>" >
+                            <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>?imageView2/2/w/300" class="media-object">
+                        </a>
+                        
+                        <% } else if (post.wx_imge_url) { %>
+                        <a href="/post/<%= post._id %>"  >
+                            <img src="<%= post.wx_imge_url %>?imageView2/2/w/120" class="media-object">
+                        </a>
                         <% } %>
-                        </h3>
-                        <span>
-                            <% if (post.source == 'wx'){ %>
-                            <a title="发布于微信公众号[lovejog]">来源于微信</a>
-                            <% } %>
-                            <%= moment(post.posted).fromNow() %>
-                        </span>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading"><%= post.length %>公里</h4>
+                        <p>时间:<%= post.costtime %>分</p>
+                        <p><%= moment(post.posted).fromNow() %></p>
                     </div>
                 </div>
-                <% if (post.content) { %>
-                <div class="card-body">
-                    <p>
-                        <%= post.content %>
-                    </p>
-                </div>
-                <% } %>
-                <% if (post.sync == 1 && post.qiniu_img_url ) { %>
-                <div class="card-media text-center">
-                    <a href="/post/<%= post._id %>" class="card-media-container　text-center ">
-                        <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>?imageView2/2/w/300" class="img-responsive ">
-                    </a>
-                </div>
-                <% } else if (post.wx_imge_url) { %>
-                <div class="card-media text-center">
-                    <a href="/post/<%= post._id %>"  class="card-media-container ">
-                        <img src="<%= post.wx_imge_url %>" class="img-responsive ">
-                    </a>
-                </div>
-                <% } %>
             </div>
+            <% }); %>
+            <nav>
+                <ul class="pager">
+                    <% if(page<1){%>
+                    <li class="previous disabled">
+                        <a><span aria-hidden="true">&larr;</span> 上一页</a>
+                    </li>
+                    <% } else {%>
+                    <li class="previous">
+                        <a <a href="/daka?page=<%= page-1 %>"><span aria-hidden="true">&larr;</span> 上一页</a>
+                    </li>
+                    <%}%>
+                    <li class="next"><a href="/daka?page=<%= page+1 %>">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+                </ul>
+            </nav>
         </div>
-        <% }); %>
-        <!--/row-->
-        <div id="nextpage" class="text-center"><a href="/daka?page=2">显示更多</a></div>
-        <div class="loading" class="text-center">
+        <div class="col-md-4 col-sm-4 col-xs-12 col-lg-3">
+            
         </div>
     </div>
+    
+    
+    <!--/row-->
+    
 </div>
-
 <%- include footer.html %>

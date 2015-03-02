@@ -77,8 +77,8 @@ module.exports = function(app, passport) {
         moment.lang('zh-cn');
         var page = req.param("page") ? parseInt(req.param("page")) : 0;
         var query = Post.find({category:'daka'}, {}, {
-            skip: page * 12,
-            limit: 12
+            skip: page * 6,
+            limit: 6
         }).where('status').sort({
             posted: 'desc'
         });
@@ -90,7 +90,8 @@ module.exports = function(app, passport) {
                 moment: moment,
                 page: page,
                 qiniu_host: 'http://lovejog.qiniudn.com',
-                user: user
+                user: user,
+                action:'daka'
             });
         })
     })

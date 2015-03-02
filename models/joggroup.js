@@ -20,6 +20,8 @@ var JosGroupSchema = mongoose.Schema({
 		ref: 'User',
 		require: true
 	},
+	icon:String,
+	owner:String,
 	local_qr_url: {
 		type: String
 	}, //本地二维码地址

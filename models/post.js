@@ -31,6 +31,8 @@ var postSchema = mongoose.Schema({
     sync: Number, //同步-1失败，０没有同步，１成功
     qiniu_img_url: String,
     number: String,
+    length:Number,
+    costtime:Number,
     author: {
         type: Schema.Types.ObjectId,
         ref: 'UserSchema',

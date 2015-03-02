@@ -1,0 +1,54 @@
+<%- include header.html %>
+<div class="container" id="main">
+    <div class="row"
+        <% posts.forEach(function(post){ %>
+        <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
+            <div class="card">
+                <div class="card-heading image">
+                    <a href=""> <img src="/images/photo.jpg" class="media-object" />
+                    </a>
+                    <div class="card-heading-header">
+                        <h3>
+                        <% if (post.title) { %>
+                        <%= post.title %>
+                        <% } %>
+                        </h3>
+                        <span>
+                            <% if (post.source == 'wx'){ %>
+                            <a title="发布于微信公众号[lovejog]">来源于微信</a>
+                            <% } %>
+                            <%= moment(post.posted).fromNow() %>
+                        </span>
+                    </div>
+                </div>
+                <% if (post.content) { %>
+                <div class="card-body">
+                    <p>
+                        <%= post.content %>
+                    </p>
+                </div>
+                <% } %>
+                <% if (post.sync == 1 && post.qiniu_img_url ) { %>
+                <div class="card-media text-center">
+                    <a href="/post/<%= post._id %>" class="card-media-container　text-center ">
+                        <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>?imageView2/2/w/300" class="img-responsive ">
+                    </a>
+                </div>
+                <% } else if (post.wx_imge_url) { %>
+                <div class="card-media text-center">
+                    <a href="/post/<%= post._id %>"  class="card-media-container ">
+                        <img src="<%= post.wx_imge_url %>" class="img-responsive ">
+                    </a>
+                </div>
+                <% } %>
+            </div>
+        </div>
+        <% }); %>
+        <!--/row-->
+        <div id="nextpage" class="text-center"><a href="/daka?page=2">显示更多</a></div>
+        <div class="loading" class="text-center">
+        </div>
+    </div>
+</div>
+
+<%- include footer.html %>

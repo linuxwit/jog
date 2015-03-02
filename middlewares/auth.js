@@ -4,7 +4,7 @@ exports.isAuthenticated = function(req, res, next) {
     if (req.isAuthenticated()) {
         next();
     } else {
-        res.redirect("/login");
+        res.redirect("/signin");
     }
 };
 
@@ -23,7 +23,7 @@ exports.userExist = function(req, res, next) {
     });
 };
 
-exports.createCode = function(req, res.next) {
+exports.createCode = function(req, res,next) {
     User.findOne({
         email: req.body.email
     }, function(err, _doc) {

@@ -1,0 +1,35 @@
+<%- include ../header.html %>
+<div class="container" id="main" style="margin-top: 30px">
+    <div class="row" id="ms-container">
+        <div class="col-md-4 col-lg-3">
+           <div class="list-group">
+                <a class="list-group-item active"> 你加入的微信群</a>
+                <% if (groups && groups.length>0) {%>
+                <% groups.forEach(function(item){ %>
+                <div class="list-group-item">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="/group/<%= item._id  %>">
+                                <img class="media-object" src="/img/upload/group0001.jpg" alt="...">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading"><%= item.name %></h4>
+                            <%= item.summary %><br/>
+                            <p>
+                                <form class="form-horizontal hide" action="/cancel/group/<%= item._id  %>" method="post">
+                                    <button class="btn btn-danger btn-xs" type="submit"> 退出</button>
+                                </form>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+                <% }else{ %>
+                <div class="list-group-item">你还没有加入任何微信群</div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include ../footer.html %>

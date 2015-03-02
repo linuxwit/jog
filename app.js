@@ -20,7 +20,15 @@ var request = require('request');
 var mongoose = restful.mongoose;
 
 //process.env.NODE_ENV = 'production'
-
+Array.prototype.contains = function(obj) {
+    var i = this.length;
+    while (i--) {
+        if (this[i] == obj) {
+            return true;
+        }
+    }
+    return false;
+}
 var env = process.env.NODE_ENV || 'development',
         config = require('./config/config')[env];
 
@@ -76,6 +84,8 @@ require('./routes/wechat')(app);
 require('./routes/index')(app, passport);
 
 require('./routes/api')(app, passport);
+
+require('./routes/fontend')(app, passport);
 
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);

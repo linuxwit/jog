@@ -25,7 +25,7 @@
     "passport-sina": "*",
     "request": "^2.53.0",
     "sitemap": "*",
-    "underscore": "*",
+    "underscore": "^1.8.2",
     "wechat": "^1.2.1"
   }
 }

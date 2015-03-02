@@ -1,0 +1,41 @@
+<%- include ../header.html %>
+<div class="container" id="main" style="margin-top: 30px">
+    <div class="row" id="ms-container">
+        <div class="col-lg-offset-3 col-lg-6">
+            <div class="well bs-component">
+                <form class="form-horizontal" action="/bind/<%= id %>" accept-charset="UTF-8" method="post">
+                    <fieldset>
+                        <legend>绑定微信</legend>
+                        <% if (msg) {%>
+                        <div class="control-group">
+                            <div class="alert alert-danger"><%= msg %></div>
+                        </div>
+                        <% } %>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputEmail">邮箱</label>
+                            <div class="col-lg-10">
+                                <input type="text" type="email"  placeholder="邮箱" name="email" id="inputEmail" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputPassword">密码</label>
+                            <div class="col-lg-10">
+                                <input type="password" id="inputPassword" placeholder="密码" name="password" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button class="btn btn-primary" type="submit">注册并绑定</button>
+                                <button class="btn btn-danger" type="submit">登录并绑定</button>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="alert alert-info">绑定后才可以正常使用微信打卡功能</div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include ../footer.html %>

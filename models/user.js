@@ -58,7 +58,7 @@ UserSchema.statics.signup = function(wx_openid, email, password, done) {
 			done(null, user);
 		});
 	});
-}
+};
 
 UserSchema.statics.findUserByOpenId = function(wx_open_id, done) {
 	this.findOne({
@@ -68,8 +68,8 @@ UserSchema.statics.findUserByOpenId = function(wx_open_id, done) {
 			done(err);
 		}
 		done(null, user);
-	})
-}
+	});
+};
 
 UserSchema.statics.isValidUserPassword = function(email, password, done) {
 	this.findOne({

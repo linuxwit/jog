@@ -6,7 +6,7 @@ exports.isAuthenticated = function (req, res, next){
     }else{
         res.redirect("/login");
     }
-}
+};
 
 exports.userExist = function(req, res, next) {
     User.count({
@@ -19,4 +19,4 @@ exports.userExist = function(req, res, next) {
             res.render('signup',{msg:'邮箱已经注册过了呢！'})
         }
     });
-}
+};

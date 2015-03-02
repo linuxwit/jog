@@ -26,6 +26,10 @@ UserSchema = mongoose.Schema({
 		ref: 'JogGroupSchema',
 		require: false
 	}],
+	code:{
+		text:String,
+		time:Date,
+	},
 	qq: {
 		id: String,
 		nickname: String,

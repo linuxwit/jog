@@ -118,7 +118,6 @@ module.exports = function(app) {
                 author: user._id,
                 sync: 0
             });
-            console.log(post);
             post.save(function(err, _post) {
                 if (err) {
                     console.dir(err);
@@ -126,7 +125,9 @@ module.exports = function(app) {
                 }
                 res.reply('发布成功!\n<a href="' + host + '/wx/post/' + _post._id + '"">点击添加公里数或者参赛号</a>');
                 mail.notify(_post);
-                console.log(_post.author);
+                console.log(_post._id);
+
+
                 var puttingStream = imagesBucket.createPutStream(key);
                 var request = require('request');
                 request(message.PicUrl).pipe(puttingStream)
@@ -149,7 +150,6 @@ module.exports = function(app) {
                                 console.dir(err);
                             }
                         });
-                        console.log(post.author);
                     });
             })
         });

@@ -103,6 +103,9 @@ module.exports = function(app, passport) {
             '_id': req.params.id,
             'author': req.user._id
         });
+
+        console.log(query);
+        
         query.exec(function(err, doc) {
             console.log(doc);
             if (!doc) {

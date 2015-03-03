@@ -125,8 +125,8 @@ module.exports = function(app) {
                 }
                 res.reply('发布成功!\n<a href="' + host + '/wx/post/' + _post._id + '">点击添加公里数或者参赛号</a>');
                 mail.notify(_post);
-                console.log(_post._id);
-
+                console.log('postid'+_post._id);
+                console.log('用户'＋_post.author);
 
                 var puttingStream = imagesBucket.createPutStream(key);
                 var request = require('request');

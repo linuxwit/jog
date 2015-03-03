@@ -118,7 +118,7 @@ module.exports = function(app, passport) {
 				});
 			} else {
 				console.log(doc.author);
-				console.log(doc.user._id);
+				console.log(req.user._id);
 			}
 		})
 	});

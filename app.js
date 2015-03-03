@@ -51,6 +51,7 @@ var app = express();
 
 // all environments
 app.set('port', process.env.VMC_APP_PORT || 8080);
+app.set('host', config.host);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');

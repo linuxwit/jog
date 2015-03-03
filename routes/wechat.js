@@ -10,13 +10,14 @@ qiniu.config({
     secret_key: 'lZAgNj8yCY_TmcPbcX4fPHPqB-Zg1h7IlaOyZpcb'
 });
 var imagesBucket = qiniu.bucket('lovejog');
-var host = "http://www.lovejog.com";
+var host;
 /**
  * 1.检查用户有没有绑定微信群
  * 2.如果没有绑定，提示先绑定帐号，绑定成功后，跳转到到加微信群页面，选择群
  * 3 如果已经绑定，返回正常连接
  */
 module.exports = function(app) {
+    host=app.get('host');
     var help = function(res,message) {
         var msg = [];
         msg.push('非常感谢您来到爱慢跑社区，您可以使用如下功能：\n\n');
@@ -71,7 +72,7 @@ module.exports = function(app) {
                             title: docs[i].conent,
                             description: '',
                             picurl: qiniu_host + docs[i].qiniu_img_url,
-                            url: 'http://www.lovejog.com/post/' + docs[i]._id
+                            url: host+'/post/' + docs[i]._id
                         });
                     }
                     console.log(match);

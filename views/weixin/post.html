@@ -1,0 +1,60 @@
+<%- include ../header.html %>
+<div class="container" id="main" style="margin-top: 30px">
+    <div class="row" id="ms-container">
+        <div class="col-lg-offset-3 col-lg-6">
+            <div class="well bs-component">
+                <form class="form-horizontal" action="/publish/post" accept-charset="UTF-8" method="post">
+                    <fieldset>
+                        <legend>编辑</legend>
+                        <input type="hidden" value="<%= openid %>"  name="openid"/>
+                        <input type="hidden" value="<%= id %>" name="id"/>
+                        <% if (this.message) {%>
+                        <div class="control-group">
+                            <div class="alert alert-danger"><%= message %></div>
+                        </div>
+                        <% } %>
+                        <% if (post && post.wx_imge_url) {%>
+                        
+                        
+                        <div class="input-group daka">
+                            <label class="col-lg-2 control-label" for="length">距离</label>
+                            <input type="number" name="length" class="form-control" placeholder="" aria-describedby="basic-addon2">
+                            <span class="input-group-addon" id="basic-addon2">km</span>
+                        </div>
+                        <div class="input-group daka">
+                            <label class="col-lg-2 control-label" for="length">时间</label>
+                            <input type="number" name="length" class="form-control" placeholder="" aria-describedby="basic-addon3">
+                            <span class="input-group-addon" id="basic-addon3">hour</span>
+                        </div>
+                        <div class="form-group">
+                            <img src="<%= post.wx_imge_url %>" class="img-responsive ">
+                        </div>
+                        <div class="form-group fenxiang zhipai">
+                            <textarea name="content" value="<%= post.content?post.content:'' %>" class="form-control" placeholder="参赛号码"></textarea>
+                        </div>
+                        <div class="form-group bisai">
+                            <input type="text" name="number" value="<%= post.number?post.number:'' %>" class="form-control" placeholder="参赛号码">
+                        </div>
+                        <% }%>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputEmail">你的问题</label>
+                            <textarea class="form-control" rows="5" name="content" placeholder="说说" ><% if(post && post.content) {%><%= post.content %> <% } %>
+                            </textarea>
+                            <input type="hidden" value="<%= openid %>"  name="openid"/>
+                            <input type="hidden" value="<%= id %>" name="id"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button class="btn btn-primary" type="submit">发布</button>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="alert alert-danger">点击发布后，其它用户才能看到你的问题</div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include ../footer.html %>

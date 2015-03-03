@@ -115,7 +115,7 @@ UserSchema.statics.findOrCreate = function(profile, done) {
 				nickname: profile['' + profile.authOrigin].nickname,
 				avatar: profile['' + profile.authOrigin].avatar,
 				authOrigin: profile.authOrigin
-			}
+			};
 			user['' + profile.authOrigin] = profile['' + profile.authOrigin];
 			console.log(user);
 			User.create(user, function(err, user) {
@@ -126,8 +126,8 @@ UserSchema.statics.findOrCreate = function(profile, done) {
 				done(null, user);
 			});
 		}
-	})
-}
+	});
+};
 
 // Create a new user given a profile
 UserSchema.statics.findOrCreateOAuthUser = function(profile, done) {
@@ -192,7 +192,7 @@ UserSchema.statics.findOrCreateOAuthUser = function(profile, done) {
 			});
 		}
 	});
-}
+};
 
 var User = restful.model("User", UserSchema).methods(['get', 'put', 'post']);
 

@@ -29,20 +29,18 @@ module.exports = function(app, passport) {
 		var query = JogGroup.find({});
 		query.exec(function(err, docs) {
 			if (docs) {
-				console.log(docs);
 				res.render('setting/group', {
 					groups: docs,
 					user: req.user
 				});
 			}
-		})
+		});
 	});
 
 	//申请加入群
 	app.post('/join/group/:id', Auth.isAuthenticated, function(req, res) {
 		Group.join(req, res, function(success, err, _user) {
 			if (success) {
-				console.log('加入成功');
 				return res.redirect('/user/group'); //我加入的小组
 			}
 			res.render('setting/group', {
@@ -89,11 +87,38 @@ module.exports = function(app, passport) {
                 posts: docs,
                 moment: moment,
                 page: page,
-                qiniu_host: 'http://lovejog.qiniudn.com',
+                qiniu_host: app.get('qiniu'),
                 user: user
             });
-        })
-    })
+        });
+    });
 
+ 
+  app.get('/wenda', function(req, res) {
+        moment.lang('zh-cn');
+        var page = req.param("page") ? parseInt(req.param("page")) : 0;
+        var query = Post.find({category:'wenda'}, {}, {
+            skip: page * 12,
+            limit: 12
+        }).where('status').sort({
+            posted: 'desc'
+        });
+
+        query.exec(function(err, docs) {
+            user = req.isAuthenticated() ? req.user : null;
+            res.render('wenda', {
+                posts: docs,
+                moment: moment,
+                page: page,
+                qiniu_host: app.get('qiniu'),
+                user: user,
+                action:'wenda'
+            });
+        });
+    });
+
+   
+
+    
 
 };

@@ -61,7 +61,7 @@ module.exports = function (passport, config) {
                     'nickname':profile._json.nickname,
                     'gender':profile._json.gender,
                     'avatar':profile._json.figureurl_qq_1
-                }
+                };
                 User.findOrCreate({'authOrigin':'qq',qq:data}, function (err, user) {
                     return done(err, user);
                 });
@@ -70,4 +70,4 @@ module.exports = function (passport, config) {
 
         }
     ));
-}
+};

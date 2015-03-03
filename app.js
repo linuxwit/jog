@@ -19,7 +19,6 @@ var request = require('request');
 
 var mongoose = restful.mongoose;
 
-//process.env.NODE_ENV = 'production'
 Array.prototype.contains = function(obj) {
     var i = this.length;
     while (i--) {
@@ -28,15 +27,16 @@ Array.prototype.contains = function(obj) {
         }
     }
     return false;
-}
+};
+
 var env = process.env.NODE_ENV || 'development',
-        config = require('./config/config')[env];
+    config = require('./config/config')[env];
 
 console.dir(config.db);
 mongoose.connect(config.db);
 
 
-require('./config/passport')(passport, config)
+require('./config/passport')(passport, config);
 
 var models_dir = __dirname + '/models';
 fs.readdirSync(models_dir).forEach(function(file) {
@@ -51,6 +51,7 @@ fs.readdirSync(models_dir).forEach(function(file) {
 var app = express();
 
 // all environments
+app.set('qinqiu', config.qinqiu);
 app.set('port', process.env.VMC_APP_PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', ejs.__express);
@@ -60,7 +61,9 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
-app.use(express.session({secret: 'keyboard cat'}));
+app.use(express.session({
+    secret: 'lovejog20150303'
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -70,7 +73,6 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.query());
-
 
 
 
@@ -89,35 +91,49 @@ require('./routes/fontend')(app, passport);
 
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('500', {error: err});
+    res.render('500', {
+        error: err
+    });
 });
 
 app.use(function(req, res, next) {
     res.status(404);
     if (req.accepts('html')) {
-        res.render('404', {url: req.url});
+        res.render('404', {
+            url: req.url
+        });
         return;
     }
     if (req.accepts('json')) {
-        res.send({error: 'Not found'});
+        res.send({
+            error: 'Not found'
+        });
         return;
     }
-    res.type('txt').send('Not found');
+    res.type('text').send('Not found');
 });
 
 
 app.get('/info', function(req, res) {
     res.send(process.env);
-})
+});
 
 sitemap = sm.createSitemap({
     hostname: 'http://lovejog.com',
     cacheTime: 600000, // 600 sec - cache purge period
-    urls: [
-        {url: '/', changefreq: 'daily', priority: 0.3}//,
-        // {url: '/page-2/', changefreq: 'monthly', priority: 0.7},
-        // {url: '/page-3/'}     // changefreq: 'weekly',  priority: 0.5
-    ]
+    urls: [{
+        url: '/',
+        changefreq: 'daily',
+        priority: 0.3
+    }, {
+        url: '/daka/',
+        changefreq: 'daily',
+        priority: 0.7
+    }, {
+        url: '/wenda/',
+        changefreq: 'daily',
+        priority: 0.5
+    }]
 });
 
 app.get('/sitemap.xml', function(req, res) {
@@ -128,11 +144,11 @@ app.get('/sitemap.xml', function(req, res) {
 });
 
 app.get('/robots.txt', function(req, res) {
-    res.sendfile(__dirname + '/robots.txt')
+    res.sendfile(__dirname + '/robots.txt');
     //res.send('User-agent: *');
-   // res.
+    // res.
     //res.send('Allow:　/');
-})
+});
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));

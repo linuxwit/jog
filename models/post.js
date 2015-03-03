@@ -16,6 +16,10 @@ var commentSchema = mongoose.Schema({
     text: {
         type: String,
         require: true
+    },
+    meta: {
+        up: Number,
+        down:Number
     }
 });
 
@@ -26,13 +30,13 @@ var postSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    category:String,//wenda,daka,bisai,zhipai,为空表示其它
+    category: String, //wenda,daka,bisai,zhipai,fenxiang,为空表示其它
     wx_imge_url: String,
     sync: Number, //同步-1失败，０没有同步，１成功
     qiniu_img_url: String,
     number: String,
-    length:Number,
-    costtime:Number,
+    length: Number,
+    costtime: Number,
     author: {
         type: Schema.Types.ObjectId,
         ref: 'UserSchema',
@@ -44,7 +48,7 @@ var postSchema = mongoose.Schema({
         default: Date.now
     },
     type: {
-        type: String,//微信消息类型：image,text
+        type: String, //微信消息类型：image,text
         require: true
     },
     status: Number, //０删除,１正常
@@ -65,9 +69,34 @@ var postSchema = mongoose.Schema({
     } //内容来源weixin等
 });
 
+/**
+ * 添加评论
+ * @param {[type]}   postId  [description]
+ * @param {[type]}   comment [description]
+ * @param {Function} done    [description]
+ */
+postSchema.statics.addComment = function(postId, comment, done) {
+    var Post = this;
+
+    Post.findOne({
+        _id: postId
+    }, function(err, post) {
+        if (err) {
+            done(err);
+        }
+        if (!post.comments) {
+            post.comments = [];
+        }
+        post.comments.push(comment);
+        Post.update({
+            _id: postId
+        }, {
+            comments: post.comments
+        }, function(err, doc) {
+            done(err, doc);
+        });
+    });
+};
+
 var Post = restful.model("post", postSchema).methods(['get', 'put', 'delete', 'post']);
 module.exports = Post;
-
-
-
-

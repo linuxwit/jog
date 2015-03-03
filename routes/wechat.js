@@ -54,7 +54,7 @@ module.exports = function(app) {
                         console.dir(err);
                         return res.reply('发布失败！')
                     }
-                    res.reply('发布成功！<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑一下，可分享给朋友</a>');
+                    res.reply('发布成功！<a href="' + host + 'wx/wenda/'+ post._id + '">点击编辑一下，可分享给朋友</a>');
                     mail.notify(post);
                 })
             })
@@ -123,7 +123,7 @@ module.exports = function(app) {
                     console.dir(err);
                     return res.reply('发布失败！')
                 }
-                res.reply('发布成功!\n,<a href="' + host + 'wx/post/' + post._id + '>点击添加公里数或者参赛号</a>');
+                res.reply('发布成功!\n<a href="' + host + 'wx/post/' + post._id + '"">点击添加公里数或者参赛号</a>');
                 mail.notify(post);
                 var puttingStream = imagesBucket.createPutStream(key);
                 var request = require('request');

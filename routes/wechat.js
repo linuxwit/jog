@@ -118,7 +118,8 @@ module.exports = function(app) {
                 author: user._id,
                 sync: 0
             });
-            post.save(function(err, post) {
+            console.log(post);
+            post.create(function(err, post) {
                 if (err) {
                     console.dir(err);
                     return res.reply('发布失败！')

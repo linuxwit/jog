@@ -100,9 +100,8 @@ module.exports = function(app, passport) {
 
 	app.get('/wx/post/:id', Auth.isAuthenticated, function(req, res, next) {
 		var query = Post.findOne({
-			'_id': mongoose.Types.ObjectId(req.params.id)
+			'_id': req.params.id
 		});
-
 		query.exec(function(err, doc) {
 			console.log(err);
 			if (!doc) {

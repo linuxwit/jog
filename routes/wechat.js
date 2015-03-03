@@ -17,7 +17,7 @@ var host = "http://www.lovejog.com";
  * 3 如果已经绑定，返回正常连接
  */
 module.exports = function(app) {
-    var help = function(res) {
+    var help = function(res,message) {
         var msg = [];
         msg.push('非常感谢您来到爱慢跑社区，您可以在这里分享慢跑的趣事儿\n\n');
         msg.push('1: 发送文字提问\n');
@@ -38,7 +38,7 @@ module.exports = function(app) {
                     return res.reply('系统跑累了，正在休息，请稍后再试,如果还是这样子，请告诉我们');
                 };
                 if (!user) {
-                    return help(res); //没有绑定
+                    return help(res,message);//没有绑定
                 }
                 var post = new Post({
                     source: 'wx',
@@ -83,7 +83,7 @@ module.exports = function(app) {
                         return res.reply('点击绑定' + '<a href="' + host + '/signup/' + message.FromUserName + '">点击绑定</a>');
                         break;
                     case '帮助':
-                        help(res);
+                        help(res,message);
                         break;
                     default:
                         return res.reply('骚年,需要帮助请发送［帮助］');
@@ -104,7 +104,7 @@ module.exports = function(app) {
                 return res.reply('系统跑累了，正在休息，请稍后再试,如果还是这样子，请告诉我们');
             };
             if (!user) {
-                return help(res); //没有绑定
+                return help(res,message);//没有绑定
             }
 
             var key = message.MsgId;

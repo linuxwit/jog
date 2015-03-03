@@ -77,7 +77,8 @@ module.exports = function(app, passport) {
 
     app.get("/signup", function(req, res) {
         res.render("signup", {
-            msg: ''
+            msg: '',
+            user:req.user
         });
     });
 

@@ -17,8 +17,8 @@ var host;
  * 3 如果已经绑定，返回正常连接
  */
 module.exports = function(app) {
-    host=app.get('host');
-    var help = function(res,message) {
+    host = app.get('host');
+    var help = function(res, message) {
         var msg = [];
         msg.push('非常感谢您来到爱慢跑社区，您可以使用如下功能：\n\n');
         msg.push('1: 发送文字提问\n');
@@ -39,7 +39,7 @@ module.exports = function(app) {
                     return res.reply('系统跑累了，正在休息，请稍后再试,如果还是这样子，请告诉我们');
                 };
                 if (!user) {
-                    return help(res,message);//没有绑定
+                    return help(res, message); //没有绑定
                 }
                 var post = new Post({
                     source: 'wx',
@@ -54,7 +54,7 @@ module.exports = function(app) {
                         console.dir(err);
                         return res.reply('发布失败！')
                     }
-                    res.reply('发布成功！<a href="' + host + 'wx/wenda/'+ post._id + '">点击编辑一下，可分享给朋友</a>');
+                    res.reply('发布成功！<a href="' + host + 'wx/wenda/' + post._id + '">点击编辑一下，可分享给朋友</a>');
                     mail.notify(post);
                 })
             })
@@ -72,7 +72,7 @@ module.exports = function(app) {
                             title: docs[i].conent,
                             description: '',
                             picurl: qiniu_host + docs[i].qiniu_img_url,
-                            url: host+'/post/' + docs[i]._id
+                            url: host + '/post/' + docs[i]._id
                         });
                     }
                     console.log(match);
@@ -84,7 +84,7 @@ module.exports = function(app) {
                         return res.reply('点击绑定' + '<a href="' + host + '/bind/' + message.FromUserName + '">点击绑定</a>');
                         break;
                     case '帮助':
-                        help(res,message);
+                        help(res, message);
                         break;
                     default:
                         return res.reply('骚年,需要帮助请发送［帮助］');
@@ -105,7 +105,7 @@ module.exports = function(app) {
                 return res.reply('系统跑累了，正在休息，请稍后再试,如果还是这样子，请告诉我们');
             };
             if (!user) {
-                return help(res,message);//没有绑定
+                return help(res, message); //没有绑定
             }
 
             var key = message.MsgId;
@@ -119,34 +119,37 @@ module.exports = function(app) {
                 sync: 0
             });
             console.log(post);
-            post.save(function(err, post) {
+            post.save(function(err, _post) {
                 if (err) {
                     console.dir(err);
                     return res.reply('发布失败！')
                 }
-                res.reply('发布成功!\n<a href="' + host + '/wx/post/' + post._id + '"">点击添加公里数或者参赛号</a>');
-                mail.notify(post);
+                res.reply('发布成功!\n<a href="' + host + '/wx/post/' + _post._id + '"">点击添加公里数或者参赛号</a>');
+                mail.notify(_post);
+                console.log(_post.author);
                 var puttingStream = imagesBucket.createPutStream(key);
                 var request = require('request');
                 request(message.PicUrl).pipe(puttingStream)
                     .on('error', function(err) {
                         console.dir(err);
-                        post.sync = -1;
-                        post.save(function(err, post) {
+                        _post.sync = -1;
+                        _post.save(function(err, post) {
                             if (err) {
                                 console.log('save sync -1 fail')
                                 console.dir(err);
                             }
+
                         });
                     })
                     .on('end', function(data) {
-                        post.sync = 1;
-                        post.save(function(err, post) {
+                        _post.sync = 1;
+                        _post.save(function(err, post) {
                             if (err) {
                                 console.log('save sync 1 fail')
                                 console.dir(err);
                             }
                         });
+                        console.log(post.author);
                     });
             })
         });

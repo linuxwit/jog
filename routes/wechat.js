@@ -119,7 +119,7 @@ module.exports = function(app) {
                 sync: 0
             });
             console.log(post);
-            post.create(function(err, post) {
+            post.save(function(err, post) {
                 if (err) {
                     console.dir(err);
                     return res.reply('发布失败！')

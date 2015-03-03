@@ -1,7 +1,7 @@
 var nodemailer = require("nodemailer");
 
 
-exports.send=function(subject,content,from,to){
+exports.send = function(subject, content, from, to) {
     var transport = nodemailer.createTransport("SMTP", {
         host: "smtp.exmail.qq.com", // hostname
         secureConnection: true, // use SSL
@@ -12,17 +12,17 @@ exports.send=function(subject,content,from,to){
         }
     });
 
-    messageOptions={
+    messageOptions = {
         from: from,
         to: to,
         subject: subject,
         html: content // html body
     };
 
-    transport.sendMail(messageOptions, function(error, response){
+    transport.sendMail(messageOptions, function(error, response) {
         transport.close();
 
-        if(error){
+        if (error) {
             console.log(error);
             return;
         }
@@ -33,16 +33,14 @@ exports.send=function(subject,content,from,to){
 
 }
 
-exports.notify=function(post){
-    var deleteUrl='http://www.lovejog.com/edit/'+post.wx_openid+'/'+post._id;
-
+exports.notify = function(post) {
     var content;
-    if (post.content){
-        content=post.content+'<br/>'
-    }else{
-        content+='<img src="'+post.wx_imge_url+'" /><br/>';
+    if (post.content) {
+        content = post.content + '<br/>'
+    } else {
+        content += '<img src="' + post.wx_imge_url + '" /><br/>';
     }
-    content+='<a href="'+deleteUrl+'">查看</a>';
+
 
     console.log(content);
 
@@ -54,7 +52,7 @@ exports.notify=function(post){
     );
 }
 
-exports.event=function(message){
+exports.event = function(message) {
 
     this.send(
         '新事件',

@@ -99,9 +99,11 @@ module.exports = function(app, passport) {
 	})
 
 	app.get('/wx/post/:id', Auth.isAuthenticated, function(req, res, next) {
+		console.log(req.params.id);
 		var query = Post.findOne({
 			'_id': req.params.id
 		});
+
 		query.exec(function(err, doc) {
 			console.log(err);
 			if (!doc) {

@@ -19,14 +19,14 @@ var host = "http://www.lovejog.com";
 module.exports = function(app) {
     var help = function(res,message) {
         var msg = [];
-        msg.push('非常感谢您来到爱慢跑社区，您可以在这里分享慢跑的趣事儿\n\n');
+        msg.push('非常感谢您来到爱慢跑社区，您可以使用如下功能：\n\n');
         msg.push('1: 发送文字提问\n');
         msg.push('2: 发送慢跑打卡图片\n');
         msg.push('3: 发送精彩赛事相片\n');
         msg.push('4: 发送位置寻找同城小伙伴\n');
         msg.push('5: 发送比赛号码找赛事相片\n');
         msg.push('6: 需要更多功能,请发文字告诉“LoveJog”\n\n');
-        msg.push('为了您能正常的使用上面的功能, 请先<a href="' + host + '/signup/' + message.FromUserName + '">点击绑定微信</a>');
+        msg.push('为了您能正常的使用上面的功能, 请先<a href="' + host + '/bind/' + message.FromUserName + '">点击绑定微信</a>');
         res.reply(msg.join(""));
     };
 
@@ -80,7 +80,7 @@ module.exports = function(app) {
             } else {
                 switch (input) {
                     case '绑定':
-                        return res.reply('点击绑定' + '<a href="' + host + '/signup/' + message.FromUserName + '">点击绑定</a>');
+                        return res.reply('点击绑定' + '<a href="' + host + '/bind/' + message.FromUserName + '">点击绑定</a>');
                         break;
                     case '帮助':
                         help(res,message);

@@ -1,7 +1,7 @@
 //config
 module.exports = {
     development: {
-         host:'dev.logejog.com',
+        host: 'http://dev.lovejog.com',
         db: 'mongodb://localhost/jog',
         //mongodb://user:pass@server.mongohq.com:port_name/db_name
         app: {
@@ -20,7 +20,7 @@ module.exports = {
         },
     },
     production: {
-        host:'www.logejog.com',
+        host: 'www.lovejog.com',
         db: 'mongodb://localhost/jog',
         app: {
             name: 'love jog'
@@ -38,5 +38,3 @@ module.exports = {
         },
     }
 }
-
-

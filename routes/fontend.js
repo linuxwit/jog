@@ -62,7 +62,7 @@ module.exports = function(app, passport) {
 			JogGroup
 				.where('_id').in(_user.join_groups)
 				.slaveOk()
-				.exec(function(err,docs) {
+				.exec(function(err, docs) {
 					console.log(docs);
 					res.render('user/group', {
 						groups: docs,
@@ -73,28 +73,92 @@ module.exports = function(app, passport) {
 
 	});
 
-   app.get('/daka', function(req, res) {
-        moment.lang('zh-cn');
-        var page = req.param("page") ? parseInt(req.param("page")) : 0;
-        var query = Post.find({category:'daka'}, {}, {
-            skip: page * 6,
-            limit: 6
-        }).where('status').sort({
-            posted: 'desc'
-        });
+	app.get('/daka', function(req, res) {
+		moment.lang('zh-cn');
+		var page = req.param("page") ? parseInt(req.param("page")) : 0;
+		var query = Post.find({
+			category: 'daka'
+		}, {}, {
+			skip: page * 6,
+			limit: 6
+		}).where('status').sort({
+			posted: 'desc'
+		});
 
-        query.exec(function(err, docs) {
-            user = req.isAuthenticated() ? req.user : null;
-            res.render('daka', {
-                posts: docs,
-                moment: moment,
-                page: page,
-                qiniu_host: 'http://lovejog.qiniudn.com',
-                user: user,
-                action:'daka'
-            });
-        })
-    })
+		query.exec(function(err, docs) {
+			user = req.isAuthenticated() ? req.user : null;
+			res.render('daka', {
+				posts: docs,
+				moment: moment,
+				page: page,
+				qiniu_host: 'http://lovejog.qiniudn.com',
+				user: user,
+				action: 'daka'
+			});
+		})
+	})
 
+	app.get('/wx/post/:id', Auth.isAuthenticated, function(req, res, next) {
+		var query = Post.findOne({
+			'_id': req.params.id,
+			'author': req.user._id
+		});
+		query.exec(function(err, doc) {
+			console.log(doc);
+			if (!doc) res.redirect('/');
+
+			return res.render('weixin/post', {
+				post: doc,
+				openid: req.params.openid,
+				id: req.params.id,
+				user: req.user
+			});
+
+		})
+	});
+
+	app.post('/edit/:id', function(req, res) {
+		Post.findOne({
+			'_id': req.params.id,
+			'author': req.user._id
+		}, function(err, post) {
+			if (err) {
+				res.redirect('/');
+			}
+			if (post) {
+
+				if (req.body.action == 'save') {
+					if (post.category !== 'wenda') {
+						post.number = req.body.number;
+						post.length = req.body.length;
+						post.costtime = req.body.costtime;
+						post.category = req.body.category;
+					}
+					post.content = req.body.content;
+					post.save(function(err, post) {
+						console.log(post);
+						if (post.category == 'daka')
+							res.redirect('/daka/' + post._id);
+						else if (post.category == 'wenda')
+							res.redirect('/wenda/' + post._id);
+						else
+							res.redirect('/post/' + post._id);
+					})
+				} else if (req.body.action == 'delete') {
+					try {
+						post.status = 0;
+						post.save(function(err, post) {
+							res.redirect('/');
+						});
+					} catch (ex) {
+						//   logger.eror(ex);
+					}
+				}
+			} else {
+				res.redirect('/');
+			}
+		});
+
+	});
 
 };

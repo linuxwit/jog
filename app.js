@@ -14,9 +14,8 @@ var flash = require("connect-flash");
 var fs = require('fs');
 var ejs = require('ejs');
 var sm = require('sitemap');
-
 var request = require('request');
-
+var MongoStore = require('connect-mongo')(express);
 var mongoose = restful.mongoose;
 
 //process.env.NODE_ENV = 'production'
@@ -30,7 +29,7 @@ Array.prototype.contains = function(obj) {
     return false;
 }
 var env = process.env.NODE_ENV || 'development',
-        config = require('./config/config')[env];
+    config = require('./config/config')[env];
 
 console.dir(config.db);
 mongoose.connect(config.db);
@@ -60,7 +59,17 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
-app.use(express.session({secret: 'keyboard cat'}));
+
+
+app.use(express.session({
+    secret: 'lovejog.com',
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+    })
+}));
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -70,7 +79,6 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.query());
-
 
 
 
@@ -89,17 +97,23 @@ require('./routes/fontend')(app, passport);
 
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('500', {error: err});
+    res.render('500', {
+        error: err
+    });
 });
 
 app.use(function(req, res, next) {
     res.status(404);
     if (req.accepts('html')) {
-        res.render('404', {url: req.url});
+        res.render('404', {
+            url: req.url
+        });
         return;
     }
     if (req.accepts('json')) {
-        res.send({error: 'Not found'});
+        res.send({
+            error: 'Not found'
+        });
         return;
     }
     res.type('txt').send('Not found');
@@ -113,8 +127,11 @@ app.get('/info', function(req, res) {
 sitemap = sm.createSitemap({
     hostname: 'http://lovejog.com',
     cacheTime: 600000, // 600 sec - cache purge period
-    urls: [
-        {url: '/', changefreq: 'daily', priority: 0.3}//,
+    urls: [{
+            url: '/',
+            changefreq: 'daily',
+            priority: 0.3
+        } //,
         // {url: '/page-2/', changefreq: 'monthly', priority: 0.7},
         // {url: '/page-3/'}     // changefreq: 'weekly',  priority: 0.5
     ]
@@ -129,9 +146,9 @@ app.get('/sitemap.xml', function(req, res) {
 
 app.get('/robots.txt', function(req, res) {
     res.sendfile(__dirname + '/robots.txt')
-    //res.send('User-agent: *');
-   // res.
-    //res.send('Allow:　/');
+        //res.send('User-agent: *');
+        // res.
+        //res.send('Allow:　/');
 })
 
 http.createServer(app).listen(app.get('port'), function() {

@@ -1,0 +1,80 @@
+<%- include ../header.html %>
+<div class="container" id="main" style="margin-top: 30px">
+    <div class="row" id="ms-container">
+        <div class="col-lg-offset-3 col-lg-6">
+            <div class="well bs-component">
+                <form class="form-horizontal" action="/edit/<%= post._id %>" accept-charset="UTF-8" method="post">
+                    <fieldset>
+                        <legend>编辑</legend>
+                        <% if (this.message) {%>
+                        <div class="control-group">
+                            <div class="alert alert-danger"><%= message %></div>
+                        </div>
+                        <% } %>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputLength">类型</label>
+                            <div class="col-lg-10">
+                                <label class="radio-inline">
+                                    <input type="radio" name="category" id="inlineRadio1" value="daka" checked> 打卡
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="category" id="inlineRadio2" value="bisai"> 比赛相片
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="category" id="inlineRadio3" value="zhipai"> 自拍
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputLength">距离</label>
+                            <div class="col-lg-6">
+                             <div class="input-group">
+                                <input type="number"  placeholder="必填" name="length" id="inputLength" value="<%= post.length?post.length:'' %>" class="form-control">
+                                <div class="input-group-addon">公里</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputTime">时间</label>
+                            <div class="col-lg-6">
+                             
+                                <div class="input-group">
+                                       <input type="number"  placeholder="必填" name="costtime" value="<%= post.costtime?post.costtime:'' %>" id="inputTime"  class="form-control">
+                                    <div class="input-group-addon">分钟</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputTime">参赛号码</label>
+                            <div class="col-lg-10">
+                                <input type="text" name="number" value="<%= post.number?post.number:'' %>" class="form-control" placeholder="参赛号，可用于微信后台查找">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button class="btn btn-success" type="submit" name="action"  value="save">发布</button>
+                                <button class="btn btn-danger" type="submit" name="action"  value="delete">删除</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <div class="alert alert-info">发布后，其它跑友可见</div>
+                            </div>
+                        </div>
+                        <% if (post && post.wx_imge_url) {%>
+                        
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputTime">图片</label>
+                            <div class="col-lg-10">
+                                <img src="<%= post.wx_imge_url %>" class="img-responsive ">
+                            </div>
+                        </div>
+                        <% }%>
+                        
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include ../footer.html %>

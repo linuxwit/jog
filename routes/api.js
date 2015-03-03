@@ -19,7 +19,7 @@ module.exports = function(app, passport) {
 			owner: 'YefanXun',
 			local_qr_url: '',
 			qiniu_qr_url: '',
-			author: mongoose.Types.ObjectId('53246bd3954d580f11000002')
+			author: mongoose.Types.ObjectId('54f46ec06fda89140b282ebe')
 		});
 		model.save(function(err, post) {
 			if (err) {
@@ -39,7 +39,7 @@ module.exports = function(app, passport) {
 			costtime: 60,
 			qiniu_img_url: '',
 			wx_openid: '',
-			author: mongoose.Types.ObjectId('53246bd3954d580f11000002'),
+			author: mongoose.Types.ObjectId('54f46ec06fda89140b282ebe'),
 			sync: 0
 		});
 		post.save(function(err, post) {

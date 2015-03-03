@@ -1,53 +1,40 @@
 <%- include header.html %>
 <div class="container" id="main">
     <div class="row">
-        
-        <div class="col-md-8 col-sm-8 col-xs-12 col-lg-9">
-            <% posts.forEach(function(post){ %>
-            <div class="well">
-                <div class="media">
-                    <div class="media-left">
-                        <% if (post.sync == 1 && post.qiniu_img_url ) { %>
-                        <a href="/post/<%= post._id %>" >
-                            <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>?imageView2/2/w/300" class="media-object">
-                        </a>
-                        
-                        <% } else if (post.wx_imge_url) { %>
-                        <a href="/post/<%= post._id %>"  >
-                            <img src="<%= post.wx_imge_url %>?imageView2/2/w/120" class="media-object">
-                        </a>
-                        <% } %>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading"><%= post.length %>公里</h4>
-                        <p>时间:<%= post.costtime %>分</p>
-                        <p><%= moment(post.posted).fromNow() %></p>
-                    </div>
+        <% posts.forEach(function(post){ %>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <% if (post.sync == 1 && post.qiniu_img_url ) { %>
+                <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>?imageView2/2/w/450" class="img-responsive img-rounded" alt="<%= post.length %>公里,<%= post.costtime %>分钟">
+                <% } else if (post.wx_imge_url) { %>
+                <img src="<%= post.wx_imge_url %>" class="img-responsive img-rounded" alt="<%= post.length %>公里,<%= post.costtime %>分钟">
+                <% } %>
+                <div class="caption">
+                    <h3><%= post.length %>公里,<%= post.costtime %>分钟</h3>
+                    <p><%= moment(post.posted).fromNow() %></p>
                 </div>
             </div>
-            <% }); %>
-            <nav>
-                <ul class="pager">
-                    <% if(page<1){%>
-                    <li class="previous disabled">
-                        <a><span aria-hidden="true">&larr;</span> 上一页</a>
-                    </li>
-                    <% } else {%>
-                    <li class="previous">
-                        <a <a href="/daka?page=<%= page-1 %>"><span aria-hidden="true">&larr;</span> 上一页</a>
-                    </li>
-                    <%}%>
-                    <li class="next"><a href="/daka?page=<%= page+1 %>">下一页 <span aria-hidden="true">&rarr;</span></a></li>
-                </ul>
-            </nav>
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-12 col-lg-3">
-            
-        </div>
+        <% }); %>
     </div>
-    
-    
-    <!--/row-->
+    <nav>
+        <ul class="pager">
+            <% if(page<1){%>
+            <li class="previous disabled">
+                <a><span aria-hidden="true">&larr;</span> 上一页</a>
+            </li>
+            <% } else {%>
+            <li class="previous">
+                <a <a href="/daka?page=<%= page-1 %>"><span aria-hidden="true">&larr;</span> 上一页</a>
+            </li>
+            <%}%>
+            <li class="next"><a href="/daka?page=<%= page+1 %>">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </nav>
+</div>
+<div class="col-md-4 col-sm-4 col-xs-12 col-lg-3">
     
 </div>
+</div>
+<!--/row-->
 <%- include footer.html %>

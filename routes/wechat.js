@@ -22,7 +22,7 @@ var host;
  */
 module.exports = function(app) {
 	log4js.loadAppender('file');
-	log4js.addAppender(log4js.appenders.file(__dirname + '/logs/wechat.log'), 'wechat');
+	log4js.addAppender(log4js.appenders.file(__dirname + '/../logs/wechat.log'), 'wechat');
 	var log = log4js.getLogger('wechat');
 	log.setLevel('DEBUG');
 

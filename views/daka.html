@@ -5,12 +5,12 @@
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
                 <% if (post.sync == 1 && post.qiniu_img_url ) { %>
-                <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>?imageView2/2/w/450" class="img-responsive img-rounded" alt="<%= post.length %>公里,<%= post.costtime %>分钟">
+                <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>?imageView2/2/w/300" class="img-responsive img-rounded" alt="<%= post.length %>公里,<%= post.costtime %>分钟">
                 <% } else if (post.wx_imge_url) { %>
                 <img src="<%= post.wx_imge_url %>" class="img-responsive img-rounded" alt="<%= post.length %>公里,<%= post.costtime %>分钟">
                 <% } %>
                 <div class="caption">
-                    <h3><%= post.length %>公里,<%= post.costtime %>分钟</h3>
+                    <h4><%= post.length %>公里,<%= post.costtime %>分钟</h4>
                     <p><%= moment(post.posted).fromNow() %></p>
                 </div>
             </div>

@@ -138,7 +138,7 @@ module.exports = function(app, passport) {
 					id: req.params.id,
 					user: req.user
 			});
-		})
+		});
 	});
 
 	app.post('/edit/:id', function(req, res) {
@@ -161,13 +161,13 @@ module.exports = function(app, passport) {
 				post.save(function(err, post) {
 					console.log(post);
 					if (post.category == 'daka') {
-						res.redirect('/daka/' + post._id);
+						res.redirect('/daka');
 					} else if (post.category == 'wenda') {
-						res.redirect('/wenda/' + post._id);
+						res.redirect('/wenda/');
 					} else {
-						res.redirect('/post/' + post._id);
+						res.redirect('/');
 					}
-				})
+				});
 			} else if (req.body.action == 'delete') {
 				try {
 					post.status = 0;

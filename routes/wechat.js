@@ -10,23 +10,24 @@ qiniu.config({
     secret_key: 'lZAgNj8yCY_TmcPbcX4fPHPqB-Zg1h7IlaOyZpcb'
 });
 var imagesBucket = qiniu.bucket('lovejog');
-var host = "http://www.lovejog.com";
+var host;
 /**
  * 1.检查用户有没有绑定微信群
  * 2.如果没有绑定，提示先绑定帐号，绑定成功后，跳转到到加微信群页面，选择群
  * 3 如果已经绑定，返回正常连接
  */
 module.exports = function(app) {
-    var help = function(res) {
+    host = app.get('host');
+    var help = function(res, message) {
         var msg = [];
-        msg.push('非常感谢您来到爱慢跑社区，您可以在这里分享慢跑的趣事儿\n\n');
+        msg.push('非常感谢您来到爱慢跑社区，您可以使用如下功能：\n\n');
         msg.push('1: 发送文字提问\n');
         msg.push('2: 发送慢跑打卡图片\n');
         msg.push('3: 发送精彩赛事相片\n');
         msg.push('4: 发送位置寻找同城小伙伴\n');
         msg.push('5: 发送比赛号码找赛事相片\n');
         msg.push('6: 需要更多功能,请发文字告诉“LoveJog”\n\n');
-        msg.push('为了您能正常的使用上面的功能, 请先<a href="' + host + '/signup/' + message.FromUserName + '">点击绑定微信</a>');
+        msg.push('为了您能正常的使用上面的功能, 请先<a href="' + host + '/bind/' + message.FromUserName + '">点击绑定微信</a>');
         res.reply(msg.join(""));
     };
 
@@ -38,7 +39,7 @@ module.exports = function(app) {
                     return res.reply('系统跑累了，正在休息，请稍后再试,如果还是这样子，请告诉我们');
                 };
                 if (!user) {
-                    return help(res); //没有绑定
+                    return help(res, message); //没有绑定
                 }
                 var post = new Post({
                     source: 'wx',
@@ -53,7 +54,7 @@ module.exports = function(app) {
                         console.dir(err);
                         return res.reply('发布失败！')
                     }
-                    res.reply('发布成功！<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '">点击编辑一下，可分享给朋友</a>');
+                    res.reply('发布成功！<a href="' + host + 'wx/wenda/' + post._id + '">点击编辑一下，可分享给朋友</a>');
                     mail.notify(post);
                 })
             })
@@ -71,7 +72,7 @@ module.exports = function(app) {
                             title: docs[i].conent,
                             description: '',
                             picurl: qiniu_host + docs[i].qiniu_img_url,
-                            url: 'http://www.lovejog.com/post/' + docs[i]._id
+                            url: host + '/post/' + docs[i]._id
                         });
                     }
                     console.log(match);
@@ -80,10 +81,10 @@ module.exports = function(app) {
             } else {
                 switch (input) {
                     case '绑定':
-                        return res.reply('点击绑定' + '<a href="' + host + '/signup/' + message.FromUserName + '">点击绑定</a>');
+                        return res.reply('点击绑定' + '<a href="' + host + '/bind/' + message.FromUserName + '">点击绑定</a>');
                         break;
                     case '帮助':
-                        help(res);
+                        help(res, message);
                         break;
                     default:
                         return res.reply('骚年,需要帮助请发送［帮助］');
@@ -104,7 +105,7 @@ module.exports = function(app) {
                 return res.reply('系统跑累了，正在休息，请稍后再试,如果还是这样子，请告诉我们');
             };
             if (!user) {
-                return help(res); //没有绑定
+                return help(res, message); //没有绑定
             }
 
             var key = message.MsgId;
@@ -117,29 +118,33 @@ module.exports = function(app) {
                 author: user._id,
                 sync: 0
             });
-            post.save(function(err, post) {
+            post.save(function(err, _post) {
                 if (err) {
                     console.dir(err);
                     return res.reply('发布失败！')
                 }
-                res.reply('发布成功!\n,<a href="' + host + '/edit/' + message.FromUserName + '/' + post._id + '?t=' + Date.now + '>点击添加公里数或者参赛号</a>');
-                mail.notify(post);
+                res.reply('发布成功!\n<a href="' + host + '/wx/post/' + _post._id + '">点击添加公里数或者参赛号</a>');
+                mail.notify(_post);
+                console.log('postid'+_post._id);
+                console.log('author'+_post.author);
+
                 var puttingStream = imagesBucket.createPutStream(key);
                 var request = require('request');
                 request(message.PicUrl).pipe(puttingStream)
                     .on('error', function(err) {
                         console.dir(err);
-                        post.sync = -1;
-                        post.save(function(err, post) {
+                        _post.sync = -1;
+                        _post.save(function(err, post) {
                             if (err) {
                                 console.log('save sync -1 fail')
                                 console.dir(err);
                             }
+
                         });
                     })
                     .on('end', function(data) {
-                        post.sync = 1;
-                        post.save(function(err, post) {
+                        _post.sync = 1;
+                        _post.save(function(err, post) {
                             if (err) {
                                 console.log('save sync 1 fail')
                                 console.dir(err);

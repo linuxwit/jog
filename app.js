@@ -14,9 +14,8 @@ var flash = require("connect-flash");
 var fs = require('fs');
 var ejs = require('ejs');
 var sm = require('sitemap');
-
 var request = require('request');
-
+var MongoStore = require('connect-mongo')(express);
 var mongoose = restful.mongoose;
 
 Array.prototype.contains = function(obj) {
@@ -53,6 +52,7 @@ var app = express();
 // all environments
 app.set('qinqiu', config.qinqiu);
 app.set('port', process.env.VMC_APP_PORT || 8080);
+app.set('host', config.host);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
@@ -61,9 +61,16 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
+
 app.use(express.session({
-    secret: 'lovejog20150303'
+    secret: 'lovejog.com',
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+    })
 }));
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -144,11 +151,12 @@ app.get('/sitemap.xml', function(req, res) {
 });
 
 app.get('/robots.txt', function(req, res) {
-    res.sendfile(__dirname + '/robots.txt');
-    //res.send('User-agent: *');
-    // res.
-    //res.send('Allow:　/');
-});
+    res.sendfile(__dirname + '/robots.txt')
+        //res.send('User-agent: *');
+        // res.
+        //res.send('Allow:　/');
+})
+
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));

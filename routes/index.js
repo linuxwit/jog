@@ -77,7 +77,8 @@ module.exports = function(app, passport) {
 
     app.get("/signup", function(req, res) {
         res.render("signup", {
-            msg: ''
+            msg: '',
+            user:req.user
         });
     });
 
@@ -164,39 +165,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.post('/edit/:openid/:id', function(req, res) {
-        Post.findOne({
-            '_id': req.params.id
-        }, function(err, post) {
-            if (err) {
-                res.redirect('/');
-            }
-            if (post) {
-                console.log(req.body.number)
-                if (req.body.action == 'save') {
-                    post.number = req.body.number;
-                    post.content = req.body.content;
 
-                    post.save(function(err, post) {
-                        console.log(post);
-                        res.redirect('/post/' + post._id);
-                    })
-                } else if (req.body.action == 'delete') {
-                    try {
-                        post.status = 0;
-                        post.save(function(err, post) {
-                            res.redirect('/');
-                        });
-                    } catch (ex) {
-                        //   logger.eror(ex);
-                    }
-                }
-            } else {
-                res.redirect('/');
-            }
-        });
-
-    });
 
 
 

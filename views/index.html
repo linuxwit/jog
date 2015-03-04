@@ -1,137 +1,43 @@
 <%- include header.html %>
-
-
-<!--main-->
 <div class="container" id="main">
-    <div class="row" id="ms-container">
-        <% if(page < 0) { %>
-        <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
-            <div class="well card">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group" style="padding:14px;margin-bottom:0">
-                        <textarea class="form-control" placeholder="说说你身边关于慢跑的新鲜事"></textarea>
-                    </div>
-                    <div>
-                        <div class="m7">
-                            <div class="mB k7"></div>
-                            <div class="mB l7"></div>
-                        </div>
-                        <ul class="list-inline text-center">
-                            <li>
-                                <a href="#">
-                                    <div class="text"></div>
-                                    文字
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="photo lp"></div>
-                                    图片
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="link lp"></div>
-                                    链接
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="event lp"></div>
-                                    活动
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
-            <div class="panel panel-default">
-                <div class="panel-heading"><a class="pull-right" href="#">更多</a> <h4>和大家一起跑</h4></div>
-                <div class="panel-body">
-                    <div class="media">
-                        <a  class="pull-left">
-                           <img src="/images/photo.jpg" class="media-object" />
-                        </a>
-
-                        <div class="media-body">
-                            <p class="media-heading">上海浦东世纪公园<a href="#"
-                                                                class="btn btn-default btn-sm pull-right">参加</a></p>
-                            <small class="text-info">12人</small>
-                        </div>
+    <div class="row">
+        
+        
+        <div class="row">
+            <% posts.forEach(function(post){ %>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <% if (post.sync == 1 && post.qiniu_img_url ) { %>
+                    <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>?imageView2/2/w/450" class="img-responsive img-rounded" alt="<%= post.length %>公里,<%= post.costtime %>分钟">
+                    <% } else if (post.wx_imge_url) { %>
+                    <img src="<%= post.wx_imge_url %>" class="img-responsive img-rounded" alt="<%= post.length %>公里,<%= post.costtime %>分钟">
+                    <% } %>
+                    <div class="caption">
+                        <h3><%= post.length %>公里,<%= post.costtime %>分钟</h3>
+                        <p><%= moment(post.posted).fromNow() %></p>
                     </div>
                 </div>
             </div>
+            <% }); %>
         </div>
-        <% } %>
-
-        <% posts.forEach(function(post){ %>
-        <div class="col-md-4 col-sm-6 col-xs-12 ms-item">
-            <div class="card">
-                <div class="card-heading image">
-                    <a href=""> <img src="/images/photo.jpg" class="media-object" />
-                    </a>
-                    <div class="card-heading-header">
-                        <h3>
-                            <% if (post.title) { %>
-                            <%= post.title %>
-                            <% } %>
-                        </h3>
-                        <span>
-                            <% if (post.source == 'wx'){ %>
-                            <a title="发布于微信公众号[lovejog]">来源于微信</a>
-                            <% } %>
-                            <%= moment(post.posted).fromNow() %>
-                        </span>
-                    </div>
-                </div>
-                <% if (post.content) { %>
-                <div class="card-body">
-                    <p>
-                        <%= post.content %>
-                    </p>
-                </div>
-                <% } %>
-
-                <% if (post.sync == 1 && post.qiniu_img_url ) { %>
-                <div class="card-media text-center">
-                    <a href="/post/<%= post._id %>" class="card-media-container　text-center ">
-                        <img src="<%= qiniu_host %>/<%= post.qiniu_img_url %>?imageView2/2/w/450" class="img-responsive ">
-                    </a>
-                </div>
-                <% } else if (post.wx_imge_url) { %>
-                <div class="card-media text-center">
-                    <a href="/post/<%= post._id %>"  class="card-media-container ">
-                        <img src="<%= post.wx_imge_url %>" class="img-responsive ">
-                    </a>
-                </div>
-                <% } %>
-                <div class="card-actions">
-                    <form>
-                        <div class="input-group">
-                            <div class="input-group-btn">
-                                <!--<a class="btn btn-default" href="/givemefive/<%= post._id %>" onclick="givemefive(this);return false" >+1</a>-->
-                                <!--<a class="btn btn-default" title="分享到weibo"><i class="glyphicon glyphicon-share"></i></a>-->
-                                <a class="btn btn-default" href="/post/<%= post._id %>" target="_blank">评论</a>
-                            </div>
-
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <% }); %>
-        <!--/row-->
-
-        <div id="nextpage" class="text-center"><a href="/?page=2">加载更多...</a></div>
-        <div class="loading" class="text-center">
-
-        </div>
-        <!--page-nav end-->
+        
+        <nav>
+            <ul class="pager">
+                <% if(page<1){%>
+                <li class="previous disabled">
+                    <a><span aria-hidden="true">&larr;</span> 上一页</a>
+                </li>
+                <% } else {%>
+                <li class="previous">
+                    <a <a href="/?page=<%= page-1 %>"><span aria-hidden="true">&larr;</span> 上一页</a>
+                </li>
+                <%}%>
+                <li class="next"><a href="/?page=<%= page+1 %>">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+            </ul>
+        </nav>
     </div>
-
-
+    <div class="col-md-4 col-sm-4 col-xs-12 col-lg-3">
+        
+    </div>
 </div>
 <%- include footer.html %>

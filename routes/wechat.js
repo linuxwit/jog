@@ -151,6 +151,8 @@ module.exports = function(app) {
 					var puttingStream = imagesBucket.createPutStream(key);
 					var request = require('request');
 					log.debug('sync:' + message.PicUrl);
+
+					/*
 					request(message.PicUrl).pipe(puttingStream)
 						.on('error', function(err) {
 
@@ -176,6 +178,26 @@ module.exports = function(app) {
 								}
 							});
 						});
+					*/
+
+					request(imgurl).pipe(fs.createWriteStream(key)).on('finish', function(data) {
+						imagesBucket.putFile(key, key)
+							.then(
+								function(reply) {
+									// 上传成功
+									log.debug(reply);
+									_post.sync = 1;
+									_post.save();
+								},
+								function(err) {
+									// 上传失败
+									log.error(err);
+									_post.sync = 0;
+									_post.save();
+								}
+							);
+					});
+
 				});
 			});
 

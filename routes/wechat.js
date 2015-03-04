@@ -121,9 +121,9 @@ module.exports = function(app) {
             post.save(function(err, _post) {
                 if (err) {
                     console.dir(err);
-                    return res.reply('发布失败！')
+                    return res.reply('上传失败！')
                 }
-                res.reply('发布成功!\n<a href="' + host + '/wx/post/' + _post._id + '">点击添加公里数或者参赛号</a>');
+                res.reply('上传成功!\n<a href="' + host + '/wx/post/' + _post._id + '">点击添加公里数或者参赛号</a>');
                 mail.notify(_post);
                 console.log('postid'+_post._id);
                 console.log('author'+_post.author);
@@ -132,6 +132,7 @@ module.exports = function(app) {
                 var request = require('request');
                 request(message.PicUrl).pipe(puttingStream)
                     .on('error', function(err) {
+                    	console.log('同步失败');
                         console.dir(err);
                         _post.sync = -1;
                         _post.save(function(err, post) {
@@ -139,7 +140,6 @@ module.exports = function(app) {
                                 console.log('save sync -1 fail')
                                 console.dir(err);
                             }
-
                         });
                     })
                     .on('end', function(data) {

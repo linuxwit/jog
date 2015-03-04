@@ -109,53 +109,65 @@ module.exports = function(app) {
 			}
 
 			var key = message.MsgId;
-			var post = new Post({
-				source: 'wx',
-				type: 'image',
-				wx_imge_url: message.PicUrl,
-				qiniu_img_url: key,
-				wx_openid: message.FromUserName,
-				author: user._id,
-				sync: 0
-			});
-			post.save(function(err, _post) {
-				if (err) {
-					console.dir(err);
-					return res.reply('上传失败！');
+
+			Post.findOne({
+				msgid: key
+			}, {}, function(err, doc) {
+				if (doc) {
+					console.log('正在处理');
+					return res.reply("");
 				}
-				res.reply('上传成功!\n<a href="' + host + '/wx/post/' + _post._id + '">点击添加公里数或者参赛号</a>');
-				mail.notify(_post);
-				console.log('postid' + _post._id);
-				console.log('author' + _post.author);
-				console.log('picurl' + message.PicUrl);
-				var puttingStream = imagesBucket.createPutStream(key);
-				var request = require('request');
-				request(message.PicUrl).pipe(puttingStream)
-					.on('error', function(err) {
-						console.log('同步失败');
+
+				var post = new Post({
+					source: 'wx',
+					type: 'image',
+					wx_imge_url: message.PicUrl,
+					qiniu_img_url: key,
+					wx_openid: message.FromUserName,
+					author: user._id,
+					sync: 0
+				});
+
+				post.save(function(err, _post) {
+					if (err) {
 						console.dir(err);
-						_post.sync = -1;
-						_post.save(function(err, post) {
-							if (err) {
-								console.log('save sync -1 fail');
-								console.dir(err);
-							}
+						return res.reply('上传失败！');
+					}
+					res.reply('上传成功!\n<a href="' + host + '/wx/post/' + _post._id + '">点击添加公里数或者参赛号</a>');
+					mail.notify(_post);
+					console.log('postid' + _post._id);
+					console.log('author' + _post.author);
+					console.log('picurl' + message.PicUrl);
+					var puttingStream = imagesBucket.createPutStream(key);
+					var request = require('request');
+					request(message.PicUrl).pipe(puttingStream)
+						.on('error', function(err) {
+							console.log('同步失败');
+							console.dir(err);
+							_post.sync = -1;
+							_post.save(function(err, post) {
+								if (err) {
+									console.log('save sync -1 fail');
+									console.dir(err);
+								}
+							});
+						})
+						.on('end', function(data) {
+							console.log(data);
+							_post.sync = 1;
+							_post.save(function(err, post) {
+								if (err) {
+									console.log('save sync 1 fail');
+									console.dir(err);
+								} else {
+									console.log('同步成功');
+									console.log(post);
+								}
+							});
 						});
-					})
-					.on('end', function(data) {
-						console.log(data);
-						_post.sync = 1;
-						_post.save(function(err, post) {
-							if (err) {
-								console.log('save sync 1 fail');
-								console.dir(err);
-							} else {
-								console.log('同步成功');
-								console.log(post);
-							}
-						});
-					});
+				});
 			});
+
 		});
 
 		// message为图片内容

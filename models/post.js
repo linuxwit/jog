@@ -51,6 +51,7 @@ var postSchema = mongoose.Schema({
         type: String, //微信消息类型：image,text
         require: true
     },
+    msgid:String,
     status: Number, //０删除,１正常
     location: {
         x: String,

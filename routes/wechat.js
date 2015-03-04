@@ -180,7 +180,7 @@ module.exports = function(app) {
 						});
 					*/
 
-					request(imgurl).pipe(fs.createWriteStream(key)).on('finish', function(data) {
+					request(message.PicUrl).pipe(fs.createWriteStream(key)).on('finish', function(data) {
 						imagesBucket.putFile(key, key)
 							.then(
 								function(reply) {

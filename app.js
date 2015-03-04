@@ -151,11 +151,11 @@ app.get('/sitemap.xml', function(req, res) {
 });
 
 app.get('/robots.txt', function(req, res) {
-    res.sendfile(__dirname + '/robots.txt')
+    res.sendfile(__dirname + '/robots.txt');
         //res.send('User-agent: *');
         // res.
         //res.send('Allow:　/');
-})
+});
 
 
 http.createServer(app).listen(app.get('port'), function() {

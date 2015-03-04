@@ -1,6 +1,6 @@
 var qiniu = require('node-qiniu');
 var wechat = require('wechat');
-var log = require('log4js');
+var log4js = require('log4js');
 //var S = require('string');
 var Post = require('../models/post');
 var User = require('../models/user');
@@ -12,12 +12,20 @@ qiniu.config({
 });
 var imagesBucket = qiniu.bucket('lovejog');
 var host;
+
+
+
 /**
  * 1.检查用户有没有绑定微信群
  * 2.如果没有绑定，提示先绑定帐号，绑定成功后，跳转到到加微信群页面，选择群
  * 3 如果已经绑定，返回正常连接
  */
 module.exports = function(app) {
+	log4js.addAppender(log4js.appenders.file(__dirname + '/logs/wechat.log'), 'wechat');
+
+	var log = log4js.getLogger('wechat');
+	log.setLevel('DEBUG');
+
 	host = app.get('host');
 	var help = function(res, message) {
 		var msg = [];

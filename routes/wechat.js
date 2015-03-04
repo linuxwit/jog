@@ -21,8 +21,8 @@ var host;
  * 3 如果已经绑定，返回正常连接
  */
 module.exports = function(app) {
+	log4js.loadAppender('file');
 	log4js.addAppender(log4js.appenders.file(__dirname + '/logs/wechat.log'), 'wechat');
-
 	var log = log4js.getLogger('wechat');
 	log.setLevel('DEBUG');
 

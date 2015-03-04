@@ -110,7 +110,7 @@ module.exports = function(app) {
 			}
 
 			var key = message.MsgId;
-			log.dubug('msgid' + key);
+			log.debug('msgid' + key);
 			Post.findOne({
 				msgid: key
 			}, {}, function(err, doc) {
@@ -145,12 +145,13 @@ module.exports = function(app) {
 					log.debug('sync:' + message.PicUrl);
 					request(message.PicUrl).pipe(puttingStream)
 						.on('error', function(err) {
-							console.log('同步失败');
+
+							log.error('同步失败');
 							console.dir(err);
 							_post.sync = -1;
 							_post.save(function(err, post) {
 								if (err) {
-									log.dubug('save sync -1 fail');
+									log.error('save sync -1 fail');
 									log.error(err);
 								}
 							});
@@ -161,9 +162,9 @@ module.exports = function(app) {
 								if (err) {
 
 									log.error(err);
-									log.dubug('save sync 1 fail');
+									log.error('save sync 1 fail');
 								} else {
-									log.dubug('同步成功');
+									log.info('同步成功');
 								}
 							});
 						});

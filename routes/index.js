@@ -119,7 +119,7 @@ module.exports = function(app, passport) {
                         });
                     };
                     user.wx_openid = open_id;
-                    user.update(function(err, doc) {
+                    user.save(function(err, doc) {
                     	if(err){
                     		console.log('bind error'+err);
                     		return res.render("weixin/bind", {

@@ -26,7 +26,7 @@ exports.send = function(subject, content, from, to) {
             console.log(error);
             return;
         }
-        console.log('send ok');
+        console.log('send mail ok');
     });
 };
 

@@ -1,5 +1,6 @@
 var qiniu = require('node-qiniu');
 var wechat = require('wechat');
+var log = require('log4js');
 //var S = require('string');
 var Post = require('../models/post');
 var User = require('../models/user');
@@ -109,12 +110,16 @@ module.exports = function(app) {
 			}
 
 			var key = message.MsgId;
-
+			log.dubug('msgid' + key);
 			Post.findOne({
 				msgid: key
 			}, {}, function(err, doc) {
+				if (err) {
+					log.error(error);
+					return res.reply('上传失败！请重试');
+				}
 				if (doc) {
-					console.log('正在处理');
+					log.debug('正在处理..');
 					return res.reply("");
 				}
 
@@ -130,16 +135,14 @@ module.exports = function(app) {
 
 				post.save(function(err, _post) {
 					if (err) {
-						console.dir(err);
+						log.error(err);
 						return res.reply('上传失败！');
 					}
 					res.reply('上传成功!\n<a href="' + host + '/wx/post/' + _post._id + '">点击添加公里数或者参赛号</a>');
 					mail.notify(_post);
-					console.log('postid' + _post._id);
-					console.log('author' + _post.author);
-					console.log('picurl' + message.PicUrl);
 					var puttingStream = imagesBucket.createPutStream(key);
 					var request = require('request');
+					log.debug('sync:' + message.PicUrl);
 					request(message.PicUrl).pipe(puttingStream)
 						.on('error', function(err) {
 							console.log('同步失败');
@@ -147,21 +150,20 @@ module.exports = function(app) {
 							_post.sync = -1;
 							_post.save(function(err, post) {
 								if (err) {
-									console.log('save sync -1 fail');
-									console.dir(err);
+									log.dubug('save sync -1 fail');
+									log.error(err);
 								}
 							});
 						})
 						.on('end', function(data) {
-							console.log(data);
 							_post.sync = 1;
 							_post.save(function(err, post) {
 								if (err) {
-									console.log('save sync 1 fail');
-									console.dir(err);
+
+									log.error(err);
+									log.dubug('save sync 1 fail');
 								} else {
-									console.log('同步成功');
-									console.log(post);
+									log.dubug('同步成功');
 								}
 							});
 						});

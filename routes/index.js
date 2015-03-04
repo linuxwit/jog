@@ -85,8 +85,6 @@ module.exports = function(app, passport) {
 
 
     app.get("/bind/:id", function(req, res) {
-        console.log(req.params.id);
-
         res.render("weixin/bind", {
             id: req.params.id,
             msg: '',
@@ -120,9 +118,18 @@ module.exports = function(app, passport) {
                             user: req.user
                         });
                     };
-                    _user.wx_openid = open_id;
-                    _user.update(function(err, doc) {
-                        req.login(user, function(err) {
+                    user.wx_openid = open_id;
+                    user.update(function(err, doc) {
+                    	if(err){
+                    		console.log('bind error'+err);
+                    		return res.render("weixin/bind", {
+					            id: req.params.id,
+					            msg: '',
+					            user: req.user
+					        });
+                    	}
+                    	console.log(doc.wx_openid);
+                        req.login(doc, function(err) {
                             if (err) return next(err);
                             return res.redirect("/setting/group");
                         });

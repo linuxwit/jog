@@ -148,6 +148,8 @@ module.exports = function(app) {
                             if (err) {
                                 console.log('save sync 1 fail')
                                 console.dir(err);
+                            }else{
+                            	console.log('同步成功');
                             }
                         });
                     });

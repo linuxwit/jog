@@ -284,15 +284,7 @@ module.exports = function(app) {
 		// MsgId: '5837397520665436492' }
 		if (message.Event == 'subscribe') {
 			var msg = [];
-			msg.push('非常感谢您来到爱慢跑社区，您可以在这里分享慢跑的趣事儿\n\n');
-			msg.push('1: 发送文字提问\n');
-			msg.push('2: 发送慢跑打卡图片\n');
-			msg.push('3: 发送精彩赛事相片\n');
-			msg.push('4: 发送位置寻找同城小伙伴\n');
-			msg.push('5: 发送比赛号码找赛事相片\n');
-			msg.push('6: 需要更多功能,请发文字告诉“LoveJog”\n\n');
-			msg.push('为了您能正常的使用上面的功能, 请先<a href="' + host + '/signup/' + message.FromUserName + '">点击绑定微信</a>');
-			res.reply(msg.join(""));
+		    help(res, message);
 			//res.reply('直接发送文字和图片试试，可以分享你的打卡记录，也可以是小伙伴的比赛图，如果有小伙们上传了你的比赛图，你也可以输入比赛号来查找你的相片<a href="' + host + '?form=' + message.FromUserName + '">点击浏览</a>可以更好玩哟');
 			/*
 			var user=new User({wx_openid:message.FromUserName,wx_status:subscribe});
@@ -300,7 +292,6 @@ module.exports = function(app) {
 			if (err) {
 			return res.reply('关注出现了点问题！')
 			}
-
 
 			return res.reply('欢迎关注love jog，直接发送文字和图片试试！<a href="">点击注册</a>可以获得更多功能！');
 			})*/

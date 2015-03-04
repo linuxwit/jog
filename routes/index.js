@@ -61,14 +61,28 @@ module.exports = function(app, passport) {
 
     app.get('/signin', function(req, res) {
         res.render('signin', {
-            user: req.user
+            user: req.user,
+            returnUrl:req.param('return','/')
         });
     })
 
-    app.post("/signin", passport.authenticate('local', {
-        successRedirect: "/",
-        failureRedirect: "/signin"
-    }));
+    app.post('/signin', function(req, res) {
+        passport.authenticate('local', function(err, user) {
+            if (!user) {
+                return res.render("signin", {
+                    msg: '邮箱或密码不正确!',
+                    user: req.user
+                });
+            };
+            req.login(user, function(err) {
+                if (err) return next(err);
+                 console.log(req.param('return'));
+                res.redirect(req.param('return','/'));
+            });
+        })(req, res);
+    });
+
+
 
     app.get('/logout', function(req, res) {
         req.logout();
@@ -78,7 +92,8 @@ module.exports = function(app, passport) {
     app.get("/signup", function(req, res) {
         res.render("signup", {
             msg: '',
-            user:req.user
+            user: req.user,
+            returnUrl:req.param('return','/')
         });
     });
 
@@ -120,15 +135,15 @@ module.exports = function(app, passport) {
                     };
                     user.wx_openid = open_id;
                     user.save(function(err, doc) {
-                    	if(err){
-                    		console.log('bind error'+err);
-                    		return res.render("weixin/bind", {
-					            id: req.params.id,
-					            msg: '',
-					            user: req.user
-					        });
-                    	}
-                    	console.log(doc.wx_openid);
+                        if (err) {
+                            console.log('bind error' + err);
+                            return res.render("weixin/bind", {
+                                id: req.params.id,
+                                msg: '',
+                                user: req.user
+                            });
+                        }
+                        console.log(doc.wx_openid);
                         req.login(doc, function(err) {
                             if (err) return next(err);
                             return res.redirect("/setting/group");
@@ -171,8 +186,6 @@ module.exports = function(app, passport) {
             })
         });
     });
-
-
 
 
 
@@ -237,6 +250,5 @@ module.exports = function(app, passport) {
     })
 
 
- 
 
 }

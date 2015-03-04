@@ -3,12 +3,12 @@
     <div class="row" id="ms-container">
         <div class="col-lg-offset-3 col-lg-6">
             <div class="well bs-component">
-                <form class="form-horizontal" action="/signin" accept-charset="UTF-8" method="post">
+                <form class="form-horizontal" action="/signin?return=<%= returnUrl %>" accept-charset="UTF-8" method="post">
                     <fieldset>
                         <legend>登录 LoveJog.com</legend>
-                        <% if (this.message) {%>
+                        <% if (this.msg) {%>
                         <div class="control-group">
-                            <div class="alert alert-danger"><%= message %></div>
+                            <div class="alert alert-danger"><%= msg %></div>
                         </div>
                         <% } %>
                         <div class="form-group">
@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                还没有帐号？<a href="/signup">免费注册</a>
+                                还没有帐号？<a href="/signup?return=<%= returnUrl %>">免费注册</a>
                             </div>
                         </div>
 

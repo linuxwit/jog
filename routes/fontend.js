@@ -123,25 +123,21 @@ module.exports = function(app, passport) {
 	app.get('/wx/post/:id', Auth.isAuthenticated, function(req, res, next) {
 		console.log(req.params.id);
 		var query = Post.findOne({
-			'_id': req.params.id
+			'_id': req.params.id,
+			'author':req.user._id
 		});
 
 		query.exec(function(err, doc) {
 			console.log(err);
 			if (!doc) {
-				return res.redirect('/');
+				return res.redirect('/post/'+req.params.id);
 			}
-			if (doc.author == req.user._id) {
-				return res.render('weixin/post', {
+			return res.render('weixin/post', {
 					post: doc,
 					openid: req.params.openid,
 					id: req.params.id,
 					user: req.user
-				});
-			} else {
-				console.log(doc.author);
-				console.log(req.user._id);
-			}
+			});
 		})
 	});
 

@@ -1,7 +1,7 @@
 var qiniu = require('node-qiniu');
 var wechat = require('wechat');
 var log4js = require('log4js');
-//var S = require('string');
+var fs=require('fs');
 var Post = require('../models/post');
 var User = require('../models/user');
 var qiniu_host = 'http://lovejog.qiniudn.com/';

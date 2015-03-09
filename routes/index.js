@@ -60,6 +60,7 @@ module.exports = function(app, passport) {
 
 
     app.get('/signin', function(req, res) {
+        console.log('returnUrl:'+req.param('return','/'));
         res.render('signin', {
             user: req.user,
             returnUrl:req.param('return','/')

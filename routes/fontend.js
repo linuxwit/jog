@@ -142,9 +142,10 @@ module.exports = function(app, passport) {
 	});
 
 	app.post('/edit/:id', function(req, res) {
+		//			'author': req.user._id
 		Post.findOne({
-			'_id': req.params.id,
-			'author': req.user._id
+			'_id': req.params.id
+
 		}, function(err, post) {
 			if (err || !post) {
 				return res.redirect('/');

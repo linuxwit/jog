@@ -121,10 +121,10 @@ module.exports = function(app, passport) {
     });
 
 	app.get('/wx/post/:id', function(req, res, next) {
-		console.log(req.params.id);
+		//console.log(req.params.id);
+		//'author':req.user._id;
 		var query = Post.findOne({
-			'_id': req.params.id,
-			'author':req.user._id
+			'_id': req.params.id
 		});
 
 		query.exec(function(err, doc) {

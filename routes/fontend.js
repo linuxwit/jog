@@ -166,7 +166,7 @@ module.exports = function(app, passport) {
 					} else if (post.category == 'wenda') {
 						res.redirect('/wenda/');
 					} else {
-						res.redirect('/');
+						res.redirect('/daka');
 					}
 				});
 			} else if (req.body.action == 'delete') {

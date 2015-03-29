@@ -95,6 +95,9 @@ module.exports = function(app) {
 					case '帮助':
 						help(res, message);
 						break;
+					case :'月排名':
+
+						break
 					default:
 						return res.reply('骚年,需要帮助请发送［帮助］');
 				}

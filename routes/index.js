@@ -72,7 +72,8 @@ module.exports = function(app, passport) {
             if (!user) {
                 return res.render("signin", {
                     msg: '邮箱或密码不正确!',
-                    user: req.user
+                    user: req.user,
+                    return:req.param('return','/')
                 });
             };
             req.login(user, function(err) {

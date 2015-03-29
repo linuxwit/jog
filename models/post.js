@@ -2,7 +2,6 @@ var restful = require('node-restful');
 var mongoose = restful.mongoose;
 var Schema = mongoose.Schema;
 var User = require('./user');
-
 var commentSchema = mongoose.Schema({
     posted: {
         type: Date,
@@ -19,11 +18,9 @@ var commentSchema = mongoose.Schema({
     },
     meta: {
         up: Number,
-        down:Number
+        down: Number
     }
 });
-
-
 var postSchema = mongoose.Schema({
     title: String,
     content: {
@@ -51,7 +48,7 @@ var postSchema = mongoose.Schema({
         type: String, //微信消息类型：image,text
         require: true
     },
-    msgid:String,
+    msgid: String,
     status: Number, //０删除,１正常
     location: {
         x: String,
@@ -69,7 +66,6 @@ var postSchema = mongoose.Schema({
         type: String
     } //内容来源weixin等
 });
-
 /**
  * 添加评论
  * @param {[type]}   postId  [description]
@@ -78,7 +74,6 @@ var postSchema = mongoose.Schema({
  */
 postSchema.statics.addComment = function(postId, comment, done) {
     var Post = this;
-
     Post.findOne({
         _id: postId
     }, function(err, post) {
@@ -98,6 +93,47 @@ postSchema.statics.addComment = function(postId, comment, done) {
         });
     });
 };
-
+/**
+ * [getMonthTop 得到月排名]
+ * @param  {[type]}   userId [description]
+ * @param  {[type]}   time   [description]
+ * @param  {Function} done   [description]
+ * @return {[type]}          [description]
+ */
+postSchema.statics.getMonthTop = function(userId, time, done) {
+    var Post = this;
+    Post.aggregate({
+        [{
+            $match: {
+                category: "daka"
+            }
+        }, {
+            $group: {
+                _id: {
+                    author: "$author",
+                    "year": {
+                        $year: "$posted"
+                    },
+                    "month": {
+                        $month: "$posted"
+                    }
+                },
+                total: {
+                    $sum: "$length"
+                },
+                count: {
+                    $sum: 1
+                }
+            }
+        }, {
+            $sort: {
+                total: -1
+            }
+        }]
+    }, function(err, docs) {
+        console.log(docs);
+        done(err, docs);
+    });
+}
 var Post = restful.model("post", postSchema).methods(['get', 'put', 'delete', 'post']);
 module.exports = Post;

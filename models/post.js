@@ -2,6 +2,7 @@ var restful = require('node-restful');
 var mongoose = restful.mongoose;
 var Schema = mongoose.Schema;
 var User = require('./user');
+var moment = require('moment');
 var commentSchema = mongoose.Schema({
     posted: {
         type: Date,
@@ -102,36 +103,43 @@ postSchema.statics.addComment = function(postId, comment, done) {
  */
 postSchema.statics.getMonthTop = function(userId, time, done) {
     var Post = this;
+    var d = moment(time, 'YYYY-MM'); //按照指定的年月字符串和格式解析出一个moment的日期对象
+    var firstDate = d.startOf("month"); //通过startOf函数指定取月份的开始即第一天
+    var lastDate = d.endOf("month"); //通过startOf函数指定取月份的末尾即最后一天
+ 
+    var start = d.startOf("month").format();
+    var end = d.endOf("month").format();
+    console.log('开始', start);
+    console.log('结束', end);
     Post.aggregate({
-        [{
-            $match: {
-                category: "daka"
-            }
-        }, {
-            $group: {
-                _id: {
-                    author: "$author",
-                    "year": {
-                        $year: "$posted"
-                    },
-                    "month": {
-                        $month: "$posted"
-                    }
+        $match: {
+            category: "daka",
+            posted: { $gte: new Date(start),$lte:new Date(end) }
+        }
+    }, {
+        $group: {
+            _id: {
+                author: "$author",
+                "year": {
+                    $year: "$posted"
                 },
-                total: {
-                    $sum: "$length"
-                },
-                count: {
-                    $sum: 1
+                "month": {
+                    $month: "$posted"
                 }
+            },
+            total: {
+                $sum: "$length"
+            },
+            count: {
+                $sum: 1
             }
-        }, {
-            $sort: {
-                total: -1
-            }
-        }]
+        }
+    }, {
+        $sort: {
+            total: -1
+        }
+
     }, function(err, docs) {
-        console.log(docs);
         done(err, docs);
     });
 }

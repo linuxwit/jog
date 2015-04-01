@@ -95,8 +95,9 @@ module.exports = function(app) {
 					case '帮助':
 						help(res, message);
 						break;
-					case :'月排名':
-
+					case '排名':
+						var premonth=moment().add({months:-1}).format('YYYYMM');
+						res.reply('<a href="' + host + '/wx/report/' + premonth+ '">点击查看上月排名</a>');
 						break
 					default:
 						return res.reply('骚年,需要帮助请发送［帮助］');

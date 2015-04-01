@@ -96,33 +96,36 @@ module.exports = function(app, passport) {
 		})
 	});
 
- 
-  app.get('/wenda', function(req, res) {
-        moment.lang('zh-cn');
-        var page = req.param("page") ? parseInt(req.param("page")) : 0;
-        var query = Post.find({category:'wenda'}, {}, {
-            skip: page * 12,
-            limit: 12
-        }).where('status').sort({
-            posted: 'desc'
-        });
 
-        query.exec(function(err, docs) {
-            user = req.isAuthenticated() ? req.user : null;
-            res.render('wenda', {
-                posts: docs,
-                moment: moment,
-                page: page,
-                qiniu_host: app.get('qiniu'),
-                user: user,
-                action:'wenda'
-            });
-        });
-    });
+	app.get('/wenda', function(req, res) {
+		moment.lang('zh-cn');
+		var page = req.param("page") ? parseInt(req.param("page")) : 0;
+		var query = Post.find({
+			category: 'wenda'
+		}, {}, {
+			skip: page * 12,
+			limit: 12
+		}).where('status').sort({
+			posted: 'desc'
+		});
+
+		query.exec(function(err, docs) {
+			user = req.isAuthenticated() ? req.user : null;
+			res.render('wenda', {
+				posts: docs,
+				moment: moment,
+				page: page,
+				qiniu_host: app.get('qiniu'),
+				user: user,
+				action: 'wenda'
+			});
+		});
+	});
 
 	app.get('/wx/post/:id', function(req, res, next) {
 		//console.log(req.params.id);
 		//'author':req.user._id;
+		
 		var query = Post.findOne({
 			'_id': req.params.id
 		});
@@ -130,13 +133,13 @@ module.exports = function(app, passport) {
 		query.exec(function(err, doc) {
 			console.log(err);
 			if (!doc) {
-				return res.redirect('/post/'+req.params.id);
+				return res.redirect('/post/' + req.params.id);
 			}
 			return res.render('weixin/post', {
-					post: doc,
-					openid: req.params.openid,
-					id: req.params.id,
-					user: req.user
+				post: doc,
+				openid: req.params.openid,
+				id: req.params.id,
+				user: req.user
 			});
 		});
 	});
@@ -183,5 +186,33 @@ module.exports = function(app, passport) {
 		});
 
 	});
+
+	app.get('/wx/report/:month?', function(req, res, next) {
+        var month = req.params.month? req.params.month:moment().format('YYYYMM');
+		Post.getMonthTop(req.params.openid, month, function(err, docs) {
+			console.log(docs);
+			User.find(function(err, users) {
+				var _users = [];
+				for (var j = 0; j < users.length; j++) {
+					_users[users[j]._id] = users[j].nickname ? users[j].nickname : users[j].email;
+				}
+				var result=[];
+
+				console.log(_users);
+				for (var i = 0; i < docs.length; i++) {
+					var doc = docs[i];
+					doc.nickname = _users[doc._id.author];
+				};
+				return res.render('weixin/report', {
+					docs: docs,
+					openid: req.params.openid,
+					id: req.params.id,
+					user: req.user,
+					month:moment(month,'YYYYMM').format('YYYY年MM月')
+				});
+			})
+		});
+	})
+
 
 };

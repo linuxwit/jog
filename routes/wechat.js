@@ -36,7 +36,8 @@ module.exports = function(app) {
 		msg.push('3: 发送精彩赛事相片\n');
 		msg.push('4: 发送位置寻找同城小伙伴\n');
 		msg.push('5: 发送比赛号码找赛事相片\n');
-		msg.push('6: 需要更多功能,请发文字告诉“LoveJog”\n\n');
+		msg.push('6: 修改呢称，请发送“name:你的呢称“\n');
+		msg.push('7: 遇到问题，可以加微信：witwave\n\n');
 		msg.push('为了您能正常的使用上面的功能, 请先<a href="' + host + '/bind/' + message.FromUserName + '">点击绑定微信</a>');
 		res.reply(msg.join(""));
 	};

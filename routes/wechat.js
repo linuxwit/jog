@@ -2,7 +2,7 @@ var qiniu = require('node-qiniu');
 var wechat = require('wechat');
 var log4js = require('log4js');
 var moment = require('moment');
-var fs=require('fs');
+var fs = require('fs');
 var Post = require('../models/post');
 var User = require('../models/user');
 var qiniu_host = 'http://lovejog.qiniudn.com/';
@@ -97,11 +97,26 @@ module.exports = function(app) {
 						help(res, message);
 						break;
 					case '排名':
-						var premonth=moment().add({months:-1}).format('YYYYMM');
-						res.reply('<a href="' + host + '/wx/report/' + premonth+ '">点击查看上月排名</a>');
+						var premonth = moment().add({
+							months: -1
+						}).format('YYYYMM');
+						res.reply('<a href="' + host + '/wx/report/' + premonth + '">点击查看上月排名</a>');
 						break
 					default:
-						return res.reply('骚年,需要帮助请发送［帮助］');
+						if (input.substring(0, 5) == 'name:') {
+							var nickname=input.substring(5);
+							User.findUserByOpenId(message.FromUserName, function(err, user) {
+								if(user){
+									user.nickname=nickname;
+									user.update();
+								}
+								else{
+									res.reply('');
+								}
+							});
+						} else {
+							return res.reply('骚年,需要帮助请发送［帮助］');
+						}
 				}
 			}
 
@@ -289,7 +304,7 @@ module.exports = function(app) {
 		// MsgId: '5837397520665436492' }
 		if (message.Event == 'subscribe') {
 			var msg = [];
-		    help(res, message);
+			help(res, message);
 			//res.reply('直接发送文字和图片试试，可以分享你的打卡记录，也可以是小伙伴的比赛图，如果有小伙们上传了你的比赛图，你也可以输入比赛号来查找你的相片<a href="' + host + '?form=' + message.FromUserName + '">点击浏览</a>可以更好玩哟');
 			/*
 			var user=new User({wx_openid:message.FromUserName,wx_status:subscribe});

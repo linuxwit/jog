@@ -42,7 +42,18 @@ module.exports = function(app) {
 	};
 
 	app.use('/wechat', wechat('weixin', wechat.text(function(message, req, res, next) {
-		if (message.Content.length > 10) {
+		if (input.substring(0, 5) == 'name:') {
+			var nickname = input.substring(5);
+			User.findUserByOpenId(message.FromUserName, function(err, user) {
+				if (user) {
+					user.nickname = nickname;
+					user.update();
+					res.reply('修改呢称成功');
+				} else {
+					res.reply('');
+				}
+			});
+		} else if (message.Content.length > 10) {
 			//1.检查用户是否绑定，如果没有绑定，不保存任何信息
 			User.findUserByOpenId(message.FromUserName, function(err, user) {
 				if (err) {
@@ -103,20 +114,8 @@ module.exports = function(app) {
 						res.reply('<a href="' + host + '/wx/report/' + premonth + '">点击查看上月排名</a>');
 						break
 					default:
-						if (input.substring(0, 5) == 'name:') {
-							var nickname=input.substring(5);
-							User.findUserByOpenId(message.FromUserName, function(err, user) {
-								if(user){
-									user.nickname=nickname;
-									user.update();
-								}
-								else{
-									res.reply('');
-								}
-							});
-						} else {
-							return res.reply('骚年,需要帮助请发送［帮助］');
-						}
+						return res.reply('骚年,需要帮助请发送［帮助］');
+
 				}
 			}
 

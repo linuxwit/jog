@@ -16,7 +16,7 @@
                     <% docs.forEach(function(item){ %>
                        <tr>
                            <td><%= item.nickname&& item.nickname.indexOf('@')?item.nickname.substring(0,item.nickname.indexOf('@')):item.nickname %></td>
-                           <td><%= item.total %></td>
+                           <td><%= Math.round(item.total) %></td>
                            <td><%= item.count %></td>
                        </tr>
                     <% }); %>

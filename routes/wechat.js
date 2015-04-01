@@ -47,7 +47,8 @@ module.exports = function(app) {
 			User.findUserByOpenId(message.FromUserName, function(err, user) {
 				if (user) {
 					user.nickname = nickname;
-					user.update(function(err, doc) {
+					user.save(function(err, doc) {
+						console.log(err);
 						if (err) return res.reply('修改失败');
 						res.reply('你的呢称为:' + doc.nickname);
 					});

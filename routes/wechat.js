@@ -43,7 +43,7 @@ module.exports = function(app) {
 	};
 
 	app.use('/wechat', wechat('weixin', wechat.text(function(message, req, res, next) {
-		if (message.Content.substring(0, 5).toLowerCase() == 'name:') {
+		if (message.Content.substring(0, 5).toLowerCase() == 'name:' || message.Content.substring(0, 5).toLowerCase() == 'name：' ) {
 			var nickname = message.Content.substring(5);
 			User.findUserByOpenId(message.FromUserName, function(err, user) {
 				if (user) {
